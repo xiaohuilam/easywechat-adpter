@@ -1,0 +1,16 @@
+{
+    "name": "xiaohuilam/easywechat-adpter",
+    "description": "EasyWechat 的 laravel 5.0~5.9 全版本适配（4.1兼容）",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiaohui.lam",
+            "email": "xiaohui.lam@aliyun.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "overtrue/laravel-wechat": ">=4.0.0"
+    }
+}
