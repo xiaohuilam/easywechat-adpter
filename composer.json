@@ -11,6 +11,60 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "overtrue/laravel-wechat": ">=4.0.0"
+        "php": "<7.0",
+        "illuminate/container": ">=5.0",
+        "ext-fileinfo": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "guzzlehttp/guzzle": "*",
+        "monolog/monolog": "*",
+        "overtrue/socialite": "*",
+        "pimple/pimple": "*",
+        "psr/simple-cache": "*",
+        "symfony/cache": "*",
+        "symfony/http-foundation": "*",
+        "symfony/psr-http-message-bridge": "*",
+        "composer-plugin-api": "^1.0"
+    },
+    "require-dev": {
+        "mikey179/vfsStream": "*",
+        "mockery/mockery": "*",
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Overtrue\\LaravelWeChat\\": "overtrue/laravel-wechat/src/",
+            "EasyWeChat\\": "overtrue/wechat/src/",
+            "EasyWeChatComposer\\": "mingyoung/easywechat-composer/src/"
+        },
+        "files": [
+            "overtrue/wechat/src/Kernel/Support/Helpers.php",
+            "overtrue/wechat/src/Kernel/Helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EasyWeChat\\Tests\\": "overtrue/wechat/tests/",
+            "EasyWeChatComposer\\Tests\\": "mingyoung/easywechat-composer/tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.6.30"
+        }
+    },
+    "extra": {
+        "class": "EasyWeChatComposer\\Plugin",
+        "laravel": {
+            "providers": [
+                "Overtrue\\LaravelWeChat\\ServiceProvider"
+            ],
+            "aliases": {
+                "EasyWeChat": "Overtrue\\LaravelWeChat\\Facade"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
