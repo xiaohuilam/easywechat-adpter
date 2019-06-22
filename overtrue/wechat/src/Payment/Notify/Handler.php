@@ -102,7 +102,7 @@ abstract class Handler
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function toResponse(): Response
+    public function toResponse()
     {
         $base = [
             'return_code' => is_null($this->fail) ? static::SUCCESS : static::FAIL,
@@ -125,7 +125,7 @@ abstract class Handler
      *
      * @throws \EasyWeChat\Kernel\Exceptions\Exception
      */
-    public function getMessage(): array
+    public function getMessage()
     {
         if (!empty($this->message)) {
             return $this->message;

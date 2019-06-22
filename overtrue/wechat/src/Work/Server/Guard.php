@@ -33,7 +33,7 @@ class Guard extends ServerGuard
      *
      * @return bool
      */
-    protected function isSafeMode(): bool
+    protected function isSafeMode()
     {
         return true;
     }
@@ -41,7 +41,7 @@ class Guard extends ServerGuard
     /**
      * @return bool
      */
-    protected function shouldReturnRawResponse(): bool
+    protected function shouldReturnRawResponse()
     {
         return !is_null($this->app['request']->get('echostr'));
     }

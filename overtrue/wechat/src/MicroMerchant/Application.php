@@ -148,7 +148,7 @@ class Application extends ServiceContainer
         unset($data['sign']);
         $secretKey = $this->getKey();
 
-        if ('HMAC-SHA256' === ($signType ?? 'MD5')) {
+        if ('HMAC-SHA256' === ($signType ?: 'MD5')) {
             $encryptMethod = function ($str) use ($secretKey) {
                 return hash_hmac('sha256', $str, $secretKey);
             };

@@ -76,7 +76,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function scheme(string $productId): string
+    public function scheme(string $productId)
     {
         $params = [
             'appid' => $this['config']->app_id,
@@ -162,7 +162,7 @@ class Application extends ServiceContainer
     /**
      * @return bool
      */
-    public function inSandbox(): bool
+    public function inSandbox()
     {
         return (bool) $this['config']->get('sandbox');
     }

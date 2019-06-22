@@ -30,6 +30,6 @@ abstract class OpenPlatformEvent
 
     public function __call($name, $args)
     {
-        return $this->payload[substr($name, 3)] ?? null;
+        return $this->payload[substr($name, 3)] ?: null;
     }
 }

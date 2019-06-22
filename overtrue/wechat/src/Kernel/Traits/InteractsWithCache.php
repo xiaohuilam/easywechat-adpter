@@ -99,7 +99,7 @@ trait InteractsWithCache
     /**
      * @return bool
      */
-    protected function isSymfony43(): bool
+    protected function isSymfony43()
     {
         return \class_exists('Symfony\Component\Cache\Psr16Cache');
     }

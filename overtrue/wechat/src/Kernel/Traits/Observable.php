@@ -129,7 +129,7 @@ trait Observable
         foreach ($this->handlers as $condition => $handlers) {
             if ('*' === $condition || ($condition & $event) === $event) {
                 foreach ($handlers as $handler) {
-                    if ($clause = $this->clauses[spl_object_hash((object) $handler)] ?? null) {
+                    if ($clause = $this->clauses[spl_object_hash((object) $handler)] ?: null) {
                         if ($clause->intercepted($payload)) {
                             continue;
                         }
@@ -166,7 +166,7 @@ trait Observable
      *
      * @return \EasyWeChat\Kernel\Clauses\Clause
      */
-    protected function newClause($handler): Clause
+    protected function newClause($handler)
     {
         return $this->clauses[spl_object_hash((object) $handler)] = new Clause();
     }
@@ -217,7 +217,7 @@ trait Observable
             }
 
             return function ($payload) use ($handler) {
-                return (new $handler($this->app ?? null))->handle($payload);
+                return (new $handler($this->app ?: null))->handle($payload);
             };
         }
 
@@ -239,7 +239,7 @@ trait Observable
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \ReflectionException
      */
-    protected function resolveHandlerAndCondition($handler, $condition): array
+    protected function resolveHandlerAndCondition($handler, $condition)
     {
         if (is_int($handler) || (is_string($handler) && !class_exists($handler))) {
             list($handler, $condition) = [$condition, $handler];

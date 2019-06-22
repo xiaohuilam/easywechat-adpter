@@ -60,7 +60,7 @@ class AccessToken extends BaseAccessToken
      *
      * @return array
      */
-    protected function getCredentials(): array
+    protected function getCredentials()
     {
         return [
             'auth_corpid' => $this->authCorpid,
@@ -71,7 +71,7 @@ class AccessToken extends BaseAccessToken
     /**
      * @return string
      */
-    public function getEndpoint(): string
+    public function getEndpoint()
     {
         return 'cgi-bin/service/get_corp_token?'.http_build_query([
                 'suite_access_token' => $this->component['suite_access_token']->getToken()['suite_access_token'],

@@ -128,7 +128,7 @@ class MessageBuilder
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function build(array $prepends = []): array
+    public function build(array $prepends = [])
     {
         if (empty($this->message)) {
             throw new RuntimeException('No message content to send.');
@@ -155,7 +155,7 @@ class MessageBuilder
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function buildForPreview(string $by, string $user): array
+    public function buildForPreview(string $by, string $user)
     {
         return $this->build([$by => $user]);
     }

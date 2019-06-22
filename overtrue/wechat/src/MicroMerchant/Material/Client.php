@@ -34,7 +34,7 @@ class Client extends BaseClient
      */
     public function setSettlementCard($params)
     {
-        $params['sub_mch_id'] = $params['sub_mch_id'] ?? $this->app['config']->sub_mch_id;
+        $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
         $params = $this->processParams(array_merge($params, [
             'version' => '1.0',
             'cert_sn' => '',
@@ -58,7 +58,7 @@ class Client extends BaseClient
      */
     public function updateContact($params)
     {
-        $params['sub_mch_id'] = $params['sub_mch_id'] ?? $this->app['config']->sub_mch_id;
+        $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
         $params = $this->processParams(array_merge($params, [
             'version' => '1.0',
             'cert_sn' => '',

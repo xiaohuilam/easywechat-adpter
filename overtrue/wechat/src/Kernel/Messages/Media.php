@@ -50,7 +50,7 @@ class Media extends Message implements MediaInterface
     /**
      * @return string
      */
-    public function getMediaId(): string
+    public function getMediaId()
     {
         $this->checkRequiredAttributes();
 

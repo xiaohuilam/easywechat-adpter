@@ -26,7 +26,7 @@ class AES
      *
      * @return string
      */
-    public static function encrypt(string $text, string $key, string $iv, int $option = OPENSSL_RAW_DATA): string
+    public static function encrypt(string $text, string $key, string $iv, int $option = OPENSSL_RAW_DATA)
     {
         self::validateKey($key);
         self::validateIv($iv);
@@ -43,7 +43,7 @@ class AES
      *
      * @return string
      */
-    public static function decrypt(string $cipherText, string $key, string $iv, int $option = OPENSSL_RAW_DATA, $method = null): string
+    public static function decrypt(string $cipherText, string $key, string $iv, int $option = OPENSSL_RAW_DATA, $method = null)
     {
         self::validateKey($key);
         self::validateIv($iv);

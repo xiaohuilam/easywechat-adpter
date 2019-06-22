@@ -68,7 +68,7 @@ class Application extends ServiceContainer
      *
      * @return \EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\Application
      */
-    public function officialAccount(string $appId, string $refreshToken = null, AccessToken $accessToken = null): OfficialAccount
+    public function officialAccount(string $appId, string $refreshToken = null, AccessToken $accessToken = null)
     {
         $application = new OfficialAccount($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
             'encryptor' => $this['encryptor'],
@@ -95,7 +95,7 @@ class Application extends ServiceContainer
      *
      * @return \EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Application
      */
-    public function miniProgram(string $appId, string $refreshToken = null, AccessToken $accessToken = null): MiniProgram
+    public function miniProgram(string $appId, string $refreshToken = null, AccessToken $accessToken = null)
     {
         return new MiniProgram($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
             'encryptor' => function () {
@@ -116,7 +116,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function getPreAuthorizationUrl(string $callbackUrl, $optional = []): string
+    public function getPreAuthorizationUrl(string $callbackUrl, $optional = [])
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
@@ -143,7 +143,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function getMobilePreAuthorizationUrl(string $callbackUrl, $optional = []): string
+    public function getMobilePreAuthorizationUrl(string $callbackUrl, $optional = [])
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
@@ -170,7 +170,7 @@ class Application extends ServiceContainer
      *
      * @return array
      */
-    protected function getAuthorizerConfig(string $appId, string $refreshToken = null): array
+    protected function getAuthorizerConfig(string $appId, string $refreshToken = null)
     {
         return $this['config']->merge([
             'component_app_id' => $this['config']['app_id'],
@@ -184,7 +184,7 @@ class Application extends ServiceContainer
      *
      * @return array
      */
-    protected function getReplaceServices(AccessToken $accessToken = null): array
+    protected function getReplaceServices(AccessToken $accessToken = null)
     {
         $services = [
             'access_token' => $accessToken ?: function ($app) {

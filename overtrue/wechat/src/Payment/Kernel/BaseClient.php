@@ -80,7 +80,7 @@ class BaseClient
         $params = array_filter(array_merge($base, $this->prepends(), $params));
 
         $secretKey = $this->app->getKey($endpoint);
-        if ('HMAC-SHA256' === ($params['sign_type'] ?? 'MD5')) {
+        if ('HMAC-SHA256' === ($params['sign_type'] ?: 'MD5')) {
             $encryptMethod = function ($str) use ($secretKey) {
                 return hash_hmac('sha256', $str, $secretKey);
             };
@@ -107,7 +107,7 @@ class BaseClient
      */
     protected function logMiddleware()
     {
-        $formatter = new MessageFormatter($this->app['config']['http.log_template'] ?? MessageFormatter::DEBUG);
+        $formatter = new MessageFormatter($this->app['config']['http.log_template'] ?: MessageFormatter::DEBUG);
 
         return Middleware::log($this->app['logger'], $formatter);
     }
@@ -160,7 +160,7 @@ class BaseClient
      *
      * @return string
      */
-    protected function wrap(string $endpoint): string
+    protected function wrap(string $endpoint)
     {
         return $this->app->inSandbox() ? "sandboxnew/{$endpoint}" : $endpoint;
     }

@@ -76,7 +76,7 @@ class ManifestManager
      *
      * @return array
      */
-    protected function map(array $packages): array
+    protected function map(array $packages)
     {
         $manifest = [];
 
@@ -85,7 +85,7 @@ class ManifestManager
         });
 
         foreach ($packages as $package) {
-            $manifest[$package['name']] = [self::EXTRA_OBSERVER => $package['extra'][self::EXTRA_OBSERVER] ?? []];
+            $manifest[$package['name']] = [self::EXTRA_OBSERVER => $package['extra'][self::EXTRA_OBSERVER] ?: []];
         }
 
         return $manifest;

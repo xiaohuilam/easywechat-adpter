@@ -58,6 +58,6 @@ class ExtensionsCommand extends BaseCommand
      */
     protected function getRows($name, $extension)
     {
-        return [$name, implode("\n", $extension['observers'] ?? [])];
+        return [$name, implode("\n", $extension['observers'] ?: [])];
     }
 }

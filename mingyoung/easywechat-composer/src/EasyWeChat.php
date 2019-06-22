@@ -64,7 +64,7 @@ class EasyWeChat
      *
      * @return string
      */
-    public static function getEncryptionKey(): string
+    public static function getEncryptionKey()
     {
         return static::$encryptionKey;
     }

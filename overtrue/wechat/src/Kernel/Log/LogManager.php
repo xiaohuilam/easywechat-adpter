@@ -108,7 +108,7 @@ class LogManager implements LoggerInterface
      */
     public function driver($driver = null)
     {
-        return $this->get($driver ?? $this->getDefaultDriver());
+        return $this->get($driver ?: $this->getDefaultDriver());
     }
 
     /**
@@ -121,7 +121,7 @@ class LogManager implements LoggerInterface
     protected function get($name)
     {
         try {
-            return $this->channels[$name] ?? ($this->channels[$name] = $this->resolve($name));
+            return $this->channels[$name] ?: ($this->channels[$name] = $this->resolve($name));
         } catch (\Throwable $e) {
             $logger = $this->createEmergencyLogger();
 
@@ -198,7 +198,7 @@ class LogManager implements LoggerInterface
     {
         $handlers = [];
 
-        foreach ($config['channels'] ?? [] as $channel) {
+        foreach ($config['channels'] ?: [] as $channel) {
             $handlers = \array_merge($handlers, $this->channel($channel)->getHandlers());
         }
 
@@ -232,7 +232,7 @@ class LogManager implements LoggerInterface
     {
         return new Monolog($this->parseChannel($config), [
             $this->prepareHandler(new RotatingFileHandler(
-                $config['path'], $config['days'] ?? 7, $this->level($config)
+                $config['path'], $config['days'] ?: 7, $this->level($config)
             )),
         ]);
     }
@@ -249,12 +249,12 @@ class LogManager implements LoggerInterface
         return new Monolog($this->parseChannel($config), [
             $this->prepareHandler(new SlackWebhookHandler(
                 $config['url'],
-                $config['channel'] ?? null,
-                $config['username'] ?? 'EasyWeChat',
-                $config['attachment'] ?? true,
-                $config['emoji'] ?? ':boom:',
-                $config['short'] ?? false,
-                $config['context'] ?? true,
+                $config['channel'] ?: null,
+                $config['username'] ?: 'EasyWeChat',
+                $config['attachment'] ?: true,
+                $config['emoji'] ?: ':boom:',
+                $config['short'] ?: false,
+                $config['context'] ?: true,
                 $this->level($config)
             )),
         ]);
@@ -271,7 +271,7 @@ class LogManager implements LoggerInterface
     {
         return new Monolog($this->parseChannel($config), [
             $this->prepareHandler(new SyslogHandler(
-                    'EasyWeChat', $config['facility'] ?? LOG_USER, $this->level($config))
+                    'EasyWeChat', $config['facility'] ?: LOG_USER, $this->level($config))
             ),
         ]);
     }
@@ -287,7 +287,7 @@ class LogManager implements LoggerInterface
     {
         return new Monolog($this->parseChannel($config), [
             $this->prepareHandler(new ErrorLogHandler(
-                    $config['type'] ?? ErrorLogHandler::OPERATING_SYSTEM, $this->level($config))
+                    $config['type'] ?: ErrorLogHandler::OPERATING_SYSTEM, $this->level($config))
             ),
         ]);
     }
@@ -342,7 +342,7 @@ class LogManager implements LoggerInterface
      */
     protected function parseChannel(array $config)
     {
-        return $config['name'] ?? null;
+        return $config['name'] ?: null;
     }
 
     /**
@@ -356,7 +356,7 @@ class LogManager implements LoggerInterface
      */
     protected function level(array $config)
     {
-        $level = $config['level'] ?? 'debug';
+        $level = $config['level'] ?: 'debug';
 
         if (isset($this->levels[$level])) {
             return $this->levels[$level];

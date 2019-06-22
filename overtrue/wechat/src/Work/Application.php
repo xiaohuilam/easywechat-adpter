@@ -79,7 +79,7 @@ class Application extends ServiceContainer
      *
      * @return \EasyWeChat\Work\MiniProgram\Application
      */
-    public function miniProgram(): MiniProgram
+    public function miniProgram()
     {
         return new MiniProgram($this->getConfig());
     }

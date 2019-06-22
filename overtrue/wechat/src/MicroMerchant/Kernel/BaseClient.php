@@ -115,7 +115,7 @@ class BaseClient extends PaymentBaseClient
 
         $result = $returnResponse ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
         // auto verify signature
-        if ($returnResponse || 'array' !== ($this->app->config->get('response_type') ?? 'array')) {
+        if ($returnResponse || 'array' !== ($this->app->config->get('response_type') ?: 'array')) {
             $this->app->verifySignature($this->castResponseToType($response, 'array'));
         } else {
             $this->app->verifySignature($result);
@@ -155,7 +155,7 @@ class BaseClient extends PaymentBaseClient
         $response = $this->performRequest($endpoint, $method, $options);
         $result = $returnResponse ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
         // auto verify signature
-        if ($returnResponse || 'array' !== ($this->app->config->get('response_type') ?? 'array')) {
+        if ($returnResponse || 'array' !== ($this->app->config->get('response_type') ?: 'array')) {
             $this->app->verifySignature($this->castResponseToType($response, 'array'));
         } else {
             $this->app->verifySignature($result);
@@ -255,7 +255,7 @@ class BaseClient extends PaymentBaseClient
         $params = array_filter($params);
 
         $key = $this->app->getKey();
-        if ('HMAC-SHA256' === ($params['sign_type'] ?? 'MD5')) {
+        if ('HMAC-SHA256' === ($params['sign_type'] ?: 'MD5')) {
             $encryptMethod = function ($str) use ($key) {
                 return hash_hmac('sha256', $str, $key);
             };

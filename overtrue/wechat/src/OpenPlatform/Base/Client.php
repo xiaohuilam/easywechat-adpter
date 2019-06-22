@@ -31,7 +31,7 @@ class Client extends BaseClient
     {
         $params = [
             'component_appid' => $this->app['config']['app_id'],
-            'authorization_code' => $authCode ?? $this->app['request']->get('auth_code'),
+            'authorization_code' => $authCode ?: $this->app['request']->get('auth_code'),
         ];
 
         return $this->httpPostJson('cgi-bin/component/api_query_auth', $params);

@@ -91,7 +91,7 @@ trait MakesHttpRequests
     /**
      * @return \GuzzleHttp\ClientInterface
      */
-    protected function getHttpClient(): ClientInterface
+    protected function getHttpClient()
     {
         return $this->httpClient ?: $this->httpClient = new Client([
             'base_uri' => $this->app['config']['delegation']['host'],
@@ -101,7 +101,7 @@ trait MakesHttpRequests
     /**
      * @return \EasyWeChatComposer\Contracts\Encrypter
      */
-    protected function getEncrypter(): Encrypter
+    protected function getEncrypter()
     {
         return $this->encrypter ?: $this->encrypter = new DefaultEncrypter(
             EasyWeChat::getEncryptionKey()

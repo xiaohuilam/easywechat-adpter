@@ -52,7 +52,7 @@ class BaseClient
     public function __construct(ServiceContainer $app, AccessTokenInterface $accessToken = null)
     {
         $this->app = $app;
-        $this->accessToken = $accessToken ?? $this->app['access_token'];
+        $this->accessToken = $accessToken ?: $this->app['access_token'];
     }
 
     /**
@@ -134,7 +134,7 @@ class BaseClient
     /**
      * @return AccessTokenInterface
      */
-    public function getAccessToken(): AccessTokenInterface
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
@@ -224,7 +224,7 @@ class BaseClient
      */
     protected function logMiddleware()
     {
-        $formatter = new MessageFormatter($this->app['config']['http.log_template'] ?? MessageFormatter::DEBUG);
+        $formatter = new MessageFormatter($this->app['config']['http.log_template'] ?: MessageFormatter::DEBUG);
 
         return Middleware::log($this->app['logger'], $formatter);
     }

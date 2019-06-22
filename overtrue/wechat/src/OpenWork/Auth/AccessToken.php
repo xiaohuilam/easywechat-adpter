@@ -42,7 +42,7 @@ class AccessToken extends BaseAccessToken
      *
      * @return array
      */
-    protected function getCredentials(): array
+    protected function getCredentials()
     {
         return [
             'corpid' => $this->app['config']['corp_id'], //服务商的corpid

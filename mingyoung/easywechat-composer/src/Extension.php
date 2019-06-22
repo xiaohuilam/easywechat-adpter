@@ -48,7 +48,7 @@ class Extension
      *
      * @return array
      */
-    public function observers(): array
+    public function observers()
     {
         if ($this->shouldIgnore()) {
             return [];
@@ -57,7 +57,7 @@ class Extension
         $observers = [];
 
         foreach ($this->getManifest() as $name => $extra) {
-            $observers = array_merge($observers, $extra['observers'] ?? []);
+            $observers = array_merge($observers, $extra['observers'] ?: []);
         }
 
         return array_map([$this, 'listObserver'], array_filter($observers, [$this, 'validateObserver']));
@@ -68,7 +68,7 @@ class Extension
      *
      * @return bool
      */
-    protected function isDisable($observer): bool
+    protected function isDisable($observer)
     {
         return in_array($observer, $this->app->config->get('disable_observers', []));
     }
@@ -78,7 +78,7 @@ class Extension
      *
      * @return bool
      */
-    protected function shouldIgnore(): bool
+    protected function shouldIgnore()
     {
         return !file_exists($this->manifestPath) || $this->isDisable('*');
     }
@@ -92,7 +92,7 @@ class Extension
      *
      * @throws \ReflectionException
      */
-    protected function validateObserver($observer): bool
+    protected function validateObserver($observer)
     {
         return !$this->isDisable($observer)
             && (new ReflectionClass($observer))->implementsInterface(EventHandlerInterface::class)
@@ -106,7 +106,7 @@ class Extension
      *
      * @return bool
      */
-    protected function accessible($observer): bool
+    protected function accessible($observer)
     {
         if (!method_exists($observer, 'getAccessor')) {
             return true;
@@ -120,7 +120,7 @@ class Extension
      *
      * @return array
      */
-    protected function listObserver($observer): array
+    protected function listObserver($observer)
     {
         $condition = method_exists($observer, 'onCondition') ? $observer::onCondition() : '*';
 
@@ -132,7 +132,7 @@ class Extension
      *
      * @return array
      */
-    protected function getManifest(): array
+    protected function getManifest()
     {
         if (!is_null($this->manifest)) {
             return $this->manifest;

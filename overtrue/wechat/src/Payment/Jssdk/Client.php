@@ -63,7 +63,7 @@ class Client extends JssdkClient
      *
      * @return array
      */
-    public function sdkConfig(string $prepayId): array
+    public function sdkConfig(string $prepayId)
     {
         $config = $this->bridgeConfig($prepayId, false);
 
@@ -80,7 +80,7 @@ class Client extends JssdkClient
      *
      * @return array
      */
-    public function appConfig(string $prepayId): array
+    public function appConfig(string $prepayId)
     {
         $params = [
             'appid' => $this->app['config']->app_id,

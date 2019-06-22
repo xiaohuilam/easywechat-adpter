@@ -85,7 +85,7 @@ abstract class Message implements MessageInterface
      *
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -149,7 +149,7 @@ abstract class Message implements MessageInterface
      *
      * @return array
      */
-    public function transformForJsonRequest(array $appends = [], $withType = true): array
+    public function transformForJsonRequest(array $appends = [], $withType = true)
     {
         if (!$withType) {
             return $this->propertiesToArray([], $this->jsonAliases);
@@ -157,7 +157,7 @@ abstract class Message implements MessageInterface
         $messageType = $this->getType();
         $data = array_merge(['msgtype' => $messageType], $appends);
 
-        $data[$messageType] = array_merge($data[$messageType] ?? [], $this->propertiesToArray([], $this->jsonAliases));
+        $data[$messageType] = array_merge($data[$messageType] ?: [], $this->propertiesToArray([], $this->jsonAliases));
 
         return $data;
     }
@@ -168,7 +168,7 @@ abstract class Message implements MessageInterface
      *
      * @return string
      */
-    public function transformToXml(array $appends = [], bool $returnAsArray = false): string
+    public function transformToXml(array $appends = [], bool $returnAsArray = false)
     {
         $data = array_merge(['MsgType' => $this->getType()], $this->toXmlArray(), $appends);
 
@@ -183,7 +183,7 @@ abstract class Message implements MessageInterface
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function propertiesToArray(array $data, array $aliases = []): array
+    protected function propertiesToArray(array $data, array $aliases = [])
     {
         $this->checkRequiredAttributes();
 

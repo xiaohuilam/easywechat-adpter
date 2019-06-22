@@ -64,7 +64,7 @@ trait HasHttpRequests
      *
      * @return array
      */
-    public static function getDefaultOptions(): array
+    public static function getDefaultOptions()
     {
         return self::$defaults;
     }
@@ -88,7 +88,7 @@ trait HasHttpRequests
      *
      * @return ClientInterface
      */
-    public function getHttpClient(): ClientInterface
+    public function getHttpClient()
     {
         if (!($this->httpClient instanceof ClientInterface)) {
             if (property_exists($this, 'app') && $this->app['http_client']) {
@@ -125,7 +125,7 @@ trait HasHttpRequests
      *
      * @return array
      */
-    public function getMiddlewares(): array
+    public function getMiddlewares()
     {
         return $this->middlewares;
     }
@@ -139,7 +139,7 @@ trait HasHttpRequests
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function request($url, $method = 'GET', $options = []): ResponseInterface
+    public function request($url, $method = 'GET', $options = [])
     {
         $method = strtoupper($method);
 
@@ -174,7 +174,7 @@ trait HasHttpRequests
      *
      * @return \GuzzleHttp\HandlerStack
      */
-    public function getHandlerStack(): HandlerStack
+    public function getHandlerStack()
     {
         if ($this->handlerStack) {
             return $this->handlerStack;
@@ -194,10 +194,10 @@ trait HasHttpRequests
      *
      * @return array
      */
-    protected function fixJsonIssue(array $options): array
+    protected function fixJsonIssue(array $options)
     {
         if (isset($options['json']) && is_array($options['json'])) {
-            $options['headers'] = array_merge($options['headers'] ?? [], ['Content-Type' => 'application/json']);
+            $options['headers'] = array_merge($options['headers'] ?: [], ['Content-Type' => 'application/json']);
 
             if (empty($options['json'])) {
                 $options['body'] = \GuzzleHttp\json_encode($options['json'], JSON_FORCE_OBJECT);

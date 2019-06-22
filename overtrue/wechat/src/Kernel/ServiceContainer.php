@@ -78,7 +78,7 @@ class ServiceContainer extends Container
      */
     public function getId()
     {
-        return $this->id ?? $this->id = md5(json_encode($this->userConfig));
+        return $this->id ?: $this->id = md5(json_encode($this->userConfig));
     }
 
     /**

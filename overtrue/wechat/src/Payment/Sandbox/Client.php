@@ -32,7 +32,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    public function getKey(): string
+    public function getKey()
     {
         if ($cache = $this->getCache()->get($this->getCacheKey())) {
             return $cache;
@@ -46,13 +46,13 @@ class Client extends BaseClient
             return $key;
         }
 
-        throw new SandboxException($response['retmsg'] ?? $response['return_msg']);
+        throw new SandboxException($response['retmsg'] ?: $response['return_msg']);
     }
 
     /**
      * @return string
      */
-    protected function getCacheKey(): string
+    protected function getCacheKey()
     {
         return 'easywechat.payment.sandbox.'.md5($this->app['config']->app_id.$this->app['config']['mch_id']);
     }

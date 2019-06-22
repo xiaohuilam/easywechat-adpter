@@ -58,7 +58,7 @@ class Response implements Arrayable, JsonSerializable
      */
     public function offsetGet($offset)
     {
-        return $this->toArray()[$offset] ?? null;
+        return $this->toArray()[$offset] ?: null;
     }
 
     /**
