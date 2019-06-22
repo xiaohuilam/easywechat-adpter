@@ -274,5 +274,5 @@ abstract class AccessToken implements AccessTokenInterface
      *
      * @return array
      */
-    abstract protected function getCredentials()
+    abstract protected function getCredentials();
 }

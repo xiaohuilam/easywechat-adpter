@@ -1,4 +1,5 @@
 /vendor/
+/scripts/
 composer.lock
 .DS_Store
 *.bak
