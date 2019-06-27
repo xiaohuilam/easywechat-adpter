@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\ExternalContact;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -33,7 +31,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/externalcontact/get_follow_user_list');
     }
-
     /**
      * 获取外部联系人列表.
      *
@@ -47,11 +44,8 @@ class Client extends BaseClient
      */
     public function list($userId)
     {
-        return $this->httpGet('cgi-bin/externalcontact/list', [
-            'userid' => $userId,
-        ]);
+        return $this->httpGet('cgi-bin/externalcontact/list', ['userid' => $userId]);
     }
-
     /**
      * 获取外部联系人详情.
      *
@@ -65,11 +59,8 @@ class Client extends BaseClient
      */
     public function get($externalUserId)
     {
-        return $this->httpGet('cgi-bin/externalcontact/get', [
-            'external_userid' => $externalUserId,
-        ]);
+        return $this->httpGet('cgi-bin/externalcontact/get', ['external_userid' => $externalUserId]);
     }
-
     /**
      * 获取离职成员的客户列表.
      *
@@ -82,14 +73,10 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getUnassigned( $pageId = 0, $pageSize = 1000)
+    public function getUnassigned($pageId = 0, $pageSize = 1000)
     {
-        return $this->httpPostJson('cgi-bin/externalcontact/get_unassigned_list', [
-            'page_id' => $pageId,
-            'page_size' => $pageSize,
-        ]);
+        return $this->httpPostJson('cgi-bin/externalcontact/get_unassigned_list', ['page_id' => $pageId, 'page_size' => $pageSize]);
     }
-
     /**
      * 离职成员的外部联系人再分配.
      *
@@ -105,12 +92,7 @@ class Client extends BaseClient
      */
     public function transfer($externalUserId, $handoverUserId, $takeoverUserId)
     {
-        $params = [
-            'external_userid' => $externalUserId,
-            'handover_userid' => $handoverUserId,
-            'takeover_userid' => $takeoverUserId,
-        ];
-
+        $params = ['external_userid' => $externalUserId, 'handover_userid' => $handoverUserId, 'takeover_userid' => $takeoverUserId];
         return $this->httpPostJson('cgi-bin/externalcontact/transfer', $params);
     }
 }

@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Store;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,7 +27,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/get_merchant_category');
     }
-
     /**
      * Get district from tencent map .
      *
@@ -39,7 +36,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/get_district');
     }
-
     /**
      * Search store from tencent map.
      *
@@ -48,16 +44,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function searchFromMap( $districtId, $keyword)
+    public function searchFromMap($districtId, $keyword)
     {
-        $params = [
-            'districtid' => $districtId,
-            'keyword' => $keyword,
-        ];
-
+        $params = ['districtid' => $districtId, 'keyword' => $keyword];
         return $this->httpPostJson('wxa/search_map_poi', $params);
     }
-
     /**
      * Get store check status.
      *
@@ -67,7 +58,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/get_merchant_audit_info');
     }
-
     /**
      * Create a merchant.
      *
@@ -79,7 +69,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/apply_merchant', $baseInfo);
     }
-
     /**
      * Update a merchant.
      *
@@ -91,7 +80,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/modify_merchant', $params);
     }
-
     /**
      * Create a store from tencent map.
      *
@@ -103,7 +91,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/create_map_poi', $baseInfo);
     }
-
     /**
      * Create a store.
      *
@@ -115,7 +102,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/add_store', $baseInfo);
     }
-
     /**
      * Update a store.
      *
@@ -124,13 +110,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update( $poiId, $baseInfo)
+    public function update($poiId, $baseInfo)
     {
         $params = array_merge($baseInfo, ['poi_id' => $poiId]);
-
         return $this->httpPostJson('wxa/update_store', $params);
     }
-
     /**
      * Get store by ID.
      *
@@ -138,11 +122,10 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function get( $poiId)
+    public function get($poiId)
     {
         return $this->httpPostJson('wxa/get_store_info', ['poi_id' => $poiId]);
     }
-
     /**
      * List store.
      *
@@ -151,16 +134,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $offset = 0, $limit = 10)
+    public function list($offset = 0, $limit = 10)
     {
-        $params = [
-            'offset' => $offset,
-            'limit' => $limit,
-        ];
-
+        $params = ['offset' => $offset, 'limit' => $limit];
         return $this->httpPostJson('wxa/get_store_list', $params);
     }
-
     /**
      * Delete a store.
      *
@@ -168,7 +146,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete( $poiId)
+    public function delete($poiId)
     {
         return $this->httpPostJson('wxa/del_store', ['poi_id' => $poiId]);
     }

@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Auth;
 
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use EasyWeChat\Kernel\Traits\InteractsWithCache;
 use EasyWeChat\OpenPlatform\Application;
-
 /**
  * Class VerifyTicket.
  *
@@ -23,12 +21,10 @@ use EasyWeChat\OpenPlatform\Application;
 class VerifyTicket
 {
     use InteractsWithCache;
-
     /**
      * @var \EasyWeChat\OpenPlatform\Application
      */
     protected $app;
-
     /**
      * Constructor.
      *
@@ -38,7 +34,6 @@ class VerifyTicket
     {
         $this->app = $app;
     }
-
     /**
      * Put the credential `component_verify_ticket` in cache.
      *
@@ -52,14 +47,11 @@ class VerifyTicket
     public function setTicket($ticket)
     {
         $this->getCache()->set($this->getCacheKey(), $ticket, 3600);
-
         if (!$this->getCache()->has($this->getCacheKey())) {
             throw new RuntimeException('Failed to cache verify ticket.');
         }
-
         return $this;
     }
-
     /**
      * Get the credential `component_verify_ticket` from cache.
      *
@@ -73,10 +65,8 @@ class VerifyTicket
         if ($cached = $this->getCache()->get($this->getCacheKey())) {
             return $cached;
         }
-
         throw new RuntimeException('Credential "component_verify_ticket" does not exist in cache.');
     }
-
     /**
      * Get cache key.
      *
@@ -84,6 +74,6 @@ class VerifyTicket
      */
     protected function getCacheKey()
     {
-        return 'easywechat.open_platform.verify_ticket.'.$this->app['config']['app_id'];
+        return 'easywechat.open_platform.verify_ticket.' . $this->app['config']['app_id'];
     }
 }

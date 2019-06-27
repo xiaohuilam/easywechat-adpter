@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Reverse;
 
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 class Client extends BaseClient
 {
     /**
@@ -28,7 +26,6 @@ class Client extends BaseClient
     {
         return $this->reverse($outTradeNumber, 'out_trade_no');
     }
-
     /**
      * Reverse order by transaction_id.
      *
@@ -42,7 +39,6 @@ class Client extends BaseClient
     {
         return $this->reverse($transactionId, 'transaction_id');
     }
-
     /**
      * Reverse order.
      *
@@ -55,11 +51,7 @@ class Client extends BaseClient
      */
     protected function reverse($number, $type)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            $type => $number,
-        ];
-
+        $params = ['appid' => $this->app['config']->app_id, $type => $number];
         return $this->safeRequest($this->wrap('secapi/pay/reverse'), $params);
     }
 }

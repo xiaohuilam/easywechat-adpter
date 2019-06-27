@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram\DataCube;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -32,7 +30,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappiddailysummarytrend', $from, $to);
     }
-
     /**
      * Get daily visit trend.
      *
@@ -45,7 +42,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappiddailyvisittrend', $from, $to);
     }
-
     /**
      * Get weekly visit trend.
      *
@@ -58,7 +54,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidweeklyvisittrend', $from, $to);
     }
-
     /**
      * Get monthly visit trend.
      *
@@ -71,7 +66,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidmonthlyvisittrend', $from, $to);
     }
-
     /**
      * Get visit distribution.
      *
@@ -84,7 +78,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidvisitdistribution', $from, $to);
     }
-
     /**
      * Get daily retain info.
      *
@@ -97,7 +90,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappiddailyretaininfo', $from, $to);
     }
-
     /**
      * Get weekly retain info.
      *
@@ -110,7 +102,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidweeklyretaininfo', $from, $to);
     }
-
     /**
      * Get monthly retain info.
      *
@@ -123,7 +114,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidmonthlyretaininfo', $from, $to);
     }
-
     /**
      * Get visit page.
      *
@@ -136,7 +126,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappidvisitpage', $from, $to);
     }
-
     /**
      * Get user portrait.
      *
@@ -149,7 +138,6 @@ class Client extends BaseClient
     {
         return $this->query('datacube/getweanalysisappiduserportrait', $from, $to);
     }
-
     /**
      * Unify query.
      *
@@ -161,11 +149,7 @@ class Client extends BaseClient
      */
     protected function query($api, $from, $to)
     {
-        $params = [
-            'begin_date' => $from,
-            'end_date' => $to,
-        ];
-
+        $params = ['begin_date' => $from, 'end_date' => $to];
         return $this->httpPostJson($api, $params);
     }
 }

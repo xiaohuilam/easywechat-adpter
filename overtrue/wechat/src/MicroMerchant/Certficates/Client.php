@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MicroMerchant\Certficates;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\MicroMerchant\Kernel\BaseClient;
 use EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidExtensionException;
-
 /**
  * Class Client.
  *
@@ -37,44 +35,26 @@ class Client extends BaseClient
      */
     public function get($returnRaw = false)
     {
-        $params = [
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ];
-
+        $params = ['sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')];
         $responseType = $this->app->config->get('response_type');
         if (true === $returnRaw) {
             return $this->requestRaw('risk/getcertficates', $params);
         }
-
         $this->app->config->set('response_type', 'array');
         $response = $this->request('risk/getcertficates', $params);
         $this->app->config->set('response_type', $responseType);
-
         if ('SUCCESS' !== $response['return_code']) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Failed to get certificate. return_code_msg: "%s" .',
-                    $response['return_code'].'('.$response['return_msg'].')'
-                )
-            );
+            throw new InvalidArgumentException(sprintf('Failed to get certificate. return_code_msg: "%s" .', $response['return_code'] . '(' . $response['return_msg'] . ')'));
         }
         if ('SUCCESS' !== $response['result_code']) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Failed to get certificate. result_err_code_des: "%s" .',
-                    $response['result_code'].'('.$response['err_code'].'['.$response['err_code_des'].'])'
-                )
-            );
+            throw new InvalidArgumentException(sprintf('Failed to get certificate. result_err_code_des: "%s" .', $response['result_code'] . '(' . $response['err_code'] . '[' . $response['err_code_des'] . '])'));
         }
         $certificates = \GuzzleHttp\json_decode($response['certificates'], true)['data'][0];
         $ciphertext = $this->decrypt($certificates['encrypt_certificate']);
         unset($certificates['encrypt_certificate']);
         $certificates['certificates'] = $ciphertext;
-
         return $certificates;
     }
-
     /**
      * decrypt ciphertext.
      *
@@ -89,18 +69,11 @@ class Client extends BaseClient
         if (false === extension_loaded('sodium')) {
             throw new InvalidExtensionException('sodium extension is not installed，Reference link https://php.net/manual/zh/book.sodium.php');
         }
-
         if (false === sodium_crypto_aead_aes256gcm_is_available()) {
             throw new InvalidExtensionException('aes256gcm is not currently supported');
         }
-
         // sodium_crypto_aead_aes256gcm_decrypt function needs to open libsodium extension.
         // https://www.php.net/manual/zh/function.sodium-crypto-aead-aes256gcm-decrypt.php
-        return sodium_crypto_aead_aes256gcm_decrypt(
-            base64_decode($encryptCertificate['ciphertext'], true),
-            $encryptCertificate['associated_data'],
-            $encryptCertificate['nonce'],
-            $this->app['config']->apiv3_key
-        );
+        return sodium_crypto_aead_aes256gcm_decrypt(base64_decode($encryptCertificate['ciphertext'], true), $encryptCertificate['associated_data'], $encryptCertificate['nonce'], $this->app['config']->apiv3_key);
     }
 }

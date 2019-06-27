@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Merchant;
 
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -33,7 +31,6 @@ class Client extends BaseClient
     {
         return $this->manage($params, ['action' => 'add']);
     }
-
     /**
      * Query sub-merchant by merchant id.
      *
@@ -45,13 +42,9 @@ class Client extends BaseClient
      */
     public function querySubMerchantByMerchantId($id)
     {
-        $params = [
-            'micro_mch_id' => $id,
-        ];
-
+        $params = ['micro_mch_id' => $id];
         return $this->manage($params, ['action' => 'query']);
     }
-
     /**
      * Query sub-merchant by wechat id.
      *
@@ -63,13 +56,9 @@ class Client extends BaseClient
      */
     public function querySubMerchantByWeChatId($id)
     {
-        $params = [
-            'recipient_wechatid' => $id,
-        ];
-
+        $params = ['recipient_wechatid' => $id];
         return $this->manage($params, ['action' => 'query']);
     }
-
     /**
      * @param array $params
      * @param array $query
@@ -80,13 +69,7 @@ class Client extends BaseClient
      */
     protected function manage($params, $query)
     {
-        $params = array_merge($params, [
-            'appid' => $this->app['config']->app_id,
-            'nonce_str' => '',
-            'sub_mch_id' => '',
-            'sub_appid' => '',
-        ]);
-
+        $params = array_merge($params, ['appid' => $this->app['config']->app_id, 'nonce_str' => '', 'sub_mch_id' => '', 'sub_appid' => '']);
         return $this->safeRequest('secapi/mch/submchmanage', $params, 'post', compact('query'));
     }
 }

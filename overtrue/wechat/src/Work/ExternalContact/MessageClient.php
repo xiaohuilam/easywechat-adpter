@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\ExternalContact;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class MessageClient.
  *
@@ -27,29 +25,10 @@ class MessageClient extends BaseClient
      * @var array
      */
     protected $required = ['content', 'media_id', 'title', 'url', 'pic_media_id', 'appid', 'page'];
-
-    protected $textMessage = [
-        'content' => '',
-    ];
-
-    protected $imageMessage = [
-        'media_id' => '',
-    ];
-
-    protected $linkMessage = [
-        'title' => '',
-        'picurl' => '',
-        'desc' => '',
-        'url' => '',
-    ];
-
-    protected $miniprogramMessage = [
-        'title' => '',
-        'pic_media_id' => '',
-        'appid' => '',
-        'page' => '',
-    ];
-
+    protected $textMessage = ['content' => ''];
+    protected $imageMessage = ['media_id' => ''];
+    protected $linkMessage = ['title' => '', 'picurl' => '', 'desc' => '', 'url' => ''];
+    protected $miniprogramMessage = ['title' => '', 'pic_media_id' => '', 'appid' => '', 'page' => ''];
     /**
      * 添加企业群发消息模板
      *
@@ -65,10 +44,8 @@ class MessageClient extends BaseClient
     public function submit($msg)
     {
         $params = $this->formatMessage($msg);
-
         return $this->httpPostJson('cgi-bin/externalcontact/add_msg_template', $params);
     }
-
     /**
      * 获取企业群发消息发送结果.
      *
@@ -82,11 +59,8 @@ class MessageClient extends BaseClient
      */
     public function get($msgId)
     {
-        return $this->httpPostJson('cgi-bin/externalcontact/get_group_msg_result', [
-            'msgid' => $msgId,
-        ]);
+        return $this->httpPostJson('cgi-bin/externalcontact/get_group_msg_result', ['msgid' => $msgId]);
     }
-
     /**
      * 发送新客户欢迎语.
      *
@@ -103,14 +77,9 @@ class MessageClient extends BaseClient
     public function sendWelcome($welcomeCode, $msg)
     {
         $formattedMsg = $this->formatMessage($msg);
-
-        $params = array_merge($formattedMsg, [
-            'welcome_code' => $welcomeCode,
-        ]);
-
+        $params = array_merge($formattedMsg, ['welcome_code' => $welcomeCode]);
         return $this->httpPostJson('cgi-bin/externalcontact/send_welcome_msg', $params);
     }
-
     /**
      * @param array $data
      *
@@ -121,26 +90,20 @@ class MessageClient extends BaseClient
     protected function formatMessage($data = [])
     {
         $params = $data;
-
         if (!empty($params['text'])) {
             $params['text'] = $this->formatFields($params['text'], $this->textMessage);
         }
-
         if (!empty($params['image'])) {
             $params['image'] = $this->formatFields($params['image'], $this->imageMessage);
         }
-
         if (!empty($params['link'])) {
             $params['link'] = $this->formatFields($params['link'], $this->linkMessage);
         }
-
         if (!empty($params['miniprogram'])) {
             $params['miniprogram'] = $this->formatFields($params['miniprogram'], $this->miniprogramMessage);
         }
-
         return $params;
     }
-
     /**
      * @param array $data
      * @param array $default
@@ -156,10 +119,8 @@ class MessageClient extends BaseClient
             if (in_array($key, $this->required, true) && empty($value) && empty($default[$key])) {
                 throw new InvalidArgumentException(sprintf('Attribute "%s" can not be empty!', $key));
             }
-
             $params[$key] = empty($value) ? $default[$key] : $value;
         }
-
         return $params;
     }
 }

@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Clauses;
 
 /**
@@ -21,10 +20,7 @@ class Clause
     /**
      * @var array
      */
-    protected $clauses = [
-        'where' => [],
-    ];
-
+    protected $clauses = ['where' => []];
     /**
      * @param string $key
      * @param string $value
@@ -34,10 +30,8 @@ class Clause
     public function where(...$args)
     {
         array_push($this->clauses['where'], $args);
-
         return $this;
     }
-
     /**
      * @param mixed $payload
      *
@@ -47,7 +41,6 @@ class Clause
     {
         return (bool) $this->interceptWhereClause($payload);
     }
-
     /**
      * @param mixed $payload
      *

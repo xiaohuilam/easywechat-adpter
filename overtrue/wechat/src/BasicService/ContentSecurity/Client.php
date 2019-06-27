@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\BasicService\ContentSecurity;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -24,7 +22,6 @@ class Client extends BaseClient
      * @var string
      */
     protected $baseUri = 'https://api.weixin.qq.com/wxa/';
-
     /**
      * Text content security check.
      *
@@ -36,13 +33,9 @@ class Client extends BaseClient
      */
     public function checkText($text)
     {
-        $params = [
-            'content' => $text,
-        ];
-
+        $params = ['content' => $text];
         return $this->httpPostJson('msg_sec_check', $params);
     }
-
     /**
      * Image security check.
      *

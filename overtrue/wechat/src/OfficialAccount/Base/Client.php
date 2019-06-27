@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Base;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -27,13 +25,9 @@ class Client extends BaseClient
      */
     public function clearQuota()
     {
-        $params = [
-            'appid' => $this->app['config']['app_id'],
-        ];
-
+        $params = ['appid' => $this->app['config']['app_id']];
         return $this->httpPostJson('cgi-bin/clear_quota', $params);
     }
-
     /**
      * Get wechat callback ip.
      *

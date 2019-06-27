@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Transfer;
 
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use function EasyWeChat\Kernel\Support\get_server_ip;
 use function EasyWeChat\Kernel\Support\rsa_public_encrypt;
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -34,15 +32,9 @@ class Client extends BaseClient
      */
     public function queryBalanceOrder($partnerTradeNo)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'mch_id' => $this->app['config']->mch_id,
-            'partner_trade_no' => $partnerTradeNo,
-        ];
-
+        $params = ['appid' => $this->app['config']->app_id, 'mch_id' => $this->app['config']->mch_id, 'partner_trade_no' => $partnerTradeNo];
         return $this->safeRequest('mmpaymkttransfers/gettransferinfo', $params);
     }
-
     /**
      * Send MerchantPay to balance.
      *
@@ -54,19 +46,12 @@ class Client extends BaseClient
      */
     public function toBalance($params)
     {
-        $base = [
-            'mch_id' => null,
-            'mchid' => $this->app['config']->mch_id,
-            'mch_appid' => $this->app['config']->app_id,
-        ];
-
+        $base = ['mch_id' => null, 'mchid' => $this->app['config']->mch_id, 'mch_appid' => $this->app['config']->app_id];
         if (empty($params['spbill_create_ip'])) {
             $params['spbill_create_ip'] = get_server_ip();
         }
-
         return $this->safeRequest('mmpaymkttransfers/promotion/transfers', array_merge($base, $params));
     }
-
     /**
      * Query MerchantPay order to BankCard.
      *
@@ -78,14 +63,9 @@ class Client extends BaseClient
      */
     public function queryBankCardOrder($partnerTradeNo)
     {
-        $params = [
-            'mch_id' => $this->app['config']->mch_id,
-            'partner_trade_no' => $partnerTradeNo,
-        ];
-
+        $params = ['mch_id' => $this->app['config']->mch_id, 'partner_trade_no' => $partnerTradeNo];
         return $this->safeRequest('mmpaysptrans/query_bank', $params);
     }
-
     /**
      * Send MerchantPay to BankCard.
      *
@@ -103,12 +83,9 @@ class Client extends BaseClient
                 throw new RuntimeException(\sprintf('"%s" is required.', $key));
             }
         }
-
         $publicKey = file_get_contents($this->app['config']->get('rsa_public_key_path'));
-
         $params['enc_bank_no'] = rsa_public_encrypt($params['enc_bank_no'], $publicKey);
         $params['enc_true_name'] = rsa_public_encrypt($params['enc_true_name'], $publicKey);
-
         return $this->safeRequest('mmpaysptrans/pay_bank', $params);
     }
 }

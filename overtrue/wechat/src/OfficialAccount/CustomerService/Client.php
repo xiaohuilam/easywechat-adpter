@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\CustomerService;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,7 +27,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/customservice/getkflist');
     }
-
     /**
      * List all online staffs.
      *
@@ -39,7 +36,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/customservice/getonlinekflist');
     }
-
     /**
      * Create a staff.
      *
@@ -50,14 +46,9 @@ class Client extends BaseClient
      */
     public function create($account, $nickname)
     {
-        $params = [
-            'kf_account' => $account,
-            'nickname' => $nickname,
-        ];
-
+        $params = ['kf_account' => $account, 'nickname' => $nickname];
         return $this->httpPostJson('customservice/kfaccount/add', $params);
     }
-
     /**
      * Update a staff.
      *
@@ -68,14 +59,9 @@ class Client extends BaseClient
      */
     public function update($account, $nickname)
     {
-        $params = [
-            'kf_account' => $account,
-            'nickname' => $nickname,
-        ];
-
+        $params = ['kf_account' => $account, 'nickname' => $nickname];
         return $this->httpPostJson('customservice/kfaccount/update', $params);
     }
-
     /**
      * Delete a staff.
      *
@@ -87,7 +73,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('customservice/kfaccount/del', [], ['kf_account' => $account]);
     }
-
     /**
      * Invite a staff.
      *
@@ -98,14 +83,9 @@ class Client extends BaseClient
      */
     public function invite($account, $wechatId)
     {
-        $params = [
-            'kf_account' => $account,
-            'invite_wx' => $wechatId,
-        ];
-
+        $params = ['kf_account' => $account, 'invite_wx' => $wechatId];
         return $this->httpPostJson('customservice/kfaccount/inviteworker', $params);
     }
-
     /**
      * Set staff avatar.
      *
@@ -118,7 +98,6 @@ class Client extends BaseClient
     {
         return $this->httpUpload('customservice/kfaccount/uploadheadimg', ['media' => $path], [], ['kf_account' => $account]);
     }
-
     /**
      * Get message builder.
      *
@@ -131,10 +110,8 @@ class Client extends BaseClient
     public function message($message)
     {
         $messageBuilder = new Messenger($this);
-
         return $messageBuilder->message($message);
     }
-
     /**
      * Send a message.
      *
@@ -146,7 +123,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/message/custom/send', $message);
     }
-
     /**
      * Show typing status.
      *
@@ -156,12 +132,8 @@ class Client extends BaseClient
      */
     public function showTypingStatusToUser($openid)
     {
-        return $this->httpPostJson('cgi-bin/message/custom/typing', [
-            'touser' => $openid,
-            'command' => 'Typing',
-        ]);
+        return $this->httpPostJson('cgi-bin/message/custom/typing', ['touser' => $openid, 'command' => 'Typing']);
     }
-
     /**
      * Hide typing status.
      *
@@ -171,12 +143,8 @@ class Client extends BaseClient
      */
     public function hideTypingStatusToUser($openid)
     {
-        return $this->httpPostJson('cgi-bin/message/custom/typing', [
-            'touser' => $openid,
-            'command' => 'CancelTyping',
-        ]);
+        return $this->httpPostJson('cgi-bin/message/custom/typing', ['touser' => $openid, 'command' => 'CancelTyping']);
     }
-
     /**
      * Get messages history.
      *
@@ -189,13 +157,7 @@ class Client extends BaseClient
      */
     public function messages($startTime, $endTime, $msgId = 1, $number = 10000)
     {
-        $params = [
-            'starttime' => is_numeric($startTime) ? $startTime : strtotime($startTime),
-            'endtime' => is_numeric($endTime) ? $endTime : strtotime($endTime),
-            'msgid' => $msgId,
-            'number' => $number,
-        ];
-
+        $params = ['starttime' => is_numeric($startTime) ? $startTime : strtotime($startTime), 'endtime' => is_numeric($endTime) ? $endTime : strtotime($endTime), 'msgid' => $msgId, 'number' => $number];
         return $this->httpPostJson('customservice/msgrecord/getmsglist', $params);
     }
 }

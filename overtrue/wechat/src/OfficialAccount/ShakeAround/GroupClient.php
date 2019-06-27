@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\ShakeAround;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class GroupClient.
  *
@@ -29,13 +27,9 @@ class GroupClient extends BaseClient
      */
     public function create($name)
     {
-        $params = [
-            'group_name' => $name,
-        ];
-
+        $params = ['group_name' => $name];
         return $this->httpPostJson('shakearound/device/group/add', $params);
     }
-
     /**
      * Update a device group name.
      *
@@ -44,16 +38,11 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update( $groupId, $name)
+    public function update($groupId, $name)
     {
-        $params = [
-            'group_id' => $groupId,
-            'group_name' => $name,
-        ];
-
+        $params = ['group_id' => $groupId, 'group_name' => $name];
         return $this->httpPostJson('shakearound/device/group/update', $params);
     }
-
     /**
      * Delete device group.
      *
@@ -61,15 +50,11 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete( $groupId)
+    public function delete($groupId)
     {
-        $params = [
-            'group_id' => $groupId,
-        ];
-
+        $params = ['group_id' => $groupId];
         return $this->httpPostJson('shakearound/device/group/delete', $params);
     }
-
     /**
      * List all device groups.
      *
@@ -78,16 +63,11 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $begin, $count)
+    public function list($begin, $count)
     {
-        $params = [
-            'begin' => $begin,
-            'count' => $count,
-        ];
-
+        $params = ['begin' => $begin, 'count' => $count];
         return $this->httpPostJson('shakearound/device/group/getlist', $params);
     }
-
     /**
      * Get detail of a device group.
      *
@@ -97,17 +77,11 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function get( $groupId, $begin, $count)
+    public function get($groupId, $begin, $count)
     {
-        $params = [
-            'group_id' => $groupId,
-            'begin' => $begin,
-            'count' => $count,
-        ];
-
+        $params = ['group_id' => $groupId, 'begin' => $begin, 'count' => $count];
         return $this->httpPostJson('shakearound/device/group/getdetail', $params);
     }
-
     /**
      * Add  one or more devices to a device group.
      *
@@ -116,16 +90,11 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function addDevices( $groupId, $deviceIdentifiers)
+    public function addDevices($groupId, $deviceIdentifiers)
     {
-        $params = [
-            'group_id' => $groupId,
-            'device_identifiers' => $deviceIdentifiers,
-        ];
-
+        $params = ['group_id' => $groupId, 'device_identifiers' => $deviceIdentifiers];
         return $this->httpPostJson('shakearound/device/group/adddevice', $params);
     }
-
     /**
      * Remove one or more devices from a device group.
      *
@@ -134,13 +103,9 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function removeDevices( $groupId, $deviceIdentifiers)
+    public function removeDevices($groupId, $deviceIdentifiers)
     {
-        $params = [
-            'group_id' => $groupId,
-            'device_identifiers' => $deviceIdentifiers,
-        ];
-
+        $params = ['group_id' => $groupId, 'device_identifiers' => $deviceIdentifiers];
         return $this->httpPostJson('shakearound/device/group/deletedevice', $params);
     }
 }

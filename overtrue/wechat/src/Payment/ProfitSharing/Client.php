@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\ProfitSharing;
 
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -25,11 +23,8 @@ class Client extends BaseClient
      */
     protected function prepends()
     {
-        return [
-            'sign_type' => 'HMAC-SHA256',
-        ];
+        return ['sign_type' => 'HMAC-SHA256'];
     }
-
     /**
      * Add profit sharing receiver.
      * 服务商代子商户发起添加分账接收方请求.
@@ -39,18 +34,9 @@ class Client extends BaseClient
      */
     public function addReceiver($receiver)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'receiver' => json_encode(
-                $receiver, JSON_UNESCAPED_UNICODE
-            ),
-        ];
-
-        return $this->request(
-            'pay/profitsharingaddreceiver', $params
-        );
+        $params = ['appid' => $this->app['config']->app_id, 'receiver' => json_encode($receiver, JSON_UNESCAPED_UNICODE)];
+        return $this->request('pay/profitsharingaddreceiver', $params);
     }
-
     /**
      * Delete profit sharing receiver.
      * 服务商代子商户发起删除分账接收方请求.
@@ -60,18 +46,9 @@ class Client extends BaseClient
      */
     public function deleteReceiver($receiver)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'receiver' => json_encode(
-                $receiver, JSON_UNESCAPED_UNICODE
-            ),
-        ];
-
-        return $this->request(
-            'pay/profitsharingremovereceiver', $params
-        );
+        $params = ['appid' => $this->app['config']->app_id, 'receiver' => json_encode($receiver, JSON_UNESCAPED_UNICODE)];
+        return $this->request('pay/profitsharingremovereceiver', $params);
     }
-
     /**
      * Single profit sharing.
      * 请求单次分账.
@@ -80,25 +57,11 @@ class Client extends BaseClient
      * @param string $outOrderNo    商户系统内部的分账单号
      * @param string $receivers     分账接收方列表
      */
-    public function share(
-        string $transactionId,
-        string $outOrderNo,
-        array $receivers
-    ) {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'transaction_id' => $transactionId,
-            'out_order_no' => $outOrderNo,
-            'receivers' => json_encode(
-                $receivers, JSON_UNESCAPED_UNICODE
-            ),
-        ];
-
-        return $this->safeRequest(
-            'secapi/pay/profitsharing', $params
-        );
+    public function share($transactionId, $outOrderNo, array $receivers)
+    {
+        $params = ['appid' => $this->app['config']->app_id, 'transaction_id' => $transactionId, 'out_order_no' => $outOrderNo, 'receivers' => json_encode($receivers, JSON_UNESCAPED_UNICODE)];
+        return $this->safeRequest('secapi/pay/profitsharing', $params);
     }
-
     /**
      * Multi profit sharing.
      * 请求多次分账.
@@ -107,25 +70,11 @@ class Client extends BaseClient
      * @param string $outOrderNo    商户系统内部的分账单号
      * @param string $receivers     分账接收方列表
      */
-    public function multiShare(
-        string $transactionId,
-        string $outOrderNo,
-        array $receivers
-    ) {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'transaction_id' => $transactionId,
-            'out_order_no' => $outOrderNo,
-            'receivers' => json_encode(
-                $receivers, JSON_UNESCAPED_UNICODE
-            ),
-        ];
-
-        return $this->safeRequest(
-            'secapi/pay/multiprofitsharing', $params
-        );
+    public function multiShare($transactionId, $outOrderNo, array $receivers)
+    {
+        $params = ['appid' => $this->app['config']->app_id, 'transaction_id' => $transactionId, 'out_order_no' => $outOrderNo, 'receivers' => json_encode($receivers, JSON_UNESCAPED_UNICODE)];
+        return $this->safeRequest('secapi/pay/multiprofitsharing', $params);
     }
-
     /**
      * Finish profit sharing.
      * 完结分账.
@@ -136,12 +85,8 @@ class Client extends BaseClient
     {
         $params['appid'] = $this->app['config']->app_id;
         $params['sub_appid'] = null;
-
-        return $this->safeRequest(
-            'secapi/pay/profitsharingfinish', $params
-        );
+        return $this->safeRequest('secapi/pay/profitsharingfinish', $params);
     }
-
     /**
      * Query profit sharing result.
      * 查询分账结果.
@@ -149,17 +94,9 @@ class Client extends BaseClient
      * @param string $transactionId 微信支付订单号
      * @param string $outOrderNo    商户系统内部的分账单号
      */
-    public function query(
-        string $transactionId, $outOrderNo
-    ) {
-        $params = [
-            'sub_appid' => null,
-            'transaction_id' => $transactionId,
-            'out_order_no' => $outOrderNo,
-        ];
-
-        return $this->request(
-            'pay/profitsharingquery', $params
-        );
+    public function query($transactionId, $outOrderNo)
+    {
+        $params = ['sub_appid' => null, 'transaction_id' => $transactionId, 'out_order_no' => $outOrderNo];
+        return $this->request('pay/profitsharingquery', $params);
     }
 }

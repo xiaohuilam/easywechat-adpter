@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Coupon;
 
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -33,10 +31,8 @@ class Client extends BaseClient
     {
         $params['appid'] = $this->app['config']->app_id;
         $params['openid_count'] = 1;
-
         return $this->safeRequest('mmpaymkttransfers/send_coupon', $params);
     }
-
     /**
      * query a coupon stock.
      *
@@ -49,10 +45,8 @@ class Client extends BaseClient
     public function stock($params)
     {
         $params['appid'] = $this->app['config']->app_id;
-
         return $this->request('mmpaymkttransfers/query_coupon_stock', $params);
     }
-
     /**
      * query a info of coupon.
      *
@@ -65,7 +59,6 @@ class Client extends BaseClient
     public function info($params)
     {
         $params['appid'] = $this->app['config']->app_id;
-
         return $this->request('mmpaymkttransfers/querycouponsinfo', $params);
     }
 }

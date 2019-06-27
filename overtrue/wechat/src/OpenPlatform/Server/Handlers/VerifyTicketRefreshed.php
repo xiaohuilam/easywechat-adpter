@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Server\Handlers;
 
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 use EasyWeChat\OpenPlatform\Application;
-
 /**
  * Class VerifyTicketRefreshed.
  *
@@ -25,7 +23,6 @@ class VerifyTicketRefreshed implements EventHandlerInterface
      * @var \EasyWeChat\OpenPlatform\Application
      */
     protected $app;
-
     /**
      * Constructor.
      *
@@ -35,7 +32,6 @@ class VerifyTicketRefreshed implements EventHandlerInterface
     {
         $this->app = $app;
     }
-
     /**
      * {@inheritdoc}.
      */

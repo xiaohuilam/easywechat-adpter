@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel;
 
 use EasyWeChat\Kernel\Providers\ConfigServiceProvider;
@@ -18,7 +17,6 @@ use EasyWeChat\Kernel\Providers\LogServiceProvider;
 use EasyWeChat\Kernel\Providers\RequestServiceProvider;
 use EasyWeChatComposer\Traits\WithAggregator;
 use Pimple\Container;
-
 /**
  * Class ServiceContainer.
  *
@@ -32,27 +30,22 @@ use Pimple\Container;
 class ServiceContainer extends Container
 {
     use WithAggregator;
-
     /**
      * @var string
      */
     protected $id;
-
     /**
      * @var array
      */
     protected $providers = [];
-
     /**
      * @var array
      */
     protected $defaultConfig = [];
-
     /**
      * @var array
      */
     protected $userConfig = [];
-
     /**
      * Constructor.
      *
@@ -63,24 +56,18 @@ class ServiceContainer extends Container
     public function __construct($config = [], $prepends = [], $id = null)
     {
         $this->registerProviders($this->getProviders());
-
         parent::__construct($prepends);
-
         $this->userConfig = $config;
-
         $this->id = $id;
-
         $this->aggregate();
     }
-
     /**
      * @return string
      */
     public function getId()
     {
-        return $this->id ?: $this->id = md5(json_encode($this->userConfig));
+        return $this->id ?: ($this->id = md5(json_encode($this->userConfig)));
     }
-
     /**
      * @return array
      */
@@ -88,15 +75,10 @@ class ServiceContainer extends Container
     {
         $base = [
             // http://docs.guzzlephp.org/en/stable/request-options.html
-            'http' => [
-                'timeout' => 30.0,
-                'base_uri' => 'https://api.weixin.qq.com/',
-            ],
+            'http' => ['timeout' => 30.0, 'base_uri' => 'https://api.weixin.qq.com/'],
         ];
-
         return array_replace_recursive($base, $this->defaultConfig, $this->userConfig);
     }
-
     /**
      * Return all providers.
      *
@@ -104,15 +86,8 @@ class ServiceContainer extends Container
      */
     public function getProviders()
     {
-        return array_merge([
-            ConfigServiceProvider::class,
-            LogServiceProvider::class,
-            RequestServiceProvider::class,
-            HttpClientServiceProvider::class,
-            ExtensionServiceProvider::class,
-        ], $this->providers);
+        return array_merge([ConfigServiceProvider::class, LogServiceProvider::class, RequestServiceProvider::class, HttpClientServiceProvider::class, ExtensionServiceProvider::class], $this->providers);
     }
-
     /**
      * @param string $id
      * @param mixed  $value
@@ -122,7 +97,6 @@ class ServiceContainer extends Container
         $this->offsetUnset($id);
         $this->offsetSet($id, $value);
     }
-
     /**
      * Magic get access.
      *
@@ -135,10 +109,8 @@ class ServiceContainer extends Container
         if ($this->shouldDelegate($id)) {
             return $this->delegateTo($id);
         }
-
         return $this->offsetGet($id);
     }
-
     /**
      * Magic set access.
      *
@@ -149,7 +121,6 @@ class ServiceContainer extends Container
     {
         $this->offsetSet($id, $value);
     }
-
     /**
      * @param array $providers
      */

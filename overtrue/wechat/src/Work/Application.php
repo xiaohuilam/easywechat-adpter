@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work;
 
 use EasyWeChat\Kernel\ServiceContainer;
 use EasyWeChat\Work\MiniProgram\Application as MiniProgram;
-
 /**
  * Application.
  *
@@ -46,34 +44,14 @@ class Application extends ServiceContainer
     /**
      * @var array
      */
-    protected $providers = [
-        OA\ServiceProvider::class,
-        Auth\ServiceProvider::class,
-        Base\ServiceProvider::class,
-        Menu\ServiceProvider::class,
-        OAuth\ServiceProvider::class,
-        User\ServiceProvider::class,
-        Agent\ServiceProvider::class,
-        Media\ServiceProvider::class,
-        Message\ServiceProvider::class,
-        Department\ServiceProvider::class,
-        Server\ServiceProvider::class,
-        Jssdk\ServiceProvider::class,
-        Invoice\ServiceProvider::class,
-        Chat\ServiceProvider::class,
-        ExternalContact\ServiceProvider::class,
-    ];
-
+    protected $providers = [OA\ServiceProvider::class, Auth\ServiceProvider::class, Base\ServiceProvider::class, Menu\ServiceProvider::class, OAuth\ServiceProvider::class, User\ServiceProvider::class, Agent\ServiceProvider::class, Media\ServiceProvider::class, Message\ServiceProvider::class, Department\ServiceProvider::class, Server\ServiceProvider::class, Jssdk\ServiceProvider::class, Invoice\ServiceProvider::class, Chat\ServiceProvider::class, ExternalContact\ServiceProvider::class];
     /**
      * @var array
      */
     protected $defaultConfig = [
         // http://docs.guzzlephp.org/en/stable/request-options.html
-        'http' => [
-            'base_uri' => 'https://qyapi.weixin.qq.com/',
-        ],
+        'http' => ['base_uri' => 'https://qyapi.weixin.qq.com/'],
     ];
-
     /**
      * Creates the miniProgram application.
      *
@@ -83,7 +61,6 @@ class Application extends ServiceContainer
     {
         return new MiniProgram($this->getConfig());
     }
-
     /**
      * @param string $method
      * @param array  $arguments
@@ -92,6 +69,6 @@ class Application extends ServiceContainer
      */
     public function __call($method, $arguments)
     {
-        return $this['base']->$method(...$arguments);
+        return $this['base']->{$method}(...$arguments);
     }
 }

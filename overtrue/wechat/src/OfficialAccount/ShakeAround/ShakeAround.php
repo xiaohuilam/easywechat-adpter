@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\ShakeAround;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class Card.
  *
@@ -38,7 +36,6 @@ class ShakeAround extends Client
         if (isset($this->app["shake_around.{$property}"])) {
             return $this->app["shake_around.{$property}"];
         }
-
         throw new InvalidArgumentException(sprintf('No shake_around service named "%s".', $property));
     }
 }

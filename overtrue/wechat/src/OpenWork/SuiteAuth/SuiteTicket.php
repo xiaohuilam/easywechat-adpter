@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenWork\SuiteAuth;
 
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use EasyWeChat\Kernel\Traits\InteractsWithCache;
 use EasyWeChat\OpenWork\Application;
-
 /**
  * SuiteTicket.
  *
@@ -23,12 +21,10 @@ use EasyWeChat\OpenWork\Application;
 class SuiteTicket
 {
     use InteractsWithCache;
-
     /**
      * @var Application
      */
     protected $app;
-
     /**
      * SuiteTicket constructor.
      *
@@ -38,7 +34,6 @@ class SuiteTicket
     {
         $this->app = $app;
     }
-
     /**
      * @param string $ticket
      *
@@ -50,14 +45,11 @@ class SuiteTicket
     public function setTicket($ticket)
     {
         $this->getCache()->set($this->getCacheKey(), $ticket, 1800);
-
         if (!$this->getCache()->has($this->getCacheKey())) {
             throw new RuntimeException('Failed to cache suite ticket.');
         }
-
         return $this;
     }
-
     /**
      * @return string
      *
@@ -69,15 +61,13 @@ class SuiteTicket
         if ($cached = $this->getCache()->get($this->getCacheKey())) {
             return $cached;
         }
-
         throw new RuntimeException('Credential "suite_ticket" does not exist in cache.');
     }
-
     /**
      * @return string
      */
     protected function getCacheKey()
     {
-        return 'easywechat.open_work.suite_ticket.'.$this->app['config']['suite_id'];
+        return 'easywechat.open_work.suite_ticket.' . $this->app['config']['suite_id'];
     }
 }

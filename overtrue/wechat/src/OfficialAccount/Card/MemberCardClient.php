@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 /**
@@ -29,7 +28,6 @@ class MemberCardClient extends Client
     {
         return $this->httpPostJson('card/membercard/activate', $info);
     }
-
     /**
      * 设置开卡字段接口.
      *
@@ -41,10 +39,8 @@ class MemberCardClient extends Client
     public function setActivationForm($cardId, $settings)
     {
         $params = array_merge(['card_id' => $cardId], $settings);
-
         return $this->httpPostJson('card/membercard/activateuserform/set', $params);
     }
-
     /**
      * 拉取会员信息接口.
      *
@@ -55,14 +51,9 @@ class MemberCardClient extends Client
      */
     public function getUser($cardId, $code)
     {
-        $params = [
-            'card_id' => $cardId,
-            'code' => $code,
-        ];
-
+        $params = ['card_id' => $cardId, 'code' => $code];
         return $this->httpPostJson('card/membercard/userinfo/get', $params);
     }
-
     /**
      * 更新会员信息.
      *
@@ -74,7 +65,6 @@ class MemberCardClient extends Client
     {
         return $this->httpPostJson('card/membercard/updateuser', $params);
     }
-
     /**
      * 获取用户提交资料.
      *
@@ -84,13 +74,9 @@ class MemberCardClient extends Client
      */
     public function getActivationForm($activateTicket)
     {
-        $params = [
-            'activate_ticket' => $activateTicket,
-        ];
-
+        $params = ['activate_ticket' => $activateTicket];
         return $this->httpPostJson('card/membercard/activatetempinfo/get', $params);
     }
-
     /**
      * 获取开卡组件链接接口.
      *

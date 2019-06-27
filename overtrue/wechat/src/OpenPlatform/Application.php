@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform;
 
 use EasyWeChat\Kernel\ServiceContainer;
@@ -20,7 +19,6 @@ use EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\Account\Client as Account
 use EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\OAuth\ComponentDelegate;
 use EasyWeChat\OpenPlatform\Authorizer\Server\Guard;
-
 /**
  * Class Application.
  *
@@ -41,24 +39,11 @@ class Application extends ServiceContainer
     /**
      * @var array
      */
-    protected $providers = [
-        Auth\ServiceProvider::class,
-        Base\ServiceProvider::class,
-        Server\ServiceProvider::class,
-        CodeTemplate\ServiceProvider::class,
-        Component\ServiceProvider::class,
-    ];
-
+    protected $providers = [Auth\ServiceProvider::class, Base\ServiceProvider::class, Server\ServiceProvider::class, CodeTemplate\ServiceProvider::class, Component\ServiceProvider::class];
     /**
      * @var array
      */
-    protected $defaultConfig = [
-        'http' => [
-            'timeout' => 5.0,
-            'base_uri' => 'https://api.weixin.qq.com/',
-        ],
-    ];
-
+    protected $defaultConfig = ['http' => ['timeout' => 5.0, 'base_uri' => 'https://api.weixin.qq.com/']];
     /**
      * Creates the officialAccount application.
      *
@@ -70,22 +55,15 @@ class Application extends ServiceContainer
      */
     public function officialAccount($appId, $refreshToken = null, AccessToken $accessToken = null)
     {
-        $application = new OfficialAccount($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
-            'encryptor' => $this['encryptor'],
-
-            'account' => function ($app) {
-                return new AccountClient($app, $this);
-            },
-        ]);
-
+        $application = new OfficialAccount($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + ['encryptor' => $this['encryptor'], 'account' => function ($app) {
+            return new AccountClient($app, $this);
+        }]);
         $application->extend('oauth', function ($socialite) {
             /* @var \Overtrue\Socialite\Providers\WeChatProvider $socialite */
             return $socialite->component(new ComponentDelegate($this));
         });
-
         return $application;
     }
-
     /**
      * Creates the miniProgram application.
      *
@@ -97,17 +75,12 @@ class Application extends ServiceContainer
      */
     public function miniProgram($appId, $refreshToken = null, AccessToken $accessToken = null)
     {
-        return new MiniProgram($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
-            'encryptor' => function () {
-                return new Encryptor($this['config']['app_id'], $this['config']['token'], $this['config']['aes_key']);
-            },
-
-            'auth' => function ($app) {
-                return new Client($app, $this);
-            },
-        ]);
+        return new MiniProgram($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + ['encryptor' => function () {
+            return new Encryptor($this['config']['app_id'], $this['config']['token'], $this['config']['aes_key']);
+        }, 'auth' => function ($app) {
+            return new Client($app, $this);
+        }]);
     }
-
     /**
      * Return the pre-authorization login page url.
      *
@@ -120,21 +93,13 @@ class Application extends ServiceContainer
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
-            $optional = [
-                'pre_auth_code' => $optional,
-            ];
+            $optional = ['pre_auth_code' => $optional];
         } else {
             $optional['pre_auth_code'] = $this->createPreAuthorizationCode()['pre_auth_code'];
         }
-
-        $queries = \array_merge($optional, [
-            'component_appid' => $this['config']['app_id'],
-            'redirect_uri' => $callbackUrl,
-        ]);
-
-        return 'https://mp.weixin.qq.com/cgi-bin/componentloginpage?'.http_build_query($queries);
+        $queries = \array_merge($optional, ['component_appid' => $this['config']['app_id'], 'redirect_uri' => $callbackUrl]);
+        return 'https://mp.weixin.qq.com/cgi-bin/componentloginpage?' . http_build_query($queries);
     }
-
     /**
      * Return the pre-authorization login page url (mobile).
      *
@@ -147,23 +112,13 @@ class Application extends ServiceContainer
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
-            $optional = [
-                'pre_auth_code' => $optional,
-            ];
+            $optional = ['pre_auth_code' => $optional];
         } else {
             $optional['pre_auth_code'] = $this->createPreAuthorizationCode()['pre_auth_code'];
         }
-
-        $queries = \array_merge($optional, [
-            'component_appid' => $this['config']['app_id'],
-            'redirect_uri' => $callbackUrl,
-            'action' => 'bindcomponent',
-            'no_scan' => 1,
-        ]);
-
-        return 'https://mp.weixin.qq.com/safe/bindcomponent?'.http_build_query($queries).'#wechat_redirect';
+        $queries = \array_merge($optional, ['component_appid' => $this['config']['app_id'], 'redirect_uri' => $callbackUrl, 'action' => 'bindcomponent', 'no_scan' => 1]);
+        return 'https://mp.weixin.qq.com/safe/bindcomponent?' . http_build_query($queries) . '#wechat_redirect';
     }
-
     /**
      * @param string      $appId
      * @param string|null $refreshToken
@@ -172,13 +127,8 @@ class Application extends ServiceContainer
      */
     protected function getAuthorizerConfig($appId, $refreshToken = null)
     {
-        return $this['config']->merge([
-            'component_app_id' => $this['config']['app_id'],
-            'app_id' => $appId,
-            'refresh_token' => $refreshToken,
-        ])->toArray();
+        return $this['config']->merge(['component_app_id' => $this['config']['app_id'], 'app_id' => $appId, 'refresh_token' => $refreshToken])->toArray();
     }
-
     /**
      * @param \EasyWeChat\OpenPlatform\Authorizer\Auth\AccessToken|null $accessToken
      *
@@ -186,25 +136,18 @@ class Application extends ServiceContainer
      */
     protected function getReplaceServices(AccessToken $accessToken = null)
     {
-        $services = [
-            'access_token' => $accessToken ?: function ($app) {
-                return new AccessToken($app, $this);
-            },
-
-            'server' => function ($app) {
-                return new Guard($app);
-            },
-        ];
-
+        $services = ['access_token' => $accessToken ?: function ($app) {
+            return new AccessToken($app, $this);
+        }, 'server' => function ($app) {
+            return new Guard($app);
+        }];
         foreach (['cache', 'http_client', 'log', 'logger', 'request'] as $reuse) {
             if (isset($this[$reuse])) {
                 $services[$reuse] = $this[$reuse];
             }
         }
-
         return $services;
     }
-
     /**
      * Handle dynamic calls.
      *
@@ -215,6 +158,6 @@ class Application extends ServiceContainer
      */
     public function __call($method, $args)
     {
-        return $this->base->$method(...$args);
+        return $this->base->{$method}(...$args);
     }
 }

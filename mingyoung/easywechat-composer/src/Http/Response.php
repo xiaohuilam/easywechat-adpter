@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the EasyWeChatComposer.
  *
@@ -10,25 +8,21 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChatComposer\Http;
 
 use EasyWeChat\Kernel\Contracts\Arrayable;
 use EasyWeChat\Kernel\Http\Response as HttpResponse;
 use JsonSerializable;
-
 class Response implements Arrayable, JsonSerializable
 {
     /**
      * @var \EasyWeChat\Kernel\Http\Response
      */
     protected $response;
-
     /**
      * @var array
      */
     protected $array;
-
     /**
      * @param \EasyWeChat\Kernel\Http\Response $response
      */
@@ -36,7 +30,6 @@ class Response implements Arrayable, JsonSerializable
     {
         $this->response = $response;
     }
-
     /**
      * @see \ArrayAccess::offsetExists
      *
@@ -48,7 +41,6 @@ class Response implements Arrayable, JsonSerializable
     {
         return isset($this->toArray()[$offset]);
     }
-
     /**
      * @see \ArrayAccess::offsetGet
      *
@@ -60,7 +52,6 @@ class Response implements Arrayable, JsonSerializable
     {
         return $this->toArray()[$offset] ?: null;
     }
-
     /**
      * @see \ArrayAccess::offsetSet
      *
@@ -71,7 +62,6 @@ class Response implements Arrayable, JsonSerializable
     {
         //
     }
-
     /**
      * @see \ArrayAccess::offsetUnset
      *
@@ -81,7 +71,6 @@ class Response implements Arrayable, JsonSerializable
     {
         //
     }
-
     /**
      * Get the instance as an array.
      *
@@ -89,9 +78,8 @@ class Response implements Arrayable, JsonSerializable
      */
     public function toArray()
     {
-        return $this->array ?: $this->array = $this->response->toArray();
+        return $this->array ?: ($this->array = $this->response->toArray());
     }
-
     /**
      * Convert the object into something JSON serializable.
      *

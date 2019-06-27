@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Chat;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/appchat/get', ['chatid' => $chatId]);
     }
-
     /**
      * Create chat.
      *
@@ -43,7 +40,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/appchat/create', $data);
     }
-
     /**
      * Update chat.
      *
@@ -56,7 +52,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/appchat/update', array_merge(['chatid' => $chatId], $data));
     }
-
     /**
      * Send a message.
      *

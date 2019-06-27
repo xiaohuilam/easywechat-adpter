@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\CustomerService;
 
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use EasyWeChat\Kernel\Messages\Message;
 use EasyWeChat\Kernel\Messages\Raw as RawMessage;
 use EasyWeChat\Kernel\Messages\Text;
-
 /**
  * Class MessageBuilder.
  *
@@ -29,28 +27,24 @@ class Messenger
      * @var \EasyWeChat\Kernel\Messages\Message;
      */
     protected $message;
-
     /**
      * Messages target user open id.
      *
      * @var string
      */
     protected $to;
-
     /**
      * Messages sender staff id.
      *
      * @var string
      */
     protected $account;
-
     /**
      * Customer service instance.
      *
      * @var \EasyWeChat\OfficialAccount\CustomerService\Client
      */
     protected $client;
-
     /**
      * MessageBuilder constructor.
      *
@@ -60,7 +54,6 @@ class Messenger
     {
         $this->client = $client;
     }
-
     /**
      * Set message to send.
      *
@@ -73,12 +66,9 @@ class Messenger
         if (is_string($message)) {
             $message = new Text($message);
         }
-
         $this->message = $message;
-
         return $this;
     }
-
     /**
      * Set staff account to send message.
      *
@@ -89,10 +79,8 @@ class Messenger
     public function by($account)
     {
         $this->account = $account;
-
         return $this;
     }
-
     /**
      * @param string $account
      *
@@ -102,7 +90,6 @@ class Messenger
     {
         return $this->by($account);
     }
-
     /**
      * Set target user open id.
      *
@@ -113,10 +100,8 @@ class Messenger
     public function to($openid)
     {
         $this->to = $openid;
-
         return $this;
     }
-
     /**
      * Send the message.
      *
@@ -129,22 +114,17 @@ class Messenger
         if (empty($this->message)) {
             throw new RuntimeException('No message to send.');
         }
-
         if ($this->message instanceof RawMessage) {
             $message = json_decode($this->message->get('content'), true);
         } else {
-            $prepends = [
-                'touser' => $this->to,
-            ];
+            $prepends = ['touser' => $this->to];
             if ($this->account) {
                 $prepends['customservice'] = ['kf_account' => $this->account];
             }
             $message = $this->message->transformForJsonRequest($prepends);
         }
-
         return $this->client->send($message);
     }
-
     /**
      * Return property.
      *
@@ -155,9 +135,8 @@ class Messenger
     public function __get($property)
     {
         if (property_exists($this, $property)) {
-            return $this->$property;
+            return $this->{$property};
         }
-
         return null;
     }
 }

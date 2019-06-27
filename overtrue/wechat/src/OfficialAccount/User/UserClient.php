@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\User;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class UserClient.
  *
@@ -32,14 +30,9 @@ class UserClient extends BaseClient
      */
     public function get($openid, $lang = 'zh_CN')
     {
-        $params = [
-            'openid' => $openid,
-            'lang' => $lang,
-        ];
-
+        $params = ['openid' => $openid, 'lang' => $lang];
         return $this->httpGet('cgi-bin/user/info', $params);
     }
-
     /**
      * Batch get users.
      *
@@ -52,16 +45,10 @@ class UserClient extends BaseClient
      */
     public function select($openids, $lang = 'zh_CN')
     {
-        return $this->httpPostJson('cgi-bin/user/info/batchget', [
-            'user_list' => array_map(function ($openid) use ($lang) {
-                return [
-                    'openid' => $openid,
-                    'lang' => $lang,
-                ];
-            }, $openids),
-        ]);
+        return $this->httpPostJson('cgi-bin/user/info/batchget', ['user_list' => array_map(function ($openid) use($lang) {
+            return ['openid' => $openid, 'lang' => $lang];
+        }, $openids)]);
     }
-
     /**
      * List users.
      *
@@ -74,10 +61,8 @@ class UserClient extends BaseClient
     public function list($nextOpenId = null)
     {
         $params = ['next_openid' => $nextOpenId];
-
         return $this->httpGet('cgi-bin/user/get', $params);
     }
-
     /**
      * Set user remark.
      *
@@ -90,14 +75,9 @@ class UserClient extends BaseClient
      */
     public function remark($openid, $remark)
     {
-        $params = [
-            'openid' => $openid,
-            'remark' => $remark,
-        ];
-
+        $params = ['openid' => $openid, 'remark' => $remark];
         return $this->httpPostJson('cgi-bin/user/info/updateremark', $params);
     }
-
     /**
      * Get black list.
      *
@@ -110,10 +90,8 @@ class UserClient extends BaseClient
     public function blacklist($beginOpenid = null)
     {
         $params = ['begin_openid' => $beginOpenid];
-
         return $this->httpPostJson('cgi-bin/tags/members/getblacklist', $params);
     }
-
     /**
      * Batch block user.
      *
@@ -126,10 +104,8 @@ class UserClient extends BaseClient
     public function block($openidList)
     {
         $params = ['openid_list' => (array) $openidList];
-
         return $this->httpPostJson('cgi-bin/tags/members/batchblacklist', $params);
     }
-
     /**
      * Batch unblock user.
      *
@@ -142,10 +118,8 @@ class UserClient extends BaseClient
     public function unblock($openidList)
     {
         $params = ['openid_list' => (array) $openidList];
-
         return $this->httpPostJson('cgi-bin/tags/members/batchunblacklist', $params);
     }
-
     /**
      * @param string $oldAppId
      * @param array  $openidList
@@ -156,11 +130,7 @@ class UserClient extends BaseClient
      */
     public function changeOpenid($oldAppId, $openidList)
     {
-        $params = [
-            'from_appid' => $oldAppId,
-            'openid_list' => $openidList,
-        ];
-
+        $params = ['from_appid' => $oldAppId, 'openid_list' => $openidList];
         return $this->httpPostJson('cgi-bin/changeopenid', $params);
     }
 }

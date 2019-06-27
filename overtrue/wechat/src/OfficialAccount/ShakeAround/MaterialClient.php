@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\ShakeAround;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class MaterialClient.
  *
@@ -36,7 +34,6 @@ class MaterialClient extends BaseClient
         if (!file_exists($path) || !is_readable($path)) {
             throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));
         }
-
         return $this->httpUpload('shakearound/material/add', ['media' => $path], [], ['type' => strtolower($type)]);
     }
 }

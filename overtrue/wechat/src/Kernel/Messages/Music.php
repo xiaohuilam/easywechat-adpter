@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Messages;
 
 /**
@@ -29,45 +28,24 @@ class Music extends Message
      * @var string
      */
     protected $type = 'music';
-
     /**
      * Properties.
      *
      * @var array
      */
-    protected $properties = [
-        'title',
-        'description',
-        'url',
-        'hq_url',
-        'thumb_media_id',
-        'format',
-    ];
-
+    protected $properties = ['title', 'description', 'url', 'hq_url', 'thumb_media_id', 'format'];
     /**
      * Aliases of attribute.
      *
      * @var array
      */
-    protected $jsonAliases = [
-        'musicurl' => 'url',
-        'hqmusicurl' => 'hq_url',
-    ];
-
+    protected $jsonAliases = ['musicurl' => 'url', 'hqmusicurl' => 'hq_url'];
     public function toXmlArray()
     {
-        $music = [
-            'Music' => [
-                'Title' => $this->get('title'),
-                'Description' => $this->get('description'),
-                'MusicUrl' => $this->get('url'),
-                'HQMusicUrl' => $this->get('hq_url'),
-            ],
-        ];
+        $music = ['Music' => ['Title' => $this->get('title'), 'Description' => $this->get('description'), 'MusicUrl' => $this->get('url'), 'HQMusicUrl' => $this->get('hq_url')]];
         if ($thumbMediaId = $this->get('thumb_media_id')) {
             $music['Music']['ThumbMediaId'] = $thumbMediaId;
         }
-
         return $music;
     }
 }

@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Setting;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -27,7 +25,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/wxopen/getallcategories');
     }
-
     /**
      * 添加类目.
      *
@@ -36,23 +33,19 @@ class Client extends BaseClient
     public function addCategories($categories)
     {
         $params = ['categories' => $categories];
-
         return $this->httpPostJson('cgi-bin/wxopen/addcategory', $params);
     }
-
     /**
      * 删除类目.
      *
      * @param int $firstId  一级类目ID
      * @param int $secondId 二级类目ID
      */
-    public function deleteCategories( $firstId, $secondId)
+    public function deleteCategories($firstId, $secondId)
     {
         $params = ['first' => $firstId, 'second' => $secondId];
-
         return $this->httpPostJson('cgi-bin/wxopen/deletecategory', $params);
     }
-
     /**
      * 获取账号已经设置的所有类目.
      */
@@ -60,7 +53,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/wxopen/getcategory');
     }
-
     /**
      * 修改类目.
      *
@@ -70,7 +62,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/wxopen/modifycategory', $category);
     }
-
     /**
      * 小程序名称设置及改名.
      *
@@ -79,25 +70,14 @@ class Client extends BaseClient
      * @param string $licenseMediaId 组织机构代码证或营业执照素材ID
      * @param string $otherStuffs    其他证明材料素材ID
      */
-    public function setNickname(
-        string $nickname,
-        string $idCardMediaId = '',
-        string $licenseMediaId = '',
-        array $otherStuffs = []
-    ) {
-        $params = [
-            'nick_name' => $nickname,
-            'id_card' => $idCardMediaId,
-            'license' => $licenseMediaId,
-        ];
-
+    public function setNickname($nickname, $idCardMediaId = '', $licenseMediaId = '', array $otherStuffs = [])
+    {
+        $params = ['nick_name' => $nickname, 'id_card' => $idCardMediaId, 'license' => $licenseMediaId];
         for ($i = \count($otherStuffs) - 1; $i >= 0; --$i) {
-            $params['naming_other_stuff_'.($i + 1)] = $otherStuffs[$i];
+            $params['naming_other_stuff_' . ($i + 1)] = $otherStuffs[$i];
         }
-
         return $this->httpPostJson('wxa/setnickname', $params);
     }
-
     /**
      * 小程序改名审核状态查询.
      *
@@ -106,10 +86,8 @@ class Client extends BaseClient
     public function getNicknameAuditStatus($auditId)
     {
         $params = ['audit_id' => $auditId];
-
         return $this->httpPostJson('wxa/api_wxa_querynickname', $params);
     }
-
     /**
      * 微信认证名称检测.
      *
@@ -118,11 +96,8 @@ class Client extends BaseClient
     public function isAvailableNickname($nickname)
     {
         $params = ['nick_name' => $nickname];
-
-        return $this->httpPostJson(
-            'cgi-bin/wxverify/checkwxverifynickname', $params);
+        return $this->httpPostJson('cgi-bin/wxverify/checkwxverifynickname', $params);
     }
-
     /**
      * 查询小程序是否可被搜索.
      *
@@ -132,7 +107,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/getwxasearchstatus');
     }
-
     /**
      * 设置小程序可被搜素.
      *
@@ -140,11 +114,8 @@ class Client extends BaseClient
      */
     public function setSearchable()
     {
-        return $this->httpPostJson('wxa/changewxasearchstatus', [
-            'status' => 0,
-        ]);
+        return $this->httpPostJson('wxa/changewxasearchstatus', ['status' => 0]);
     }
-
     /**
      * 设置小程序不可被搜素.
      *
@@ -152,11 +123,8 @@ class Client extends BaseClient
      */
     public function setUnsearchable()
     {
-        return $this->httpPostJson('wxa/changewxasearchstatus', [
-            'status' => 1,
-        ]);
+        return $this->httpPostJson('wxa/changewxasearchstatus', ['status' => 1]);
     }
-
     /**
      * 获取展示的公众号信息.
      *
@@ -166,7 +134,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/getshowwxaitem');
     }
-
     /**
      * 设置展示的公众号.
      *
@@ -176,12 +143,8 @@ class Client extends BaseClient
      */
     public function setDisplayedOfficialAccount($appid)
     {
-        return $this->httpPostJson('wxa/updateshowwxaitem', [
-            'appid' => $appid ?: null,
-            'wxa_subscribe_biz_flag' => $appid ? 1 : 0,
-        ]);
+        return $this->httpPostJson('wxa/updateshowwxaitem', ['appid' => $appid ?: null, 'wxa_subscribe_biz_flag' => $appid ? 1 : 0]);
     }
-
     /**
      * 获取可以用来设置的公众号列表.
      *
@@ -190,11 +153,8 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function getDisplayableOfficialAccounts( $page, $num)
+    public function getDisplayableOfficialAccounts($page, $num)
     {
-        return $this->httpGet('wxa/getwxamplinkforshow', [
-            'page' => $page,
-            'num' => $num,
-        ]);
+        return $this->httpGet('wxa/getwxamplinkforshow', ['page' => $page, 'num' => $num]);
     }
 }

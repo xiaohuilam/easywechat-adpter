@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 /**
@@ -29,7 +28,6 @@ class GeneralCardClient extends Client
     {
         return $this->httpPostJson('card/generalcard/activate', $info);
     }
-
     /**
      * 通用卡撤销激活.
      *
@@ -40,14 +38,9 @@ class GeneralCardClient extends Client
      */
     public function deactivate($cardId, $code)
     {
-        $params = [
-            'card_id' => $cardId,
-            'code' => $code,
-        ];
-
+        $params = ['card_id' => $cardId, 'code' => $code];
         return $this->httpPostJson('card/generalcard/unactivate', $params);
     }
-
     /**
      * 更新会员信息.
      *

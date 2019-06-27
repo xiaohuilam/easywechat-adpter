@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\User;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/user/create', $data);
     }
-
     /**
      * Update an exist user.
      *
@@ -44,7 +41,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/user/update', array_merge(['userid' => $id], $data));
     }
-
     /**
      * Delete a user.
      *
@@ -57,10 +53,8 @@ class Client extends BaseClient
         if (is_array($userId)) {
             return $this->batchDelete($userId);
         }
-
         return $this->httpGet('cgi-bin/user/delete', ['userid' => $userId]);
     }
-
     /**
      * Batch delete users.
      *
@@ -72,7 +66,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/user/batchdelete', ['useridlist' => $userIds]);
     }
-
     /**
      * Get user.
      *
@@ -84,7 +77,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/user/get', ['userid' => $userId]);
     }
-
     /**
      * Get simple user list.
      *
@@ -93,16 +85,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function getDepartmentUsers( $departmentId, $fetchChild = false)
+    public function getDepartmentUsers($departmentId, $fetchChild = false)
     {
-        $params = [
-            'department_id' => $departmentId,
-            'fetch_child' => (int) $fetchChild,
-        ];
-
+        $params = ['department_id' => $departmentId, 'fetch_child' => (int) $fetchChild];
         return $this->httpGet('cgi-bin/user/simplelist', $params);
     }
-
     /**
      * Get user list.
      *
@@ -111,16 +98,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function getDetailedDepartmentUsers( $departmentId, $fetchChild = false)
+    public function getDetailedDepartmentUsers($departmentId, $fetchChild = false)
     {
-        $params = [
-            'department_id' => $departmentId,
-            'fetch_child' => (int) $fetchChild,
-        ];
-
+        $params = ['department_id' => $departmentId, 'fetch_child' => (int) $fetchChild];
         return $this->httpGet('cgi-bin/user/list', $params);
     }
-
     /**
      * Convert userId to openid.
      *
@@ -131,14 +113,9 @@ class Client extends BaseClient
      */
     public function userIdToOpenid($userId, $agentId = null)
     {
-        $params = [
-            'userid' => $userId,
-            'agentid' => $agentId,
-        ];
-
+        $params = ['userid' => $userId, 'agentid' => $agentId];
         return $this->httpPostJson('cgi-bin/user/convert_to_openid', $params);
     }
-
     /**
      * Convert openid to userId.
      *
@@ -148,13 +125,9 @@ class Client extends BaseClient
      */
     public function openidToUserId($openid)
     {
-        $params = [
-            'openid' => $openid,
-        ];
-
+        $params = ['openid' => $openid];
         return $this->httpPostJson('cgi-bin/user/convert_to_userid', $params);
     }
-
     /**
      * @param string $userId
      *
@@ -162,10 +135,7 @@ class Client extends BaseClient
      */
     public function accept($userId)
     {
-        $params = [
-            'userid' => $userId,
-        ];
-
+        $params = ['userid' => $userId];
         return $this->httpGet('cgi-bin/user/authsucc', $params);
     }
 }

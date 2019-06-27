@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MicroMerchant\Material;
 
 use EasyWeChat\MicroMerchant\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -35,16 +33,9 @@ class Client extends BaseClient
     public function setSettlementCard($params)
     {
         $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
-        $params = $this->processParams(array_merge($params, [
-            'version' => '1.0',
-            'cert_sn' => '',
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]));
-
+        $params = $this->processParams(array_merge($params, ['version' => '1.0', 'cert_sn' => '', 'sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]));
         return $this->safeRequest('applyment/micro/modifyarchives', $params);
     }
-
     /**
      * update contact info.
      *
@@ -59,13 +50,7 @@ class Client extends BaseClient
     public function updateContact($params)
     {
         $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
-        $params = $this->processParams(array_merge($params, [
-            'version' => '1.0',
-            'cert_sn' => '',
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]));
-
+        $params = $this->processParams(array_merge($params, ['version' => '1.0', 'cert_sn' => '', 'sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]));
         return $this->safeRequest('applyment/micro/modifycontactinfo', $params);
     }
 }

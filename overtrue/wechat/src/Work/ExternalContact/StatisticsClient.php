@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\ExternalContact;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class StatisticsClient.
  *
@@ -35,12 +33,7 @@ class StatisticsClient extends BaseClient
      */
     public function userBehavior($userIds, $from, $to)
     {
-        $params = [
-            'userid' => $userIds,
-            'start_time' => $from,
-            'end_time' => $to,
-        ];
-
+        $params = ['userid' => $userIds, 'start_time' => $from, 'end_time' => $to];
         return $this->httpPostJson('cgi-bin/externalcontact/get_user_behavior_data', $params);
     }
 }

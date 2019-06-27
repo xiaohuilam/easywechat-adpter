@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace Overtrue\LaravelWeChat\Events\OpenPlatform;
 
 abstract class OpenPlatformEvent
@@ -17,7 +16,6 @@ abstract class OpenPlatformEvent
      * @var array
      */
     public $payload;
-
     /**
      * Create a new event instance.
      *
@@ -27,7 +25,6 @@ abstract class OpenPlatformEvent
     {
         $this->payload = $payload;
     }
-
     public function __call($name, $args)
     {
         return $this->payload[substr($name, 3)] ?: null;

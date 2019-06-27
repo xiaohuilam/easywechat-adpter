@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Base;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,14 +27,9 @@ class Client extends BaseClient
      */
     public function handleAuthorize($authCode = null)
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-            'authorization_code' => $authCode ?: $this->app['request']->get('auth_code'),
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id'], 'authorization_code' => $authCode ?: $this->app['request']->get('auth_code')];
         return $this->httpPostJson('cgi-bin/component/api_query_auth', $params);
     }
-
     /**
      * Get authorizer info.
      *
@@ -46,14 +39,9 @@ class Client extends BaseClient
      */
     public function getAuthorizer($appId)
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-            'authorizer_appid' => $appId,
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id'], 'authorizer_appid' => $appId];
         return $this->httpPostJson('cgi-bin/component/api_get_authorizer_info', $params);
     }
-
     /**
      * Get options.
      *
@@ -64,15 +52,9 @@ class Client extends BaseClient
      */
     public function getAuthorizerOption($appId, $name)
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-            'authorizer_appid' => $appId,
-            'option_name' => $name,
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id'], 'authorizer_appid' => $appId, 'option_name' => $name];
         return $this->httpPostJson('cgi-bin/component/api_get_authorizer_option', $params);
     }
-
     /**
      * Set authorizer option.
      *
@@ -84,16 +66,9 @@ class Client extends BaseClient
      */
     public function setAuthorizerOption($appId, $name, $value)
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-            'authorizer_appid' => $appId,
-            'option_name' => $name,
-            'option_value' => $value,
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id'], 'authorizer_appid' => $appId, 'option_name' => $name, 'option_value' => $value];
         return $this->httpPostJson('cgi-bin/component/api_set_authorizer_option', $params);
     }
-
     /**
      * Get authorizer list.
      *
@@ -104,15 +79,9 @@ class Client extends BaseClient
      */
     public function getAuthorizers($offset = 0, $count = 500)
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-            'offset' => $offset,
-            'count' => $count,
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id'], 'offset' => $offset, 'count' => $count];
         return $this->httpPostJson('cgi-bin/component/api_get_authorizer_list', $params);
     }
-
     /**
      * Create pre-authorization code.
      *
@@ -120,13 +89,9 @@ class Client extends BaseClient
      */
     public function createPreAuthorizationCode()
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id']];
         return $this->httpPostJson('cgi-bin/component/api_create_preauthcode', $params);
     }
-
     /**
      * OpenPlatform Clear quota.
      *
@@ -136,10 +101,7 @@ class Client extends BaseClient
      */
     public function clearQuota()
     {
-        $params = [
-            'component_appid' => $this->app['config']['app_id'],
-        ];
-
+        $params = ['component_appid' => $this->app['config']['app_id']];
         return $this->httpPostJson('cgi-bin/component/clear_quota', $params);
     }
 }

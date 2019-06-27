@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Log;
 
 use EasyWeChat\Kernel\ServiceContainer;
@@ -21,7 +20,6 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger as Monolog;
 use Psr\Log\LoggerInterface;
-
 /**
  * Class LogManager.
  *
@@ -33,37 +31,24 @@ class LogManager implements LoggerInterface
      * @var \EasyWeChat\Kernel\ServiceContainer
      */
     protected $app;
-
     /**
      * The array of resolved channels.
      *
      * @var array
      */
     protected $channels = [];
-
     /**
      * The registered custom driver creators.
      *
      * @var array
      */
     protected $customCreators = [];
-
     /**
      * The Log levels.
      *
      * @var array
      */
-    protected $levels = [
-        'debug' => Monolog::DEBUG,
-        'info' => Monolog::INFO,
-        'notice' => Monolog::NOTICE,
-        'warning' => Monolog::WARNING,
-        'error' => Monolog::ERROR,
-        'critical' => Monolog::CRITICAL,
-        'alert' => Monolog::ALERT,
-        'emergency' => Monolog::EMERGENCY,
-    ];
-
+    protected $levels = ['debug' => Monolog::DEBUG, 'info' => Monolog::INFO, 'notice' => Monolog::NOTICE, 'warning' => Monolog::WARNING, 'error' => Monolog::ERROR, 'critical' => Monolog::CRITICAL, 'alert' => Monolog::ALERT, 'emergency' => Monolog::EMERGENCY];
     /**
      * LogManager constructor.
      *
@@ -73,7 +58,6 @@ class LogManager implements LoggerInterface
     {
         $this->app = $app;
     }
-
     /**
      * Create a new, on-demand aggregate logger instance.
      *
@@ -86,7 +70,6 @@ class LogManager implements LoggerInterface
     {
         return $this->createStackDriver(compact('channels', 'channel'));
     }
-
     /**
      * Get a log channel instance.
      *
@@ -98,7 +81,6 @@ class LogManager implements LoggerInterface
     {
         return $this->get($channel);
     }
-
     /**
      * Get a log driver instance.
      *
@@ -110,7 +92,6 @@ class LogManager implements LoggerInterface
     {
         return $this->get($driver ?: $this->getDefaultDriver());
     }
-
     /**
      * Attempt to get the log from the local cache.
      *
@@ -124,15 +105,10 @@ class LogManager implements LoggerInterface
             return $this->channels[$name] ?: ($this->channels[$name] = $this->resolve($name));
         } catch (\Throwable $e) {
             $logger = $this->createEmergencyLogger();
-
-            $logger->emergency('Unable to create configured logger. Using emergency logger.', [
-                    'exception' => $e,
-                ]);
-
+            $logger->emergency('Unable to create configured logger. Using emergency logger.', ['exception' => $e]);
             return $logger;
         }
     }
-
     /**
      * Resolve the given log instance by name.
      *
@@ -145,24 +121,18 @@ class LogManager implements LoggerInterface
     protected function resolve($name)
     {
         $config = $this->app['config']->get(\sprintf('log.channels.%s', $name));
-
         if (is_null($config)) {
             throw new \InvalidArgumentException(\sprintf('Log [%s] is not defined.', $name));
         }
-
         if (isset($this->customCreators[$config['driver']])) {
             return $this->callCustomCreator($config);
         }
-
-        $driverMethod = 'create'.ucfirst($config['driver']).'Driver';
-
+        $driverMethod = 'create' . ucfirst($config['driver']) . 'Driver';
         if (method_exists($this, $driverMethod)) {
             return $this->{$driverMethod}($config);
         }
-
         throw new \InvalidArgumentException(\sprintf('Driver [%s] is not supported.', $config['driver']));
     }
-
     /**
      * Create an emergency log handler to avoid white screens of death.
      *
@@ -170,11 +140,8 @@ class LogManager implements LoggerInterface
      */
     protected function createEmergencyLogger()
     {
-        return new Monolog('EasyWeChat', $this->prepareHandlers([new StreamHandler(
-            \sys_get_temp_dir().'/easywechat/easywechat.log', $this->level(['level' => 'debug'])
-        )]));
+        return new Monolog('EasyWeChat', $this->prepareHandlers([new StreamHandler(\sys_get_temp_dir() . '/easywechat/easywechat.log', $this->level(['level' => 'debug']))]));
     }
-
     /**
      * Call a custom driver creator.
      *
@@ -186,7 +153,6 @@ class LogManager implements LoggerInterface
     {
         return $this->customCreators[$config['driver']]($this->app, $config);
     }
-
     /**
      * Create an aggregate log driver instance.
      *
@@ -197,14 +163,11 @@ class LogManager implements LoggerInterface
     protected function createStackDriver($config)
     {
         $handlers = [];
-
         foreach ($config['channels'] ?: [] as $channel) {
             $handlers = \array_merge($handlers, $this->channel($channel)->getHandlers());
         }
-
         return new Monolog($this->parseChannel($config), $handlers);
     }
-
     /**
      * Create an instance of the single file log driver.
      *
@@ -214,13 +177,8 @@ class LogManager implements LoggerInterface
      */
     protected function createSingleDriver($config)
     {
-        return new Monolog($this->parseChannel($config), [
-            $this->prepareHandler(
-                new StreamHandler($config['path'], $this->level($config))
-            ),
-        ]);
+        return new Monolog($this->parseChannel($config), [$this->prepareHandler(new StreamHandler($config['path'], $this->level($config)))]);
     }
-
     /**
      * Create an instance of the daily file log driver.
      *
@@ -230,13 +188,8 @@ class LogManager implements LoggerInterface
      */
     protected function createDailyDriver($config)
     {
-        return new Monolog($this->parseChannel($config), [
-            $this->prepareHandler(new RotatingFileHandler(
-                $config['path'], $config['days'] ?: 7, $this->level($config)
-            )),
-        ]);
+        return new Monolog($this->parseChannel($config), [$this->prepareHandler(new RotatingFileHandler($config['path'], $config['days'] ?: 7, $this->level($config)))]);
     }
-
     /**
      * Create an instance of the Slack log driver.
      *
@@ -246,20 +199,8 @@ class LogManager implements LoggerInterface
      */
     protected function createSlackDriver($config)
     {
-        return new Monolog($this->parseChannel($config), [
-            $this->prepareHandler(new SlackWebhookHandler(
-                $config['url'],
-                $config['channel'] ?: null,
-                $config['username'] ?: 'EasyWeChat',
-                $config['attachment'] ?: true,
-                $config['emoji'] ?: ':boom:',
-                $config['short'] ?: false,
-                $config['context'] ?: true,
-                $this->level($config)
-            )),
-        ]);
+        return new Monolog($this->parseChannel($config), [$this->prepareHandler(new SlackWebhookHandler($config['url'], $config['channel'] ?: null, $config['username'] ?: 'EasyWeChat', $config['attachment'] ?: true, $config['emoji'] ?: ':boom:', $config['short'] ?: false, $config['context'] ?: true, $this->level($config)))]);
     }
-
     /**
      * Create an instance of the syslog log driver.
      *
@@ -269,13 +210,8 @@ class LogManager implements LoggerInterface
      */
     protected function createSyslogDriver($config)
     {
-        return new Monolog($this->parseChannel($config), [
-            $this->prepareHandler(new SyslogHandler(
-                    'EasyWeChat', $config['facility'] ?: LOG_USER, $this->level($config))
-            ),
-        ]);
+        return new Monolog($this->parseChannel($config), [$this->prepareHandler(new SyslogHandler('EasyWeChat', $config['facility'] ?: LOG_USER, $this->level($config)))]);
     }
-
     /**
      * Create an instance of the "error log" log driver.
      *
@@ -285,13 +221,8 @@ class LogManager implements LoggerInterface
      */
     protected function createErrorlogDriver($config)
     {
-        return new Monolog($this->parseChannel($config), [
-            $this->prepareHandler(new ErrorLogHandler(
-                    $config['type'] ?: ErrorLogHandler::OPERATING_SYSTEM, $this->level($config))
-            ),
-        ]);
+        return new Monolog($this->parseChannel($config), [$this->prepareHandler(new ErrorLogHandler($config['type'] ?: ErrorLogHandler::OPERATING_SYSTEM, $this->level($config)))]);
     }
-
     /**
      * Prepare the handlers for usage by Monolog.
      *
@@ -304,10 +235,8 @@ class LogManager implements LoggerInterface
         foreach ($handlers as $key => $handler) {
             $handlers[$key] = $this->prepareHandler($handler);
         }
-
         return $handlers;
     }
-
     /**
      * Prepare the handler for usage by Monolog.
      *
@@ -319,7 +248,6 @@ class LogManager implements LoggerInterface
     {
         return $handler->setFormatter($this->formatter());
     }
-
     /**
      * Get a Monolog formatter instance.
      *
@@ -329,10 +257,8 @@ class LogManager implements LoggerInterface
     {
         $formatter = new LineFormatter(null, null, true, true);
         $formatter->includeStacktraces();
-
         return $formatter;
     }
-
     /**
      * Extract the log channel from the given configuration.
      *
@@ -344,7 +270,6 @@ class LogManager implements LoggerInterface
     {
         return $config['name'] ?: null;
     }
-
     /**
      * Parse the string level into a Monolog constant.
      *
@@ -357,14 +282,11 @@ class LogManager implements LoggerInterface
     protected function level($config)
     {
         $level = $config['level'] ?: 'debug';
-
         if (isset($this->levels[$level])) {
             return $this->levels[$level];
         }
-
         throw new \InvalidArgumentException('Invalid log level.');
     }
-
     /**
      * Get the default log driver name.
      *
@@ -374,7 +296,6 @@ class LogManager implements LoggerInterface
     {
         return $this->app['config']['log.default'];
     }
-
     /**
      * Set the default log driver name.
      *
@@ -384,7 +305,6 @@ class LogManager implements LoggerInterface
     {
         $this->app['config']['log.default'] = $name;
     }
-
     /**
      * Register a custom driver creator Closure.
      *
@@ -396,10 +316,8 @@ class LogManager implements LoggerInterface
     public function extend($driver, \Closure $callback)
     {
         $this->customCreators[$driver] = $callback->bindTo($this, $this);
-
         return $this;
     }
-
     /**
      * System is unusable.
      *
@@ -412,7 +330,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->emergency($message, $context);
     }
-
     /**
      * Action must be taken immediately.
      *
@@ -428,7 +345,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->alert($message, $context);
     }
-
     /**
      * Critical conditions.
      *
@@ -443,7 +359,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->critical($message, $context);
     }
-
     /**
      * Runtime errors that do not require immediate action but should typically
      * be logged and monitored.
@@ -457,7 +372,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->error($message, $context);
     }
-
     /**
      * Exceptional occurrences that are not errors.
      *
@@ -473,7 +387,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->warning($message, $context);
     }
-
     /**
      * Normal but significant events.
      *
@@ -486,7 +399,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->notice($message, $context);
     }
-
     /**
      * Interesting events.
      *
@@ -501,7 +413,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->info($message, $context);
     }
-
     /**
      * Detailed debug information.
      *
@@ -514,7 +425,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->debug($message, $context);
     }
-
     /**
      * Logs with an arbitrary level.
      *
@@ -528,7 +438,6 @@ class LogManager implements LoggerInterface
     {
         return $this->driver()->log($level, $message, $context);
     }
-
     /**
      * Dynamically call the default driver instance.
      *
@@ -539,6 +448,6 @@ class LogManager implements LoggerInterface
      */
     public function __call($method, $parameters)
     {
-        return $this->driver()->$method(...$parameters);
+        return $this->driver()->{$method}(...$parameters);
     }
 }

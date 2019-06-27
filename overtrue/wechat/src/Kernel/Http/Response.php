@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Http;
 
 use EasyWeChat\Kernel\Support\Collection;
 use EasyWeChat\Kernel\Support\XML;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Psr\Http\Message\ResponseInterface;
-
 /**
  * Class Response.
  *
@@ -31,10 +29,8 @@ class Response extends GuzzleResponse
         $this->getBody()->rewind();
         $contents = $this->getBody()->getContents();
         $this->getBody()->rewind();
-
         return $contents;
     }
-
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      *
@@ -42,15 +38,8 @@ class Response extends GuzzleResponse
      */
     public static function buildFromPsrResponse(ResponseInterface $response)
     {
-        return new static(
-            $response->getStatusCode(),
-            $response->getHeaders(),
-            $response->getBody(),
-            $response->getProtocolVersion(),
-            $response->getReasonPhrase()
-        );
+        return new static($response->getStatusCode(), $response->getHeaders(), $response->getBody(), $response->getProtocolVersion(), $response->getReasonPhrase());
     }
-
     /**
      * Build to json.
      *
@@ -60,7 +49,6 @@ class Response extends GuzzleResponse
     {
         return json_encode($this->toArray());
     }
-
     /**
      * Build to array.
      *
@@ -69,20 +57,15 @@ class Response extends GuzzleResponse
     public function toArray()
     {
         $content = $this->removeControlCharacters($this->getBodyContents());
-
         if (false !== stripos($this->getHeaderLine('Content-Type'), 'xml') || 0 === stripos($content, '<xml')) {
             return XML::parse($content);
         }
-
         $array = json_decode($content, true, 512, JSON_BIGINT_AS_STRING);
-
         if (JSON_ERROR_NONE === json_last_error()) {
             return (array) $array;
         }
-
         return [];
     }
-
     /**
      * Get collection data.
      *
@@ -92,7 +75,6 @@ class Response extends GuzzleResponse
     {
         return new Collection($this->toArray());
     }
-
     /**
      * @return object
      */
@@ -100,7 +82,6 @@ class Response extends GuzzleResponse
     {
         return json_decode($this->toJson());
     }
-
     /**
      * @return bool|string
      */
@@ -108,7 +89,6 @@ class Response extends GuzzleResponse
     {
         return $this->getBodyContents();
     }
-
     /**
      * @param string $content
      *
@@ -116,6 +96,6 @@ class Response extends GuzzleResponse
      */
     protected function removeControlCharacters($content)
     {
-        return \preg_replace('/[\x00-\x1F\x80-\x9F]/u', '', $content);
+        return \preg_replace('/[\\x00-\\x1F\\x80-\\x9F]/u', '', $content);
     }
 }

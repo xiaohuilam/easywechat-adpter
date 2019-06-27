@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Traits\InteractsWithCache;
-
 /**
  * Class Client.
  *
@@ -22,26 +20,22 @@ use EasyWeChat\Kernel\Traits\InteractsWithCache;
 class Client extends BaseClient
 {
     use InteractsWithCache;
-
     /**
      * @var string
      */
     protected $url;
-
     /**
      * Ticket cache key.
      *
      * @var string
      */
     protected $ticketCacheKey;
-
     /**
      * Ticket cache prefix.
      *
      * @var string
      */
     protected $ticketCachePrefix = 'easywechat.official_account.card.api_ticket.';
-
     /**
      * 获取卡券颜色.
      *
@@ -51,7 +45,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('card/getcolors');
     }
-
     /**
      * 卡券开放类目查询接口.
      *
@@ -61,7 +54,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('card/getapplyprotocol');
     }
-
     /**
      * 创建卡券.
      *
@@ -72,16 +64,9 @@ class Client extends BaseClient
      */
     public function create($cardType = 'member_card', $attributes)
     {
-        $params = [
-            'card' => [
-                'card_type' => strtoupper($cardType),
-                strtolower($cardType) => $attributes,
-            ],
-        ];
-
+        $params = ['card' => ['card_type' => strtoupper($cardType), strtolower($cardType) => $attributes]];
         return $this->httpPostJson('card/create', $params);
     }
-
     /**
      * 查看卡券详情.
      *
@@ -91,13 +76,9 @@ class Client extends BaseClient
      */
     public function get($cardId)
     {
-        $params = [
-            'card_id' => $cardId,
-        ];
-
+        $params = ['card_id' => $cardId];
         return $this->httpPostJson('card/get', $params);
     }
-
     /**
      * 批量查询卡列表.
      *
@@ -109,15 +90,9 @@ class Client extends BaseClient
      */
     public function list($offset = 0, $count = 10, $statusList = 'CARD_STATUS_VERIFY_OK')
     {
-        $params = [
-            'offset' => $offset,
-            'count' => $count,
-            'status_list' => $statusList,
-        ];
-
+        $params = ['offset' => $offset, 'count' => $count, 'status_list' => $statusList];
         return $this->httpPostJson('card/batchget', $params);
     }
-
     /**
      * 更改卡券信息接口 and 设置跟随推荐接口.
      *
@@ -132,10 +107,8 @@ class Client extends BaseClient
         $card = [];
         $card['card_id'] = $cardId;
         $card[strtolower($type)] = $attributes;
-
         return $this->httpPostJson('card/update', $card);
     }
-
     /**
      * 删除卡券接口.
      *
@@ -145,13 +118,9 @@ class Client extends BaseClient
      */
     public function delete($cardId)
     {
-        $params = [
-            'card_id' => $cardId,
-        ];
-
+        $params = ['card_id' => $cardId];
         return $this->httpPostJson('card/delete', $params);
     }
-
     /**
      * 创建二维码.
      *
@@ -163,7 +132,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('card/qrcode/create', $cards);
     }
-
     /**
      * ticket 换取二维码图片.
      *
@@ -174,21 +142,10 @@ class Client extends BaseClient
     public function getQrCode($ticket)
     {
         $baseUri = 'https://mp.weixin.qq.com/cgi-bin/showqrcode';
-        $params = [
-            'ticket' => $ticket,
-        ];
-
+        $params = ['ticket' => $ticket];
         $response = $this->requestRaw($baseUri, 'GET', $params);
-
-        return [
-            'status' => $response->getStatusCode(),
-            'reason' => $response->getReasonPhrase(),
-            'headers' => $response->getHeaders(),
-            'body' => strval($response->getBody()),
-            'url' => $baseUri.'?'.http_build_query($params),
-        ];
+        return ['status' => $response->getStatusCode(), 'reason' => $response->getReasonPhrase(), 'headers' => $response->getHeaders(), 'body' => strval($response->getBody()), 'url' => $baseUri . '?' . http_build_query($params)];
     }
-
     /**
      * 通过ticket换取二维码 链接.
      *
@@ -200,7 +157,6 @@ class Client extends BaseClient
     {
         return sprintf('https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=%s', $ticket);
     }
-
     /**
      * 创建货架接口.
      *
@@ -215,17 +171,9 @@ class Client extends BaseClient
      */
     public function createLandingPage($banner, $pageTitle, $canShare, $scene, $cardList)
     {
-        $params = [
-            'banner' => $banner,
-            'page_title' => $pageTitle,
-            'can_share' => $canShare,
-            'scene' => $scene,
-            'card_list' => $cardList,
-        ];
-
+        $params = ['banner' => $banner, 'page_title' => $pageTitle, 'can_share' => $canShare, 'scene' => $scene, 'card_list' => $cardList];
         return $this->httpPostJson('card/landingpage/create', $params);
     }
-
     /**
      * 图文消息群发卡券.
      *
@@ -235,13 +183,9 @@ class Client extends BaseClient
      */
     public function getHtml($cardId)
     {
-        $params = [
-            'card_id' => $cardId,
-        ];
-
+        $params = ['card_id' => $cardId];
         return $this->httpPostJson('card/mpnews/gethtml', $params);
     }
-
     /**
      * 设置测试白名单.
      *
@@ -251,13 +195,9 @@ class Client extends BaseClient
      */
     public function setTestWhitelist($openids)
     {
-        $params = [
-            'openid' => $openids,
-        ];
-
+        $params = ['openid' => $openids];
         return $this->httpPostJson('card/testwhitelist/set', $params);
     }
-
     /**
      * 设置测试白名单(by username).
      *
@@ -267,13 +207,9 @@ class Client extends BaseClient
      */
     public function setTestWhitelistByName($usernames)
     {
-        $params = [
-            'username' => $usernames,
-        ];
-
+        $params = ['username' => $usernames];
         return $this->httpPostJson('card/testwhitelist/set', $params);
     }
-
     /**
      * 获取用户已领取卡券接口.
      *
@@ -284,14 +220,9 @@ class Client extends BaseClient
      */
     public function getUserCards($openid, $cardId = '')
     {
-        $params = [
-            'openid' => $openid,
-            'card_id' => $cardId,
-        ];
-
+        $params = ['openid' => $openid, 'card_id' => $cardId];
         return $this->httpPostJson('card/user/getcardlist', $params);
     }
-
     /**
      * 设置微信买单接口.
      * 设置买单的 card_id 必须已经配置了门店，否则会报错.
@@ -303,14 +234,9 @@ class Client extends BaseClient
      */
     public function setPayCell($cardId, $isOpen = true)
     {
-        $params = [
-            'card_id' => $cardId,
-            'is_open' => $isOpen,
-        ];
-
+        $params = ['card_id' => $cardId, 'is_open' => $isOpen];
         return $this->httpPostJson('card/paycell/set', $params);
     }
-
     /**
      * 增加库存.
      *
@@ -323,7 +249,6 @@ class Client extends BaseClient
     {
         return $this->updateStock($cardId, $amount, 'increase');
     }
-
     /**
      * 减少库存.
      *
@@ -336,7 +261,6 @@ class Client extends BaseClient
     {
         return $this->updateStock($cardId, $amount, 'reduce');
     }
-
     /**
      * 修改库存接口.
      *
@@ -349,11 +273,7 @@ class Client extends BaseClient
     protected function updateStock($cardId, $amount, $action = 'increase')
     {
         $key = 'increase' === $action ? 'increase_stock_value' : 'reduce_stock_value';
-        $params = [
-            'card_id' => $cardId,
-            $key => abs($amount),
-        ];
-
+        $params = ['card_id' => $cardId, $key => abs($amount)];
         return $this->httpPostJson('card/modifystock', $params);
     }
 }

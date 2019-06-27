@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Component;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -33,7 +31,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/component/fastregisterweapp', $params, ['action' => 'create']);
     }
-
     /**
      * 查询创建任务状态.
      *
@@ -47,12 +44,7 @@ class Client extends BaseClient
      */
     public function getRegistrationStatus($companyName, $legalPersonaWechat, $legalPersonaName)
     {
-        $params = [
-            'name' => $companyName,
-            'legal_persona_wechat' => $legalPersonaWechat,
-            'legal_persona_name' => $legalPersonaName,
-        ];
-
+        $params = ['name' => $companyName, 'legal_persona_wechat' => $legalPersonaWechat, 'legal_persona_name' => $legalPersonaName];
         return $this->httpPostJson('cgi-bin/component/fastregisterweapp', $params, ['action' => 'search']);
     }
 }

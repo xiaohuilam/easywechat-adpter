@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram;
 
 use EasyWeChat\BasicService;
 use EasyWeChat\Kernel\ServiceContainer;
-
 /**
  * Class Application.
  *
@@ -60,7 +58,6 @@ class Application extends ServiceContainer
         BasicService\Media\ServiceProvider::class,
         BasicService\ContentSecurity\ServiceProvider::class,
     ];
-
     /**
      * Handle dynamic calls.
      *
@@ -71,6 +68,6 @@ class Application extends ServiceContainer
      */
     public function __call($method, $args)
     {
-        return $this->base->$method(...$args);
+        return $this->base->{$method}(...$args);
     }
 }

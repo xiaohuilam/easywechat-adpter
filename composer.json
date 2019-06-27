@@ -29,7 +29,8 @@
     "require-dev": {
         "mikey179/vfsStream": "*",
         "mockery/mockery": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "spatie/7to5": "*"
     },
     "autoload": {
         "psr-4": {

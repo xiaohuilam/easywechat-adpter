@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenWork;
 
 use EasyWeChat\Kernel\ServiceContainer;
 use EasyWeChat\OpenWork\Work\Application as Work;
-
 /**
  * Application.
  *
@@ -28,24 +26,14 @@ class Application extends ServiceContainer
     /**
      * @var array
      */
-    protected $providers = [
-        Auth\ServiceProvider::class,
-        SuiteAuth\ServiceProvider::class,
-        Server\ServiceProvider::class,
-        Corp\ServiceProvider::class,
-        Provider\ServiceProvider::class,
-    ];
-
+    protected $providers = [Auth\ServiceProvider::class, SuiteAuth\ServiceProvider::class, Server\ServiceProvider::class, Corp\ServiceProvider::class, Provider\ServiceProvider::class];
     /**
      * @var array
      */
     protected $defaultConfig = [
         // http://docs.guzzlephp.org/en/stable/request-options.html
-        'http' => [
-            'base_uri' => 'https://qyapi.weixin.qq.com/',
-        ],
+        'http' => ['base_uri' => 'https://qyapi.weixin.qq.com/'],
     ];
-
     /**
      * @param string $authCorpId    企业 corp_id
      * @param string $permanentCode 企业永久授权码
@@ -56,7 +44,6 @@ class Application extends ServiceContainer
     {
         return new Work($authCorpId, $permanentCode, $this);
     }
-
     /**
      * @param string $method
      * @param array  $arguments
@@ -65,6 +52,6 @@ class Application extends ServiceContainer
      */
     public function __call($method, $arguments)
     {
-        return $this['base']->$method(...$arguments);
+        return $this['base']->{$method}(...$arguments);
     }
 }

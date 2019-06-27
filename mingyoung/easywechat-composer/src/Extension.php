@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the EasyWeChatComposer.
  *
@@ -10,39 +8,33 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChatComposer;
 
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 use EasyWeChat\Kernel\ServiceContainer;
 use ReflectionClass;
-
 class Extension
 {
     /**
      * @var \EasyWeChat\Kernel\ServiceContainer
      */
     protected $app;
-
     /**
      * @var string
      */
     protected $manifestPath;
-
     /**
      * @var array|null
      */
     protected $manifest;
-
     /**
      * @param \EasyWeChat\Kernel\ServiceContainer $app
      */
     public function __construct(ServiceContainer $app)
     {
         $this->app = $app;
-        $this->manifestPath = __DIR__.'/../extensions.php';
+        $this->manifestPath = __DIR__ . '/../extensions.php';
     }
-
     /**
      * Get observers.
      *
@@ -53,16 +45,12 @@ class Extension
         if ($this->shouldIgnore()) {
             return [];
         }
-
         $observers = [];
-
         foreach ($this->getManifest() as $name => $extra) {
             $observers = array_merge($observers, $extra['observers'] ?: []);
         }
-
         return array_map([$this, 'listObserver'], array_filter($observers, [$this, 'validateObserver']));
     }
-
     /**
      * @param mixed $observer
      *
@@ -72,7 +60,6 @@ class Extension
     {
         return in_array($observer, $this->app->config->get('disable_observers', []));
     }
-
     /**
      * Get the observers should be ignore.
      *
@@ -82,7 +69,6 @@ class Extension
     {
         return !file_exists($this->manifestPath) || $this->isDisable('*');
     }
-
     /**
      * Validate the given observer.
      *
@@ -94,11 +80,8 @@ class Extension
      */
     protected function validateObserver($observer)
     {
-        return !$this->isDisable($observer)
-            && (new ReflectionClass($observer))->implementsInterface(EventHandlerInterface::class)
-            && $this->accessible($observer);
+        return !$this->isDisable($observer) && (new ReflectionClass($observer))->implementsInterface(EventHandlerInterface::class) && $this->accessible($observer);
     }
-
     /**
      * Determine whether the given observer is accessible.
      *
@@ -111,10 +94,8 @@ class Extension
         if (!method_exists($observer, 'getAccessor')) {
             return true;
         }
-
         return in_array(get_class($this->app), (array) $observer::getAccessor());
     }
-
     /**
      * @param mixed $observer
      *
@@ -123,10 +104,8 @@ class Extension
     protected function listObserver($observer)
     {
         $condition = method_exists($observer, 'onCondition') ? $observer::onCondition() : '*';
-
         return [$observer, $condition];
     }
-
     /**
      * Get the easywechat manifest.
      *
@@ -137,7 +116,6 @@ class Extension
         if (!is_null($this->manifest)) {
             return $this->manifest;
         }
-
         return $this->manifest = file_exists($this->manifestPath) ? require $this->manifestPath : [];
     }
 }

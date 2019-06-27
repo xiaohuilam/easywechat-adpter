@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Server;
 
 use EasyWeChat\Kernel\ServerGuard;
-
 /**
  * Class Guard.
  *
@@ -27,7 +25,6 @@ class Guard extends ServerGuard
     {
         return $this;
     }
-
     /**
      * Check the request message safe mode.
      *
@@ -37,7 +34,6 @@ class Guard extends ServerGuard
     {
         return true;
     }
-
     /**
      * @return bool
      */

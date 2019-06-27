@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Domain;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/modify_domain', $params);
     }
-
     /**
      * 设置小程序业务域名.
      *
@@ -44,9 +41,6 @@ class Client extends BaseClient
      */
     public function setWebviewDomain($domains, $action = 'add')
     {
-        return $this->httpPostJson('wxa/setwebviewdomain', [
-            'action' => $action,
-            'webviewdomain' => $domains,
-        ]);
+        return $this->httpPostJson('wxa/setwebviewdomain', ['action' => $action, 'webviewdomain' => $domains]);
     }
 }

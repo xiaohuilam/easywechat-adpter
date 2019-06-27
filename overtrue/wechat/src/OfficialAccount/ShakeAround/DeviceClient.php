@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\ShakeAround;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class DeviceClient.
  *
@@ -30,7 +28,6 @@ class DeviceClient extends BaseClient
     {
         return $this->httpPostJson('shakearound/device/applyid', $data);
     }
-
     /**
      * Get audit status.
      *
@@ -38,15 +35,11 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function status( $applyId)
+    public function status($applyId)
     {
-        $params = [
-            'apply_id' => $applyId,
-        ];
-
+        $params = ['apply_id' => $applyId];
         return $this->httpPostJson('shakearound/device/applystatus', $params);
     }
-
     /**
      * Update a device comment.
      *
@@ -57,14 +50,9 @@ class DeviceClient extends BaseClient
      */
     public function update($deviceIdentifier, $comment)
     {
-        $params = [
-            'device_identifier' => $deviceIdentifier,
-            'comment' => $comment,
-        ];
-
+        $params = ['device_identifier' => $deviceIdentifier, 'comment' => $comment];
         return $this->httpPostJson('shakearound/device/update', $params);
     }
-
     /**
      * Bind location for device.
      *
@@ -77,14 +65,9 @@ class DeviceClient extends BaseClient
      */
     public function bindPoi($deviceIdentifier, $poiId)
     {
-        $params = [
-            'device_identifier' => $deviceIdentifier,
-            'poi_id' => $poiId,
-        ];
-
+        $params = ['device_identifier' => $deviceIdentifier, 'poi_id' => $poiId];
         return $this->httpPostJson('shakearound/device/bindlocation', $params);
     }
-
     /**
      * @param array  $deviceIdentifier
      * @param int    $poiId
@@ -94,16 +77,9 @@ class DeviceClient extends BaseClient
      */
     public function bindThirdPoi($deviceIdentifier, $poiId, $appId)
     {
-        $params = [
-            'device_identifier' => $deviceIdentifier,
-            'poi_id' => $poiId,
-            'type' => 2,
-            'poi_appid' => $appId,
-        ];
-
+        $params = ['device_identifier' => $deviceIdentifier, 'poi_id' => $poiId, 'type' => 2, 'poi_appid' => $appId];
         return $this->httpPostJson('shakearound/device/bindlocation', $params);
     }
-
     /**
      * Fetch batch of devices by deviceIds.
      *
@@ -113,14 +89,9 @@ class DeviceClient extends BaseClient
      */
     public function listByIds($deviceIdentifiers)
     {
-        $params = [
-            'type' => 1,
-            'device_identifiers' => $deviceIdentifiers,
-        ];
-
+        $params = ['type' => 1, 'device_identifiers' => $deviceIdentifiers];
         return $this->search($params);
     }
-
     /**
      * Pagination to get batch of devices.
      *
@@ -129,17 +100,11 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $lastId, $count)
+    public function list($lastId, $count)
     {
-        $params = [
-            'type' => 2,
-            'last_seen' => $lastId,
-            'count' => $count,
-        ];
-
+        $params = ['type' => 2, 'last_seen' => $lastId, 'count' => $count];
         return $this->search($params);
     }
-
     /**
      * Fetch batch of devices by applyId.
      *
@@ -149,18 +114,11 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function listByApplyId( $applyId, $lastId, $count)
+    public function listByApplyId($applyId, $lastId, $count)
     {
-        $params = [
-            'type' => 3,
-            'apply_id' => $applyId,
-            'last_seen' => $lastId,
-            'count' => $count,
-        ];
-
+        $params = ['type' => 3, 'apply_id' => $applyId, 'last_seen' => $lastId, 'count' => $count];
         return $this->search($params);
     }
-
     /**
      * Fetch batch of devices.
      *

@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Message;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Messages\Message;
-
 /**
  * Class Client.
  *
@@ -32,7 +30,6 @@ class Client extends BaseClient
     {
         return (new Messenger($this))->message($message);
     }
-
     /**
      * @param array $message
      *

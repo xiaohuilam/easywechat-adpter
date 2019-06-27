@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MicroMerchant\Base;
 
 use EasyWeChat\MicroMerchant\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -34,16 +32,9 @@ class Client extends BaseClient
      */
     public function submitApplication($params)
     {
-        $params = $this->processParams(array_merge($params, [
-            'version' => '3.0',
-            'cert_sn' => '',
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]));
-
+        $params = $this->processParams(array_merge($params, ['version' => '3.0', 'cert_sn' => '', 'sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]));
         return $this->safeRequest('applyment/micro/submit', $params);
     }
-
     /**
      * query application status.
      *
@@ -58,24 +49,13 @@ class Client extends BaseClient
     public function getStatus($applymentId, $businessCode = '')
     {
         if (!empty($applymentId)) {
-            $params = [
-                'applyment_id' => $applymentId,
-            ];
+            $params = ['applyment_id' => $applymentId];
         } else {
-            $params = [
-                'business_code' => $businessCode,
-            ];
+            $params = ['business_code' => $businessCode];
         }
-
-        $params = array_merge($params, [
-            'version' => '1.0',
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]);
-
+        $params = array_merge($params, ['version' => '1.0', 'sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]);
         return $this->safeRequest('applyment/micro/getstate', $params);
     }
-
     /**
      * merchant upgrade api.
      *
@@ -90,16 +70,9 @@ class Client extends BaseClient
     public function upgrade($params)
     {
         $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
-        $params = $this->processParams(array_merge($params, [
-            'version' => '1.0',
-            'cert_sn' => '',
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]));
-
+        $params = $this->processParams(array_merge($params, ['version' => '1.0', 'cert_sn' => '', 'sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]));
         return $this->safeRequest('applyment/micro/submitupgrade', $params);
     }
-
     /**
      * get upgrade status.
      *
@@ -112,11 +85,6 @@ class Client extends BaseClient
      */
     public function getUpgradeStatus($subMchId = '')
     {
-        return $this->safeRequest('applyment/micro/getupgradestate', [
-            'version' => '1.0',
-            'sign_type' => 'HMAC-SHA256',
-            'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id,
-            'nonce_str' => uniqid('micro'),
-        ]);
+        return $this->safeRequest('applyment/micro/getupgradestate', ['version' => '1.0', 'sign_type' => 'HMAC-SHA256', 'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id, 'nonce_str' => uniqid('micro')]);
     }
 }

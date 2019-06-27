@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram\OpenData;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -24,7 +22,6 @@ class Client extends BaseClient
      * @var string
      */
     protected $baseUri = 'https://api.weixin.qq.com/wxa/';
-
     /**
      * removeUserStorage.
      *
@@ -39,15 +36,9 @@ class Client extends BaseClient
     public function removeUserStorage($openid, $sessionKey, $key)
     {
         $data = ['key' => $key];
-        $query = [
-            'openid' => $openid,
-            'sig_method' => 'hmac_sha256',
-            'signature' => hash_hmac('sha256', json_encode($data), $sessionKey),
-        ];
-
+        $query = ['openid' => $openid, 'sig_method' => 'hmac_sha256', 'signature' => hash_hmac('sha256', json_encode($data), $sessionKey)];
         return $this->httpPostJson('remove_user_storage', $data, $query);
     }
-
     /**
      * setUserStorage.
      *
@@ -62,17 +53,10 @@ class Client extends BaseClient
     public function setUserStorage($openid, $sessionKey, $kvList)
     {
         $kvList = $this->formatKVLists($kvList);
-
         $data = ['kv_list' => $kvList];
-        $query = [
-            'openid' => $openid,
-            'sig_method' => 'hmac_sha256',
-            'signature' => hash_hmac('sha256', json_encode($data), $sessionKey),
-        ];
-
+        $query = ['openid' => $openid, 'sig_method' => 'hmac_sha256', 'signature' => hash_hmac('sha256', json_encode($data), $sessionKey)];
         return $this->httpPostJson('set_user_storage', $data, $query);
     }
-
     /**
      * @param array $params
      *
@@ -81,14 +65,9 @@ class Client extends BaseClient
     protected function formatKVLists($params)
     {
         $formatted = [];
-
         foreach ($params as $name => $value) {
-            $formatted[] = [
-                'key' => $name,
-                'value' => strval($value),
-            ];
+            $formatted[] = ['key' => $name, 'value' => strval($value)];
         }
-
         return $formatted;
     }
 }

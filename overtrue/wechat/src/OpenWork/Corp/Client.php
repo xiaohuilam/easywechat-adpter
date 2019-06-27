@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenWork\Corp;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\ServiceContainer;
-
 /**
  * Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         parent::__construct($app, $app['suite_access_token']);
     }
-
     /**
      * 企业微信安装应用授权 url.
      *
@@ -45,20 +42,12 @@ class Client extends BaseClient
      */
     public function getPreAuthorizationUrl($preAuthCode = '', $redirectUri = '', $state = '')
     {
-        $redirectUri || $redirectUri = $this->app->config['redirect_uri_install'];
-        $preAuthCode || $preAuthCode = $this->getPreAuthCode()['pre_auth_code'];
-        $state || $state = rand();
-
-        $params = [
-            'suite_id' => $this->app['config']['suite_id'],
-            'redirect_uri' => $redirectUri,
-            'pre_auth_code' => $preAuthCode,
-            'state' => $state,
-        ];
-
-        return 'https://open.work.weixin.qq.com/3rdapp/install?'.http_build_query($params);
+        $redirectUri || ($redirectUri = $this->app->config['redirect_uri_install']);
+        $preAuthCode || ($preAuthCode = $this->getPreAuthCode()['pre_auth_code']);
+        $state || ($state = rand());
+        $params = ['suite_id' => $this->app['config']['suite_id'], 'redirect_uri' => $redirectUri, 'pre_auth_code' => $preAuthCode, 'state' => $state];
+        return 'https://open.work.weixin.qq.com/3rdapp/install?' . http_build_query($params);
     }
-
     /**
      * 获取预授权码.
      *
@@ -70,7 +59,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/service/get_pre_auth_code');
     }
-
     /**
      * 设置授权配置.
      * 该接口可对某次授权进行配置.
@@ -84,14 +72,9 @@ class Client extends BaseClient
      */
     public function setSession($preAuthCode, $sessionInfo)
     {
-        $params = [
-            'pre_auth_code' => $preAuthCode,
-            'session_info' => $sessionInfo,
-        ];
-
+        $params = ['pre_auth_code' => $preAuthCode, 'session_info' => $sessionInfo];
         return $this->httpPostJson('cgi-bin/service/set_session_info', $params);
     }
-
     /**
      * 获取企业永久授权码.
      *
@@ -103,13 +86,9 @@ class Client extends BaseClient
      */
     public function getPermanentByCode($authCode)
     {
-        $params = [
-            'auth_code' => $authCode,
-        ];
-
+        $params = ['auth_code' => $authCode];
         return $this->httpPostJson('cgi-bin/service/get_permanent_code', $params);
     }
-
     /**
      * 获取企业授权信息.
      *
@@ -122,14 +101,9 @@ class Client extends BaseClient
      */
     public function getAuthorization($authCorpId, $permanentCode)
     {
-        $params = [
-            'auth_corpid' => $authCorpId,
-            'permanent_code' => $permanentCode,
-        ];
-
+        $params = ['auth_corpid' => $authCorpId, 'permanent_code' => $permanentCode];
         return $this->httpPostJson('cgi-bin/service/get_auth_info', $params);
     }
-
     /**
      * 获取应用的管理员列表.
      *
@@ -142,14 +116,9 @@ class Client extends BaseClient
      */
     public function getManagers($authCorpId, $agentId)
     {
-        $params = [
-            'auth_corpid' => $authCorpId,
-            'agentid' => $agentId,
-        ];
-
+        $params = ['auth_corpid' => $authCorpId, 'agentid' => $agentId];
         return $this->httpPostJson('cgi-bin/service/get_admin_lis', $params);
     }
-
     /**
      * 获取登录url.
      *
@@ -161,19 +130,11 @@ class Client extends BaseClient
      */
     public function getOAuthRedirectUrl($redirectUri = '', $scope = 'snsapi_userinfo', $state = null)
     {
-        $redirectUri || $redirectUri = $this->app->config['redirect_uri_oauth'];
-        $state || $state = rand();
-        $params = [
-            'appid' => $this->app['config']['suite_id'],
-            'redirect_uri' => $redirectUri,
-            'response_type' => 'code',
-            'scope' => $scope,
-            'state' => $state,
-        ];
-
-        return 'https://open.weixin.qq.com/connect/oauth2/authorize?'.http_build_query($params).'#wechat_redirect';
+        $redirectUri || ($redirectUri = $this->app->config['redirect_uri_oauth']);
+        $state || ($state = rand());
+        $params = ['appid' => $this->app['config']['suite_id'], 'redirect_uri' => $redirectUri, 'response_type' => 'code', 'scope' => $scope, 'state' => $state];
+        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' . http_build_query($params) . '#wechat_redirect';
     }
-
     /**
      * 第三方根据code获取企业成员信息.
      *
@@ -185,13 +146,9 @@ class Client extends BaseClient
      */
     public function getUserByCode($code)
     {
-        $params = [
-            'code' => $code,
-        ];
-
+        $params = ['code' => $code];
         return $this->httpGet('cgi-bin/service/getuserinfo3rd', $params);
     }
-
     /**
      * 第三方使用user_ticket获取成员详情.
      *
@@ -203,10 +160,7 @@ class Client extends BaseClient
      */
     public function getUserByTicket($userTicket)
     {
-        $params = [
-            'user_ticket' => $userTicket,
-        ];
-
+        $params = ['user_ticket' => $userTicket];
         return $this->httpPostJson('cgi-bin/service/getuserdetail3rd', $params);
     }
 }

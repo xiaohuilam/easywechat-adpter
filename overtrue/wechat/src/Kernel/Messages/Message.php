@@ -8,21 +8,18 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Messages;
 
 use EasyWeChat\Kernel\Contracts\MessageInterface;
 use EasyWeChat\Kernel\Support\XML;
 use EasyWeChat\Kernel\Traits\HasAttributes;
 use Mockery\Exception\BadMethodCallException;
-
 /**
  * Class Messages.
  */
 abstract class Message implements MessageInterface
 {
     use HasAttributes;
-
     const TEXT = 2;
     const IMAGE = 4;
     const VOICE = 8;
@@ -37,39 +34,31 @@ abstract class Message implements MessageInterface
     const TRANSFER = 4096;
     const EVENT = 1048576;
     const MINIPROGRAM_PAGE = 2097152;
-    const ALL = self::TEXT | self::IMAGE | self::VOICE | self::VIDEO | self::SHORT_VIDEO | self::LOCATION | self::LINK
-                | self::DEVICE_EVENT | self::DEVICE_TEXT | self::FILE | self::TEXT_CARD | self::TRANSFER | self::EVENT | self::MINIPROGRAM_PAGE;
-
+    const ALL = self::TEXT | self::IMAGE | self::VOICE | self::VIDEO | self::SHORT_VIDEO | self::LOCATION | self::LINK | self::DEVICE_EVENT | self::DEVICE_TEXT | self::FILE | self::TEXT_CARD | self::TRANSFER | self::EVENT | self::MINIPROGRAM_PAGE;
     /**
      * @var string
      */
     protected $type;
-
     /**
      * @var int
      */
     protected $id;
-
     /**
      * @var string
      */
     protected $to;
-
     /**
      * @var string
      */
     protected $from;
-
     /**
      * @var array
      */
     protected $properties = [];
-
     /**
      * @var array
      */
     protected $jsonAliases = [];
-
     /**
      * Message constructor.
      *
@@ -79,7 +68,6 @@ abstract class Message implements MessageInterface
     {
         $this->setAttributes($attributes);
     }
-
     /**
      * Return type name message.
      *
@@ -89,7 +77,6 @@ abstract class Message implements MessageInterface
     {
         return $this->type;
     }
-
     /**
      * @param string $type
      */
@@ -97,7 +84,6 @@ abstract class Message implements MessageInterface
     {
         $this->type = $type;
     }
-
     /**
      * Magic getter.
      *
@@ -108,12 +94,10 @@ abstract class Message implements MessageInterface
     public function __get($property)
     {
         if (property_exists($this, $property)) {
-            return $this->$property;
+            return $this->{$property};
         }
-
         return $this->getAttribute($property);
     }
-
     /**
      * Magic setter.
      *
@@ -125,14 +109,12 @@ abstract class Message implements MessageInterface
     public function __set($property, $value)
     {
         if (property_exists($this, $property)) {
-            $this->$property = $value;
+            $this->{$property} = $value;
         } else {
             $this->setAttribute($property, $value);
         }
-
         return $this;
     }
-
     /**
      * @param array $appends
      *
@@ -142,7 +124,6 @@ abstract class Message implements MessageInterface
     {
         return $this->transformForJsonRequest($appends, false);
     }
-
     /**
      * @param array $appends
      * @param bool  $withType
@@ -156,12 +137,9 @@ abstract class Message implements MessageInterface
         }
         $messageType = $this->getType();
         $data = array_merge(['msgtype' => $messageType], $appends);
-
         $data[$messageType] = array_merge($data[$messageType] ?: [], $this->propertiesToArray([], $this->jsonAliases));
-
         return $data;
     }
-
     /**
      * @param array $appends
      * @param bool  $returnAsArray
@@ -171,10 +149,8 @@ abstract class Message implements MessageInterface
     public function transformToXml($appends = [], $returnAsArray = false)
     {
         $data = array_merge(['MsgType' => $this->getType()], $this->toXmlArray(), $appends);
-
         return $returnAsArray ? $data : XML::build($data);
     }
-
     /**
      * @param array $data
      * @param array $aliases
@@ -186,19 +162,15 @@ abstract class Message implements MessageInterface
     protected function propertiesToArray($data, $aliases = [])
     {
         $this->checkRequiredAttributes();
-
         foreach ($this->attributes as $property => $value) {
             if (is_null($value) && !$this->isRequired($property)) {
                 continue;
             }
             $alias = array_search($property, $aliases, true);
-
             $data[$alias ?: $property] = $this->get($property);
         }
-
         return $data;
     }
-
     public function toXmlArray()
     {
         throw new BadMethodCallException(sprintf('Class "%s" cannot support transform to XML message.', __CLASS__));

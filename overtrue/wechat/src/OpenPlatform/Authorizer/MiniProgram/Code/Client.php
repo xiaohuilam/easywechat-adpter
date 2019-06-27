@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Code;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -30,16 +28,10 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function commit( $templateId, $extJson, $version, $description)
+    public function commit($templateId, $extJson, $version, $description)
     {
-        return $this->httpPostJson('wxa/commit', [
-            'template_id' => $templateId,
-            'ext_json' => $extJson,
-            'user_version' => $version,
-            'user_desc' => $description,
-        ]);
+        return $this->httpPostJson('wxa/commit', ['template_id' => $templateId, 'ext_json' => $extJson, 'user_version' => $version, 'user_desc' => $description]);
     }
-
     /**
      * @param string|null $path
      *
@@ -49,11 +41,8 @@ class Client extends BaseClient
      */
     public function getQrCode($path = null)
     {
-        return $this->requestRaw('wxa/get_qrcode', 'GET', [
-            'query' => ['path' => $path],
-        ]);
+        return $this->requestRaw('wxa/get_qrcode', 'GET', ['query' => ['path' => $path]]);
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -63,7 +52,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/get_category');
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -73,7 +61,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/get_page');
     }
-
     /**
      * @param array $itemList
      *
@@ -83,11 +70,8 @@ class Client extends BaseClient
      */
     public function submitAudit($itemList)
     {
-        return $this->httpPostJson('wxa/submit_audit', [
-            'item_list' => $itemList,
-        ]);
+        return $this->httpPostJson('wxa/submit_audit', ['item_list' => $itemList]);
     }
-
     /**
      * @param int $auditId
      *
@@ -95,13 +79,10 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getAuditStatus( $auditId)
+    public function getAuditStatus($auditId)
     {
-        return $this->httpPostJson('wxa/get_auditstatus', [
-            'auditid' => $auditId,
-        ]);
+        return $this->httpPostJson('wxa/get_auditstatus', ['auditid' => $auditId]);
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -111,7 +92,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/get_latest_auditstatus');
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -121,7 +101,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('wxa/release');
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -131,7 +110,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/undocodeaudit');
     }
-
     /**
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      *
@@ -141,7 +119,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/revertcoderelease');
     }
-
     /**
      * @param string $action
      *
@@ -151,11 +128,8 @@ class Client extends BaseClient
      */
     public function changeVisitStatus($action)
     {
-        return $this->httpPostJson('wxa/change_visitstatus', [
-            'action' => $action,
-        ]);
+        return $this->httpPostJson('wxa/change_visitstatus', ['action' => $action]);
     }
-
     /**
      * 分阶段发布.
      *
@@ -165,13 +139,10 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function grayRelease( $grayPercentage)
+    public function grayRelease($grayPercentage)
     {
-        return $this->httpPostJson('wxa/grayrelease', [
-            'gray_percentage' => $grayPercentage,
-        ]);
+        return $this->httpPostJson('wxa/grayrelease', ['gray_percentage' => $grayPercentage]);
     }
-
     /**
      * 取消分阶段发布.
      *
@@ -183,7 +154,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/revertgrayrelease');
     }
-
     /**
      * 查询当前分阶段发布详情.
      *
@@ -195,7 +165,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('wxa/getgrayreleaseplan');
     }
-
     /**
      * 查询当前设置的最低基础库版本及各版本用户占比.
      *
@@ -207,7 +176,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/wxopen/getweappsupportversion');
     }
-
     /**
      * 设置最低基础库版本.
      *
@@ -217,8 +185,6 @@ class Client extends BaseClient
      */
     public function setSupportVersion($version)
     {
-        return $this->httpPostJson('cgi-bin/wxopen/setweappsupportversion', [
-            'version' => $version,
-        ]);
+        return $this->httpPostJson('cgi-bin/wxopen/setweappsupportversion', ['version' => $version]);
     }
 }

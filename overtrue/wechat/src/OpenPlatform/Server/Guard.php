@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Server;
 
 use EasyWeChat\Kernel\ServerGuard;
@@ -17,7 +16,6 @@ use EasyWeChat\OpenPlatform\Server\Handlers\Unauthorized;
 use EasyWeChat\OpenPlatform\Server\Handlers\UpdateAuthorized;
 use EasyWeChat\OpenPlatform\Server\Handlers\VerifyTicketRefreshed;
 use Symfony\Component\HttpFoundation\Response;
-
 /**
  * Class Guard.
  *
@@ -29,23 +27,18 @@ class Guard extends ServerGuard
     const EVENT_UNAUTHORIZED = 'unauthorized';
     const EVENT_UPDATE_AUTHORIZED = 'updateauthorized';
     const EVENT_COMPONENT_VERIFY_TICKET = 'component_verify_ticket';
-
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function resolve()
     {
         $this->registerHandlers();
-
         $message = $this->getMessage();
-
         if (isset($message['InfoType'])) {
             $this->dispatch($message['InfoType'], $message);
         }
-
         return new Response(static::SUCCESS_EMPTY_RESPONSE);
     }
-
     /**
      * Register event handlers.
      */

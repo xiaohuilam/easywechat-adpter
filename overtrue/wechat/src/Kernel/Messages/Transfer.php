@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Messages;
 
 /**
@@ -25,16 +24,12 @@ class Transfer extends Message
      * @var string
      */
     protected $type = 'transfer_customer_service';
-
     /**
      * Properties.
      *
      * @var array
      */
-    protected $properties = [
-        'account',
-    ];
-
+    protected $properties = ['account'];
     /**
      * Transfer constructor.
      *
@@ -44,13 +39,8 @@ class Transfer extends Message
     {
         parent::__construct(compact('account'));
     }
-
     public function toXmlArray()
     {
-        return empty($this->get('account')) ? [] : [
-            'TransInfo' => [
-                'KfAccount' => $this->get('account'),
-            ],
-        ];
+        return empty($this->get('account')) ? [] : ['TransInfo' => ['KfAccount' => $this->get('account')]];
     }
 }

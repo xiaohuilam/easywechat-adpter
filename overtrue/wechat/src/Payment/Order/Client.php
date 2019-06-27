@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Order;
 
 use EasyWeChat\Kernel\Support;
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 class Client extends BaseClient
 {
     /**
@@ -28,15 +26,12 @@ class Client extends BaseClient
     public function unify($params)
     {
         if (empty($params['spbill_create_ip'])) {
-            $params['spbill_create_ip'] = ('NATIVE' === $params['trade_type']) ? Support\get_server_ip() : Support\get_client_ip();
+            $params['spbill_create_ip'] = 'NATIVE' === $params['trade_type'] ? Support\get_server_ip() : Support\get_client_ip();
         }
-
         $params['appid'] = $this->app['config']->app_id;
         $params['notify_url'] = $params['notify_url'] ?: $this->app['config']['notify_url'];
-
         return $this->request($this->wrap('pay/unifiedorder'), $params);
     }
-
     /**
      * Query order by out trade number.
      *
@@ -48,11 +43,8 @@ class Client extends BaseClient
      */
     public function queryByOutTradeNumber($number)
     {
-        return $this->query([
-            'out_trade_no' => $number,
-        ]);
+        return $this->query(['out_trade_no' => $number]);
     }
-
     /**
      * Query order by transaction id.
      *
@@ -64,11 +56,8 @@ class Client extends BaseClient
      */
     public function queryByTransactionId($transactionId)
     {
-        return $this->query([
-            'transaction_id' => $transactionId,
-        ]);
+        return $this->query(['transaction_id' => $transactionId]);
     }
-
     /**
      * @param array $params
      *
@@ -79,10 +68,8 @@ class Client extends BaseClient
     protected function query($params)
     {
         $params['appid'] = $this->app['config']->app_id;
-
         return $this->request($this->wrap('pay/orderquery'), $params);
     }
-
     /**
      * Close order by out_trade_no.
      *
@@ -94,11 +81,7 @@ class Client extends BaseClient
      */
     public function close($tradeNo)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'out_trade_no' => $tradeNo,
-        ];
-
+        $params = ['appid' => $this->app['config']->app_id, 'out_trade_no' => $tradeNo];
         return $this->request($this->wrap('pay/closeorder'), $params);
     }
 }

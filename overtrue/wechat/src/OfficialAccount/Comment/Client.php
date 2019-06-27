@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Comment;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -30,14 +28,9 @@ class Client extends BaseClient
      */
     public function open($msgId, $index = null)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index];
         return $this->httpPostJson('cgi-bin/comment/open', $params);
     }
-
     /**
      * Close comment.
      *
@@ -48,14 +41,9 @@ class Client extends BaseClient
      */
     public function close($msgId, $index = null)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index];
         return $this->httpPostJson('cgi-bin/comment/close', $params);
     }
-
     /**
      * Get article comments.
      *
@@ -69,17 +57,9 @@ class Client extends BaseClient
      */
     public function list($msgId, $index, $begin, $count, $type = 0)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'begin' => $begin,
-            'count' => $count,
-            'type' => $type,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'begin' => $begin, 'count' => $count, 'type' => $type];
         return $this->httpPostJson('cgi-bin/comment/list', $params);
     }
-
     /**
      * Mark elect comment.
      *
@@ -91,15 +71,9 @@ class Client extends BaseClient
      */
     public function markElect($msgId, $index, $commentId)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'user_comment_id' => $commentId,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'user_comment_id' => $commentId];
         return $this->httpPostJson('cgi-bin/comment/markelect', $params);
     }
-
     /**
      * Unmark elect comment.
      *
@@ -111,15 +85,9 @@ class Client extends BaseClient
      */
     public function unmarkElect($msgId, $index, $commentId)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'user_comment_id' => $commentId,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'user_comment_id' => $commentId];
         return $this->httpPostJson('cgi-bin/comment/unmarkelect', $params);
     }
-
     /**
      * Delete comment.
      *
@@ -131,15 +99,9 @@ class Client extends BaseClient
      */
     public function delete($msgId, $index, $commentId)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'user_comment_id' => $commentId,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'user_comment_id' => $commentId];
         return $this->httpPostJson('cgi-bin/comment/delete', $params);
     }
-
     /**
      * Reply to a comment.
      *
@@ -152,16 +114,9 @@ class Client extends BaseClient
      */
     public function reply($msgId, $index, $commentId, $content)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'user_comment_id' => $commentId,
-            'content' => $content,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'user_comment_id' => $commentId, 'content' => $content];
         return $this->httpPostJson('cgi-bin/comment/reply/add', $params);
     }
-
     /**
      * Delete a reply.
      *
@@ -173,12 +128,7 @@ class Client extends BaseClient
      */
     public function deleteReply($msgId, $index, $commentId)
     {
-        $params = [
-            'msg_data_id' => $msgId,
-            'index' => $index,
-            'user_comment_id' => $commentId,
-        ];
-
+        $params = ['msg_data_id' => $msgId, 'index' => $index, 'user_comment_id' => $commentId];
         return $this->httpPostJson('cgi-bin/comment/reply/delete', $params);
     }
 }

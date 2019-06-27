@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenWork\Provider;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\ServiceContainer;
-
 /**
  * Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         parent::__construct($app, $app['provider_access_token']);
     }
-
     /**
      * 单点登录 - 获取登录的地址.
      *
@@ -43,18 +40,11 @@ class Client extends BaseClient
      */
     public function getLoginUrl($redirectUri = '', $userType = 'admin', $state = '')
     {
-        $redirectUri || $redirectUri = $this->app->config['redirect_uri_single'];
-        $state || $state = rand();
-        $params = [
-            'appid' => $this->app['config']['corp_id'],
-            'redirect_uri' => $redirectUri,
-            'usertype' => $userType,
-            'state' => $state,
-        ];
-
-        return 'https://open.work.weixin.qq.com/wwopen/sso/3rd_qrConnect?'.http_build_query($params);
+        $redirectUri || ($redirectUri = $this->app->config['redirect_uri_single']);
+        $state || ($state = rand());
+        $params = ['appid' => $this->app['config']['corp_id'], 'redirect_uri' => $redirectUri, 'usertype' => $userType, 'state' => $state];
+        return 'https://open.work.weixin.qq.com/wwopen/sso/3rd_qrConnect?' . http_build_query($params);
     }
-
     /**
      * 单点登录 - 获取登录用户信息.
      *
@@ -66,13 +56,9 @@ class Client extends BaseClient
      */
     public function getLoginInfo($authCode)
     {
-        $params = [
-            'auth_code' => $authCode,
-        ];
-
+        $params = ['auth_code' => $authCode];
         return $this->httpPostJson('cgi-bin/service/get_login_info', $params);
     }
-
     /**
      * 获取注册定制化URL.
      *
@@ -84,12 +70,10 @@ class Client extends BaseClient
      */
     public function getRegisterUri($registerCode = '')
     {
-        $registerCode || $registerCode = $this->getRegisterCode()['register_code'];
+        $registerCode || ($registerCode = $this->getRegisterCode()['register_code']);
         $params = ['register_code' => $registerCode];
-
-        return 'https://open.work.weixin.qq.com/3rdservice/wework/register?'.http_build_query($params);
+        return 'https://open.work.weixin.qq.com/3rdservice/wework/register?' . http_build_query($params);
     }
-
     /**
      * 获取注册码.
      *
@@ -102,22 +86,16 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getRegisterCode(
-        string $corpName = '',
-        string $adminName = '',
-        string $adminMobile = '',
-        string $state = ''
-    ) {
+    public function getRegisterCode($corpName = '', $adminName = '', $adminMobile = '', $state = '')
+    {
         $params = [];
         $params['template_id'] = $this->app['config']['reg_template_id'];
-        !empty($corpName) && $params['corp_name'] = $corpName;
-        !empty($adminName) && $params['admin_name'] = $adminName;
-        !empty($adminMobile) && $params['admin_mobile'] = $adminMobile;
-        !empty($state) && $params['state'] = $state;
-
+        !empty($corpName) && ($params['corp_name'] = $corpName);
+        !empty($adminName) && ($params['admin_name'] = $adminName);
+        !empty($adminMobile) && ($params['admin_mobile'] = $adminMobile);
+        !empty($state) && ($params['state'] = $state);
         return $this->httpPostJson('cgi-bin/service/get_register_code', $params);
     }
-
     /**
      * 查询注册状态.
      *
@@ -131,13 +109,9 @@ class Client extends BaseClient
      */
     public function getRegisterInfo($registerCode)
     {
-        $params = [
-            'register_code' => $registerCode,
-        ];
-
+        $params = ['register_code' => $registerCode];
         return $this->httpPostJson('cgi-bin/service/get_register_info', $params);
     }
-
     /**
      * 设置授权应用可见范围.
      *
@@ -157,24 +131,11 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function setAgentScope(
-        string $accessToken,
-        string $agentId,
-        array $allowUser = [],
-        array $allowParty = [],
-        array $allowTag = []
-    ) {
-        $params = [
-            'agentid' => $agentId,
-            'allow_user' => $allowUser,
-            'allow_party' => $allowParty,
-            'allow_tag' => $allowTag,
-            'access_token' => $accessToken,
-        ];
-
+    public function setAgentScope($accessToken, $agentId, array $allowUser = [], array $allowParty = [], array $allowTag = [])
+    {
+        $params = ['agentid' => $agentId, 'allow_user' => $allowUser, 'allow_party' => $allowParty, 'allow_tag' => $allowTag, 'access_token' => $accessToken];
         return $this->httpGet('cgi-bin/agent/set_scope', $params);
     }
-
     /**
      * 设置通讯录同步完成.
      *
@@ -189,7 +150,6 @@ class Client extends BaseClient
     public function contactSyncSuccess($accessToken)
     {
         $params = ['access_token' => $accessToken];
-
         return $this->httpGet('cgi-bin/sync/contact_sync_success', $params);
     }
 }

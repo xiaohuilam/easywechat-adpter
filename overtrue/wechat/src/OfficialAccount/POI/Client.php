@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\POI;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,7 +27,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/poi/getwxcategory');
     }
-
     /**
      * Get POI by ID.
      *
@@ -37,11 +34,10 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function get( $poiId)
+    public function get($poiId)
     {
         return $this->httpPostJson('cgi-bin/poi/getpoi', ['poi_id' => $poiId]);
     }
-
     /**
      * List POI.
      *
@@ -50,16 +46,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $offset = 0, $limit = 10)
+    public function list($offset = 0, $limit = 10)
     {
-        $params = [
-            'begin' => $offset,
-            'limit' => $limit,
-        ];
-
+        $params = ['begin' => $offset, 'limit' => $limit];
         return $this->httpPostJson('cgi-bin/poi/getpoilist', $params);
     }
-
     /**
      * Create a POI.
      *
@@ -69,15 +60,9 @@ class Client extends BaseClient
      */
     public function create($baseInfo)
     {
-        $params = [
-            'business' => [
-                'base_info' => $baseInfo,
-            ],
-        ];
-
+        $params = ['business' => ['base_info' => $baseInfo]];
         return $this->httpPostJson('cgi-bin/poi/addpoi', $params);
     }
-
     /**
      * @param array $databaseInfo
      *
@@ -87,7 +72,6 @@ class Client extends BaseClient
     {
         return $this->create($databaseInfo)['poi_id'];
     }
-
     /**
      * Update a POI.
      *
@@ -96,17 +80,11 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update( $poiId, $baseInfo)
+    public function update($poiId, $baseInfo)
     {
-        $params = [
-            'business' => [
-                'base_info' => array_merge($baseInfo, ['poi_id' => $poiId]),
-            ],
-        ];
-
+        $params = ['business' => ['base_info' => array_merge($baseInfo, ['poi_id' => $poiId])]];
         return $this->httpPostJson('cgi-bin/poi/updatepoi', $params);
     }
-
     /**
      * Delete a POI.
      *
@@ -114,7 +92,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete( $poiId)
+    public function delete($poiId)
     {
         return $this->httpPostJson('cgi-bin/poi/delpoi', ['poi_id' => $poiId]);
     }

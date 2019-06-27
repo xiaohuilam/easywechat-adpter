@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Department;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * This is WeWork Department Client.
  *
@@ -33,7 +31,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/department/create', $data);
     }
-
     /**
      * Update a department.
      *
@@ -44,11 +41,10 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update( $id, $data)
+    public function update($id, $data)
     {
         return $this->httpPostJson('cgi-bin/department/update', array_merge(compact('id'), $data));
     }
-
     /**
      * Delete a department.
      *
@@ -62,7 +58,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/department/delete', compact('id'));
     }
-
     /**
      * Get department lists.
      *

@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\OCR;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class Client.
  *
@@ -27,7 +25,6 @@ class Client extends BaseClient
      * @var array
      */
     protected $allowTypes = ['photo', 'scan'];
-
     /**
      * ID card OCR.
      *
@@ -44,13 +41,8 @@ class Client extends BaseClient
         if (!\in_array($type, $this->allowTypes, true)) {
             throw new InvalidArgumentException(sprintf("Unsupported type: '%s'", $type));
         }
-
-        return $this->httpGet('cv/ocr/idcard', [
-            'type' => $type,
-            'img_url' => $path,
-        ]);
+        return $this->httpGet('cv/ocr/idcard', ['type' => $type, 'img_url' => $path]);
     }
-
     /**
      * Bank card OCR.
      *
@@ -62,11 +54,8 @@ class Client extends BaseClient
      */
     public function bankCard($path)
     {
-        return $this->httpGet('cv/ocr/bankcard', [
-            'img_url' => $path,
-        ]);
+        return $this->httpGet('cv/ocr/bankcard', ['img_url' => $path]);
     }
-
     /**
      * Vehicle license OCR.
      *
@@ -78,8 +67,6 @@ class Client extends BaseClient
      */
     public function vehicleLicense($path)
     {
-        return $this->httpGet('cv/ocr/driving', [
-            'img_url' => $path,
-        ]);
+        return $this->httpGet('cv/ocr/driving', ['img_url' => $path]);
     }
 }

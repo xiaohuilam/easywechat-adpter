@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\ExternalContact;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class ContactWayClient.
  *
@@ -31,16 +29,11 @@ class ContactWayClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function create( $type, $scene, $config = [])
+    public function create($type, $scene, $config = [])
     {
-        $params = array_merge([
-            'type' => $type,
-            'scene' => $scene,
-        ], $config);
-
+        $params = array_merge(['type' => $type, 'scene' => $scene], $config);
         return $this->httpPostJson('cgi-bin/externalcontact/add_contact_way', $params);
     }
-
     /**
      * 获取企业已配置的「联系我」方式.
      *
@@ -52,11 +45,8 @@ class ContactWayClient extends BaseClient
      */
     public function get($configId)
     {
-        return $this->httpPostJson('cgi-bin/externalcontact/get_contact_way', [
-            'config_id' => $configId,
-        ]);
+        return $this->httpPostJson('cgi-bin/externalcontact/get_contact_way', ['config_id' => $configId]);
     }
-
     /**
      * 更新企业已配置的「联系我」方式.
      *
@@ -69,13 +59,9 @@ class ContactWayClient extends BaseClient
      */
     public function update($configId, $config = [])
     {
-        $params = array_merge([
-            'config_id' => $configId,
-        ], $config);
-
+        $params = array_merge(['config_id' => $configId], $config);
         return $this->httpPostJson('cgi-bin/externalcontact/update_contact_way', $params);
     }
-
     /**
      * 删除企业已配置的「联系我」方式.
      *
@@ -87,8 +73,6 @@ class ContactWayClient extends BaseClient
      */
     public function delete($configId)
     {
-        return $this->httpPostJson('cgi-bin/externalcontact/del_contact_way', [
-            'config_id' => $configId,
-        ]);
+        return $this->httpPostJson('cgi-bin/externalcontact/del_contact_way', ['config_id' => $configId]);
     }
 }

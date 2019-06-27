@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class CodeClient.
  *
@@ -30,14 +28,9 @@ class CodeClient extends BaseClient
      */
     public function deposit($cardId, $codes)
     {
-        $params = [
-            'card_id' => $cardId,
-            'code' => $codes,
-        ];
-
+        $params = ['card_id' => $cardId, 'code' => $codes];
         return $this->httpPostJson('card/code/deposit', $params);
     }
-
     /**
      * 查询导入code数目.
      *
@@ -47,13 +40,9 @@ class CodeClient extends BaseClient
      */
     public function getDepositedCount($cardId)
     {
-        $params = [
-            'card_id' => $cardId,
-        ];
-
+        $params = ['card_id' => $cardId];
         return $this->httpPostJson('card/code/getdepositcount', $params);
     }
-
     /**
      * 核查code接口.
      *
@@ -64,14 +53,9 @@ class CodeClient extends BaseClient
      */
     public function check($cardId, $codes)
     {
-        $params = [
-            'card_id' => $cardId,
-            'code' => $codes,
-        ];
-
+        $params = ['card_id' => $cardId, 'code' => $codes];
         return $this->httpPostJson('card/code/checkcode', $params);
     }
-
     /**
      * 查询 Code 接口.
      *
@@ -83,15 +67,9 @@ class CodeClient extends BaseClient
      */
     public function get($code, $cardId = '', $checkConsume = true)
     {
-        $params = [
-            'code' => $code,
-            'check_consume' => $checkConsume,
-            'card_id' => $cardId,
-        ];
-
+        $params = ['code' => $code, 'check_consume' => $checkConsume, 'card_id' => $cardId];
         return $this->httpPostJson('card/code/get', $params);
     }
-
     /**
      * 更改Code接口.
      *
@@ -103,15 +81,9 @@ class CodeClient extends BaseClient
      */
     public function update($code, $newCode, $cardId = '')
     {
-        $params = [
-            'code' => $code,
-            'new_code' => $newCode,
-            'card_id' => $cardId,
-        ];
-
+        $params = ['code' => $code, 'new_code' => $newCode, 'card_id' => $cardId];
         return $this->httpPostJson('card/code/update', $params);
     }
-
     /**
      * 设置卡券失效.
      *
@@ -122,14 +94,9 @@ class CodeClient extends BaseClient
      */
     public function disable($code, $cardId = '')
     {
-        $params = [
-            'code' => $code,
-            'card_id' => $cardId,
-        ];
-
+        $params = ['code' => $code, 'card_id' => $cardId];
         return $this->httpPostJson('card/code/unavailable', $params);
     }
-
     /**
      * 核销 Code 接口.
      *
@@ -140,17 +107,12 @@ class CodeClient extends BaseClient
      */
     public function consume($code, $cardId = null)
     {
-        $params = [
-            'code' => $code,
-        ];
-
+        $params = ['code' => $code];
         if (!is_null($cardId)) {
             $params['card_id'] = $cardId;
         }
-
         return $this->httpPostJson('card/code/consume', $params);
     }
-
     /**
      * Code解码接口.
      *
@@ -160,10 +122,7 @@ class CodeClient extends BaseClient
      */
     public function decrypt($encryptedCode)
     {
-        $params = [
-            'encrypt_code' => $encryptedCode,
-        ];
-
+        $params = ['encrypt_code' => $encryptedCode];
         return $this->httpPostJson('card/code/decrypt', $params);
     }
 }

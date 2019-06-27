@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\User;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class TagClient.
  *
@@ -31,13 +29,9 @@ class TagClient extends BaseClient
      */
     public function create($name)
     {
-        $params = [
-            'tag' => ['name' => $name],
-        ];
-
+        $params = ['tag' => ['name' => $name]];
         return $this->httpPostJson('cgi-bin/tags/create', $params);
     }
-
     /**
      * List all tags.
      *
@@ -49,7 +43,6 @@ class TagClient extends BaseClient
     {
         return $this->httpGet('cgi-bin/tags/get');
     }
-
     /**
      * Update a tag name.
      *
@@ -60,18 +53,11 @@ class TagClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update( $tagId, $name)
+    public function update($tagId, $name)
     {
-        $params = [
-            'tag' => [
-                'id' => $tagId,
-                'name' => $name,
-            ],
-        ];
-
+        $params = ['tag' => ['id' => $tagId, 'name' => $name]];
         return $this->httpPostJson('cgi-bin/tags/update', $params);
     }
-
     /**
      * Delete tag.
      *
@@ -81,15 +67,11 @@ class TagClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function delete( $tagId)
+    public function delete($tagId)
     {
-        $params = [
-            'tag' => ['id' => $tagId],
-        ];
-
+        $params = ['tag' => ['id' => $tagId]];
         return $this->httpPostJson('cgi-bin/tags/delete', $params);
     }
-
     /**
      * Get user tags.
      *
@@ -102,10 +84,8 @@ class TagClient extends BaseClient
     public function userTags($openid)
     {
         $params = ['openid' => $openid];
-
         return $this->httpPostJson('cgi-bin/tags/getidlist', $params);
     }
-
     /**
      * Get users from a tag.
      *
@@ -116,16 +96,11 @@ class TagClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function usersOfTag( $tagId, $nextOpenId = '')
+    public function usersOfTag($tagId, $nextOpenId = '')
     {
-        $params = [
-            'tagid' => $tagId,
-            'next_openid' => $nextOpenId,
-        ];
-
+        $params = ['tagid' => $tagId, 'next_openid' => $nextOpenId];
         return $this->httpPostJson('cgi-bin/user/tag/get', $params);
     }
-
     /**
      * Batch tag users.
      *
@@ -138,14 +113,9 @@ class TagClient extends BaseClient
      */
     public function tagUsers($openids, $tagId)
     {
-        $params = [
-            'openid_list' => $openids,
-            'tagid' => $tagId,
-        ];
-
+        $params = ['openid_list' => $openids, 'tagid' => $tagId];
         return $this->httpPostJson('cgi-bin/tags/members/batchtagging', $params);
     }
-
     /**
      * Untag users from a tag.
      *
@@ -158,11 +128,7 @@ class TagClient extends BaseClient
      */
     public function untagUsers($openids, $tagId)
     {
-        $params = [
-            'openid_list' => $openids,
-            'tagid' => $tagId,
-        ];
-
+        $params = ['openid_list' => $openids, 'tagid' => $tagId];
         return $this->httpPostJson('cgi-bin/tags/members/batchuntagging', $params);
     }
 }

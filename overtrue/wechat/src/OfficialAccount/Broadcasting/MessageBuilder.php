@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Broadcasting;
 
 use EasyWeChat\Kernel\Contracts\MessageInterface;
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
-
 /**
  * Class MessageBuilder.
  *
@@ -25,17 +23,14 @@ class MessageBuilder
      * @var array
      */
     protected $to = [];
-
     /**
      * @var \EasyWeChat\Kernel\Contracts\MessageInterface
      */
     protected $message;
-
     /**
      * @var array
      */
     protected $attributes = [];
-
     /**
      * Set message.
      *
@@ -46,10 +41,8 @@ class MessageBuilder
     public function message(MessageInterface $message)
     {
         $this->message = $message;
-
         return $this;
     }
-
     /**
      * Set target user or group.
      *
@@ -60,27 +53,18 @@ class MessageBuilder
     public function to($to)
     {
         $this->to = $to;
-
         return $this;
     }
-
     /**
      * @param int $tagId
      *
      * @return \EasyWeChat\OfficialAccount\Broadcasting\MessageBuilder
      */
-    public function toTag( $tagId)
+    public function toTag($tagId)
     {
-        $this->to([
-            'filter' => [
-                'is_to_all' => false,
-                'tag_id' => $tagId,
-            ],
-        ]);
-
+        $this->to(['filter' => ['is_to_all' => false, 'tag_id' => $tagId]]);
         return $this;
     }
-
     /**
      * @param array $openids
      *
@@ -88,25 +72,17 @@ class MessageBuilder
      */
     public function toUsers($openids)
     {
-        $this->to([
-            'touser' => $openids,
-        ]);
-
+        $this->to(['touser' => $openids]);
         return $this;
     }
-
     /**
      * @return $this
      */
     public function toAll()
     {
-        $this->to([
-            'filter' => ['is_to_all' => true],
-        ]);
-
+        $this->to(['filter' => ['is_to_all' => true]]);
         return $this;
     }
-
     /**
      * @param array $attributes
      *
@@ -115,10 +91,8 @@ class MessageBuilder
     public function with($attributes)
     {
         $this->attributes = $attributes;
-
         return $this;
     }
-
     /**
      * Build message.
      *
@@ -133,18 +107,13 @@ class MessageBuilder
         if (empty($this->message)) {
             throw new RuntimeException('No message content to send.');
         }
-
         $content = $this->message->transformForJsonRequest();
-
         if (empty($prepends)) {
             $prepends = $this->to;
         }
-
         $message = array_merge($prepends, $content, $this->attributes);
-
         return $message;
     }
-
     /**
      * Build preview message.
      *

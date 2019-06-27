@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel;
 
 use EasyWeChat\Kernel\Contracts\Arrayable;
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use EasyWeChat\Kernel\Support\Arr;
 use EasyWeChat\Kernel\Support\Collection;
-
 function data_get($data, $key, $default = null)
 {
     switch (true) {
@@ -35,7 +33,6 @@ function data_get($data, $key, $default = null)
             throw new RuntimeException(sprintf('Can\'t access data with key "%s"', $key));
     }
 }
-
 function data_to_array($data)
 {
     switch (true) {

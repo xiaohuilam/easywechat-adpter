@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 use EasyWeChat\BasicService\Jssdk\Client as Jssdk;
 use EasyWeChat\Kernel\Support\Arr;
 use function EasyWeChat\Kernel\Support\str_random;
-
 /**
  * Class Jssdk.
  *
@@ -36,7 +34,6 @@ class JssdkClient extends Jssdk
     {
         return parent::getTicket($refresh, $type);
     }
-
     /**
      * 微信卡券：JSAPI 卡券发放.
      *
@@ -50,7 +47,6 @@ class JssdkClient extends Jssdk
             return $this->attachExtension($card['card_id'], $card);
         }, $cards));
     }
-
     /**
      * 生成 js添加到卡包 需要的 card_list 项.
      *
@@ -67,17 +63,8 @@ class JssdkClient extends Jssdk
         $timestamp = time();
         $nonce = str_random(6);
         $ticket = $this->getTicket()['ticket'];
-
-        $ext = array_merge(['timestamp' => $timestamp, 'nonce_str' => $nonce], Arr::only(
-            $extension,
-            ['code', 'openid', 'outer_id', 'balance', 'fixed_begintimestamp', 'outer_str']
-        ));
-
+        $ext = array_merge(['timestamp' => $timestamp, 'nonce_str' => $nonce], Arr::only($extension, ['code', 'openid', 'outer_id', 'balance', 'fixed_begintimestamp', 'outer_str']));
         $ext['signature'] = $this->dictionaryOrderSignature($ticket, $timestamp, $cardId, $ext['code'] ?: '', $ext['openid'] ?: '', $nonce);
-
-        return [
-            'cardId' => $cardId,
-            'cardExt' => json_encode($ext),
-        ];
+        return ['cardId' => $cardId, 'cardExt' => json_encode($ext)];
     }
 }

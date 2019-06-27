@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Decorators;
 
 /**
@@ -22,7 +21,6 @@ class TerminateResult
      * @var mixed
      */
     public $content;
-
     /**
      * FinallyResult constructor.
      *

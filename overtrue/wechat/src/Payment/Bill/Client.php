@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Bill;
 
 use EasyWeChat\Kernel\Http\StreamResponse;
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 class Client extends BaseClient
 {
     /**
@@ -28,18 +26,11 @@ class Client extends BaseClient
      */
     public function get($date, $type = 'ALL', $optional = [])
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            'bill_date' => $date,
-            'bill_type' => $type,
-        ] + $optional;
-
+        $params = ['appid' => $this->app['config']->app_id, 'bill_date' => $date, 'bill_type' => $type] + $optional;
         $response = $this->requestRaw($this->wrap('pay/downloadbill'), $params);
-
         if (0 === strpos($response->getBody()->getContents(), '<xml>')) {
             return $this->castResponseToType($response, $this->app['config']->get('response_type'));
         }
-
         return StreamResponse::buildFromPsrResponse($response);
     }
 }

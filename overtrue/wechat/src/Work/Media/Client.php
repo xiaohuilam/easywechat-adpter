@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Media;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Http\StreamResponse;
-
 /**
  * Class Client.
  *
@@ -30,19 +28,12 @@ class Client extends BaseClient
      */
     public function get($mediaId)
     {
-        $response = $this->requestRaw('cgi-bin/media/get', 'GET', [
-            'query' => [
-                'media_id' => $mediaId,
-            ],
-        ]);
-
+        $response = $this->requestRaw('cgi-bin/media/get', 'GET', ['query' => ['media_id' => $mediaId]]);
         if (false !== stripos($response->getHeaderLine('Content-Type'), 'text/plain')) {
             return $this->castResponseToType($response, $this->app['config']->get('response_type'));
         }
-
         return StreamResponse::buildFromPsrResponse($response);
     }
-
     /**
      * Upload Image.
      *
@@ -54,7 +45,6 @@ class Client extends BaseClient
     {
         return $this->upload('image', $path);
     }
-
     /**
      * Upload Voice.
      *
@@ -66,7 +56,6 @@ class Client extends BaseClient
     {
         return $this->upload('voice', $path);
     }
-
     /**
      * Upload Video.
      *
@@ -78,7 +67,6 @@ class Client extends BaseClient
     {
         return $this->upload('video', $path);
     }
-
     /**
      * Upload File.
      *
@@ -90,7 +78,6 @@ class Client extends BaseClient
     {
         return $this->upload('file', $path);
     }
-
     /**
      * Upload media.
      *
@@ -101,10 +88,7 @@ class Client extends BaseClient
      */
     public function upload($type, $path)
     {
-        $files = [
-            'media' => $path,
-        ];
-
+        $files = ['media' => $path];
         return $this->httpUpload('cgi-bin/media/upload', $files, [], compact('type'));
     }
 }

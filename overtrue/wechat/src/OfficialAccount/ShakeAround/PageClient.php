@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\ShakeAround;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class PageClient.
  *
@@ -29,18 +27,16 @@ class PageClient extends BaseClient
     {
         return $this->httpPostJson('shakearound/page/add', $data);
     }
-
     /**
      * @param int   $pageId
      * @param array $data
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function update( $pageId, $data)
+    public function update($pageId, $data)
     {
         return $this->httpPostJson('shakearound/page/update', array_merge(['page_id' => $pageId], $data));
     }
-
     /**
      * Fetch batch of pages by pageIds.
      *
@@ -50,14 +46,9 @@ class PageClient extends BaseClient
      */
     public function listByIds($pageIds)
     {
-        $params = [
-            'type' => 1,
-            'page_ids' => $pageIds,
-        ];
-
+        $params = ['type' => 1, 'page_ids' => $pageIds];
         return $this->httpPostJson('shakearound/page/search', $params);
     }
-
     /**
      * Pagination to get batch of pages.
      *
@@ -66,17 +57,11 @@ class PageClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $begin, $count)
+    public function list($begin, $count)
     {
-        $params = [
-            'type' => 2,
-            'begin' => $begin,
-            'count' => $count,
-        ];
-
+        $params = ['type' => 2, 'begin' => $begin, 'count' => $count];
         return $this->httpPostJson('shakearound/page/search', $params);
     }
-
     /**
      * delete a page.
      *
@@ -84,12 +69,9 @@ class PageClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete( $pageId)
+    public function delete($pageId)
     {
-        $params = [
-            'page_id' => $pageId,
-        ];
-
+        $params = ['page_id' => $pageId];
         return $this->httpPostJson('shakearound/page/delete', $params);
     }
 }

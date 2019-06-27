@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\CustomerService;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class SessionClient.
  *
@@ -33,7 +31,6 @@ class SessionClient extends BaseClient
     {
         return $this->httpGet('customservice/kfsession/getsessionlist', ['kf_account' => $account]);
     }
-
     /**
      * List all the people waiting.
      *
@@ -45,7 +42,6 @@ class SessionClient extends BaseClient
     {
         return $this->httpGet('customservice/kfsession/getwaitcase');
     }
-
     /**
      * Create a session.
      *
@@ -58,14 +54,9 @@ class SessionClient extends BaseClient
      */
     public function create($account, $openid)
     {
-        $params = [
-            'kf_account' => $account,
-            'openid' => $openid,
-        ];
-
+        $params = ['kf_account' => $account, 'openid' => $openid];
         return $this->httpPostJson('customservice/kfsession/create', $params);
     }
-
     /**
      * Close a session.
      *
@@ -78,14 +69,9 @@ class SessionClient extends BaseClient
      */
     public function close($account, $openid)
     {
-        $params = [
-            'kf_account' => $account,
-            'openid' => $openid,
-        ];
-
+        $params = ['kf_account' => $account, 'openid' => $openid];
         return $this->httpPostJson('customservice/kfsession/close', $params);
     }
-
     /**
      * Get a session.
      *

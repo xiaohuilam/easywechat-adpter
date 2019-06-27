@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Messages;
 
 /**
@@ -24,14 +23,12 @@ class Text extends Message
      * @var string
      */
     protected $type = 'text';
-
     /**
      * Properties.
      *
      * @var array
      */
     protected $properties = ['content'];
-
     /**
      * Text constructor.
      *
@@ -41,14 +38,11 @@ class Text extends Message
     {
         parent::__construct(compact('content'));
     }
-
     /**
      * @return array
      */
     public function toXmlArray()
     {
-        return [
-            'Content' => $this->get('content'),
-        ];
+        return ['Content' => $this->get('content')];
     }
 }

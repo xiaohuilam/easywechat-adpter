@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel;
 
 use EasyWeChat\Kernel\Contracts\AccessTokenInterface;
@@ -18,7 +17,6 @@ use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-
 /**
  * Class BaseClient.
  *
@@ -26,23 +24,21 @@ use Psr\Http\Message\ResponseInterface;
  */
 class BaseClient
 {
-    use HasHttpRequests { request as performRequest; }
-
+    use HasHttpRequests {
+        request as performRequest;
+    }
     /**
      * @var \EasyWeChat\Kernel\ServiceContainer
      */
     protected $app;
-
     /**
      * @var \EasyWeChat\Kernel\Contracts\AccessTokenInterface
      */
     protected $accessToken;
-
     /**
      * @var
      */
     protected $baseUri;
-
     /**
      * BaseClient constructor.
      *
@@ -54,7 +50,6 @@ class BaseClient
         $this->app = $app;
         $this->accessToken = $accessToken ?: $this->app['access_token'];
     }
-
     /**
      * GET request.
      *
@@ -69,7 +64,6 @@ class BaseClient
     {
         return $this->request($url, 'GET', ['query' => $query]);
     }
-
     /**
      * POST request.
      *
@@ -84,7 +78,6 @@ class BaseClient
     {
         return $this->request($url, 'POST', ['form_params' => $data]);
     }
-
     /**
      * JSON request.
      *
@@ -100,7 +93,6 @@ class BaseClient
     {
         return $this->request($url, 'POST', ['query' => $query, 'json' => $data]);
     }
-
     /**
      * Upload file.
      *
@@ -116,21 +108,14 @@ class BaseClient
     public function httpUpload($url, $files = [], $form = [], $query = [])
     {
         $multipart = [];
-
         foreach ($files as $name => $path) {
-            $multipart[] = [
-                'name' => $name,
-                'contents' => fopen($path, 'r'),
-            ];
+            $multipart[] = ['name' => $name, 'contents' => fopen($path, 'r')];
         }
-
         foreach ($form as $name => $contents) {
             $multipart[] = compact('name', 'contents');
         }
-
         return $this->request($url, 'POST', ['query' => $query, 'multipart' => $multipart, 'connect_timeout' => 30, 'timeout' => 30, 'read_timeout' => 30]);
     }
-
     /**
      * @return AccessTokenInterface
      */
@@ -138,7 +123,6 @@ class BaseClient
     {
         return $this->accessToken;
     }
-
     /**
      * @param \EasyWeChat\Kernel\Contracts\AccessTokenInterface $accessToken
      *
@@ -147,10 +131,8 @@ class BaseClient
     public function setAccessToken(AccessTokenInterface $accessToken)
     {
         $this->accessToken = $accessToken;
-
         return $this;
     }
-
     /**
      * @param string $url
      * @param string $method
@@ -166,12 +148,9 @@ class BaseClient
         if (empty($this->middlewares)) {
             $this->registerHttpMiddlewares();
         }
-
         $response = $this->performRequest($url, $method, $options);
-
         return $returnRaw ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
     }
-
     /**
      * @param string $url
      * @param string $method
@@ -185,7 +164,6 @@ class BaseClient
     {
         return Response::buildFromPsrResponse($this->request($url, $method, $options, true));
     }
-
     /**
      * Register Guzzle middlewares.
      */
@@ -198,7 +176,6 @@ class BaseClient
         // log
         $this->pushMiddleware($this->logMiddleware(), 'log');
     }
-
     /**
      * Attache access token to request query.
      *
@@ -207,16 +184,14 @@ class BaseClient
     protected function accessTokenMiddleware()
     {
         return function (callable $handler) {
-            return function (RequestInterface $request, $options) use ($handler) {
+            return function (RequestInterface $request, $options) use($handler) {
                 if ($this->accessToken) {
                     $request = $this->accessToken->applyToRequest($request, $options);
                 }
-
                 return $handler($request, $options);
             };
         };
     }
-
     /**
      * Log the request.
      *
@@ -225,10 +200,8 @@ class BaseClient
     protected function logMiddleware()
     {
         $formatter = new MessageFormatter($this->app['config']['http.log_template'] ?: MessageFormatter::DEBUG);
-
         return Middleware::log($this->app['logger'], $formatter);
     }
-
     /**
      * Return retry middleware.
      *
@@ -236,24 +209,17 @@ class BaseClient
      */
     protected function retryMiddleware()
     {
-        return Middleware::retry(function (
-            $retries,
-            RequestInterface $request,
-            ResponseInterface $response = null
-        ) {
+        return Middleware::retry(function ($retries, RequestInterface $request, ResponseInterface $response = null) {
             // Limit the number of retries to 2
-            if ($retries < $this->app->config->get('http.max_retries', 1) && $response && $body = $response->getBody()) {
+            if ($retries < $this->app->config->get('http.max_retries', 1) && $response && ($body = $response->getBody())) {
                 // Retry on server errors
                 $response = json_decode($body, true);
-
                 if (!empty($response['errcode']) && in_array(abs($response['errcode']), [40001, 40014, 42001], true)) {
                     $this->accessToken->refresh();
                     $this->app['logger']->debug('Retrying with refreshed access token.');
-
                     return true;
                 }
             }
-
             return false;
         }, function () {
             return abs($this->app->config->get('http.retry_delay', 500));

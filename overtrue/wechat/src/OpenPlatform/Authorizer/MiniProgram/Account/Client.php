@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Account;
 
 use EasyWeChat\OpenPlatform\Authorizer\Aggregate\Account\Client as BaseClient;
-
 /**
  * Class Client.
  *
@@ -27,7 +25,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/account/getaccountbasicinfo');
     }
-
     /**
      * 修改头像.
      *
@@ -37,21 +34,11 @@ class Client extends BaseClient
      * @param int    $right   剪裁框右下角x坐标（取值范围：[0, 1]）
      * @param int    $bottom  剪裁框右下角y坐标（取值范围：[0, 1]）
      */
-    public function updateAvatar(
-        string $mediaId,
-        float $left = 0,
-        float $top = 0,
-        float $right = 1,
-        float $bottom = 1
-    ) {
-        $params = [
-            'head_img_media_id' => $mediaId,
-            'x1' => $left, 'y1' => $top, 'x2' => $right, 'y2' => $bottom,
-        ];
-
+    public function updateAvatar($mediaId, $left = 0, $top = 0, $right = 1, $bottom = 1)
+    {
+        $params = ['head_img_media_id' => $mediaId, 'x1' => $left, 'y1' => $top, 'x2' => $right, 'y2' => $bottom];
         return $this->httpPostJson('cgi-bin/account/modifyheadimage', $params);
     }
-
     /**
      * 修改功能介绍.
      *
@@ -60,7 +47,6 @@ class Client extends BaseClient
     public function updateSignature($signature)
     {
         $params = ['signature' => $signature];
-
         return $this->httpPostJson('cgi-bin/account/modifysignature', $params);
     }
 }

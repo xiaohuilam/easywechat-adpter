@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram\NearbyPoi;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class Client.
  *
@@ -33,14 +31,8 @@ class Client extends BaseClient
      */
     public function add($name, $credential, $address, $proofMaterial = null)
     {
-        return $this->httpPostJson('wxa/addnearbypoi', [
-            'related_name' => $name,
-            'related_credential' => $credential,
-            'related_address' => $address,
-            'related_proof_material' => $proofMaterial,
-        ]);
+        return $this->httpPostJson('wxa/addnearbypoi', ['related_name' => $name, 'related_credential' => $credential, 'related_address' => $address, 'related_proof_material' => $proofMaterial]);
     }
-
     /**
      * Delete nearby poi.
      *
@@ -50,11 +42,8 @@ class Client extends BaseClient
      */
     public function delete($poiId)
     {
-        return $this->httpPostJson('wxa/delnearbypoi', [
-            'poi_id' => $poiId,
-        ]);
+        return $this->httpPostJson('wxa/delnearbypoi', ['poi_id' => $poiId]);
     }
-
     /**
      * Get nearby poi list.
      *
@@ -63,14 +52,10 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list( $page, $pageRows)
+    public function list($page, $pageRows)
     {
-        return $this->httpGet('wxa/getnearbypoilist', [
-            'page' => $page,
-            'page_rows' => $pageRows,
-        ]);
+        return $this->httpGet('wxa/getnearbypoilist', ['page' => $page, 'page_rows' => $pageRows]);
     }
-
     /**
      * Set nearby poi show status.
      *
@@ -84,10 +69,6 @@ class Client extends BaseClient
         if (!in_array($status, [0, 1], true)) {
             throw new InvalidArgumentException('status should be 0 or 1.');
         }
-
-        return $this->httpPostJson('wxa/setnearbypoishowstatus', [
-            'poi_id' => $poiId,
-            'status' => $status,
-        ]);
+        return $this->httpPostJson('wxa/setnearbypoishowstatus', ['poi_id' => $poiId, 'status' => $status]);
     }
 }

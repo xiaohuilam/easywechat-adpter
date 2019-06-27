@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\User;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class TagClient.
  *
@@ -30,14 +28,9 @@ class TagClient extends BaseClient
      */
     public function create($tagName, $tagId = null)
     {
-        $params = [
-            'tagname' => $tagName,
-            'tagid' => $tagId,
-        ];
-
+        $params = ['tagname' => $tagName, 'tagid' => $tagId];
         return $this->httpPostJson('cgi-bin/tag/create', $params);
     }
-
     /**
      * Update tag.
      *
@@ -46,16 +39,11 @@ class TagClient extends BaseClient
      *
      * @return mixed
      */
-    public function update( $tagId, $tagName)
+    public function update($tagId, $tagName)
     {
-        $params = [
-            'tagid' => $tagId,
-            'tagname' => $tagName,
-        ];
-
+        $params = ['tagid' => $tagId, 'tagname' => $tagName];
         return $this->httpPostJson('cgi-bin/tag/update', $params);
     }
-
     /**
      * Delete tag.
      *
@@ -63,65 +51,59 @@ class TagClient extends BaseClient
      *
      * @return mixed
      */
-    public function delete( $tagId)
+    public function delete($tagId)
     {
         return $this->httpGet('cgi-bin/tag/delete', ['tagid' => $tagId]);
     }
-
     /**
      * @param int $tagId
      *
      * @return mixed
      */
-    public function get( $tagId)
+    public function get($tagId)
     {
         return $this->httpGet('cgi-bin/tag/get', ['tagid' => $tagId]);
     }
-
     /**
      * @param int   $tagId
      * @param array $userList
      *
      * @return mixed
      */
-    public function tagUsers( $tagId, $userList = [])
+    public function tagUsers($tagId, $userList = [])
     {
         return $this->tagOrUntagUsers('cgi-bin/tag/addtagusers', $tagId, $userList);
     }
-
     /**
      * @param int   $tagId
      * @param array $partyList
      *
      * @return mixed
      */
-    public function tagDepartments( $tagId, $partyList = [])
+    public function tagDepartments($tagId, $partyList = [])
     {
         return $this->tagOrUntagUsers('cgi-bin/tag/addtagusers', $tagId, [], $partyList);
     }
-
     /**
      * @param $tagId
      * @param array $userList
      *
      * @return mixed
      */
-    public function untagUsers( $tagId, $userList = [])
+    public function untagUsers($tagId, $userList = [])
     {
         return $this->tagOrUntagUsers('cgi-bin/tag/deltagusers', $tagId, $userList);
     }
-
     /**
      * @param $tagId
      * @param array $partyList
      *
      * @return mixed
      */
-    public function untagDepartments( $tagId, $partyList = [])
+    public function untagDepartments($tagId, $partyList = [])
     {
         return $this->tagOrUntagUsers('cgi-bin/tag/deltagusers', $tagId, [], $partyList);
     }
-
     /**
      * @param $endpoint
      * @param $tagId
@@ -132,15 +114,9 @@ class TagClient extends BaseClient
      */
     protected function tagOrUntagUsers($endpoint, $tagId, $userList = [], $partyList = [])
     {
-        $data = [
-            'tagid' => $tagId,
-            'userlist' => $userList,
-            'partylist' => $partyList,
-        ];
-
+        $data = ['tagid' => $tagId, 'userlist' => $userList, 'partylist' => $partyList];
         return $this->httpPostJson($endpoint, $data);
     }
-
     /**
      * @return mixed
      */

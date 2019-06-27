@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\OAuth;
 
 use EasyWeChat\Work\Application;
 use Overtrue\Socialite\AccessTokenInterface;
-
 /**
  * Class AccessTokenDelegate.
  *
@@ -25,7 +23,6 @@ class AccessTokenDelegate implements AccessTokenInterface
      * @var \EasyWeChat\Work\Application
      */
     protected $app;
-
     /**
      * @param \EasyWeChat\Work\Application $app
      */
@@ -33,7 +30,6 @@ class AccessTokenDelegate implements AccessTokenInterface
     {
         $this->app = $app;
     }
-
     /**
      * Return the access token string.
      *

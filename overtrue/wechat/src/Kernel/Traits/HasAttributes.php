@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Traits;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\Support\Arr;
 use EasyWeChat\Kernel\Support\Str;
-
 /**
  * Trait Attributes.
  */
@@ -24,12 +22,10 @@ trait HasAttributes
      * @var array
      */
     protected $attributes = [];
-
     /**
      * @var bool
      */
     protected $snakeable = true;
-
     /**
      * Set Attributes.
      *
@@ -40,10 +36,8 @@ trait HasAttributes
     public function setAttributes($attributes = [])
     {
         $this->attributes = $attributes;
-
         return $this;
     }
-
     /**
      * Set attribute.
      *
@@ -55,10 +49,8 @@ trait HasAttributes
     public function setAttribute($attribute, $value)
     {
         Arr::set($this->attributes, $attribute, $value);
-
         return $this;
     }
-
     /**
      * Get attribute.
      *
@@ -71,7 +63,6 @@ trait HasAttributes
     {
         return Arr::get($this->attributes, $attribute, $default);
     }
-
     /**
      * @param string $attribute
      *
@@ -81,7 +72,6 @@ trait HasAttributes
     {
         return in_array($attribute, $this->getRequired(), true);
     }
-
     /**
      * @return array|mixed
      */
@@ -89,7 +79,6 @@ trait HasAttributes
     {
         return property_exists($this, 'required') ? $this->required : [];
     }
-
     /**
      * Set attribute.
      *
@@ -100,13 +89,10 @@ trait HasAttributes
      */
     public function with($attribute, $value)
     {
-        $this->snakeable && $attribute = Str::snake($attribute);
-
+        $this->snakeable && ($attribute = Str::snake($attribute));
         $this->setAttribute($attribute, $value);
-
         return $this;
     }
-
     /**
      * Override parent set() method.
      *
@@ -118,10 +104,8 @@ trait HasAttributes
     public function set($attribute, $value)
     {
         $this->setAttribute($attribute, $value);
-
         return $this;
     }
-
     /**
      * Override parent get() method.
      *
@@ -134,7 +118,6 @@ trait HasAttributes
     {
         return $this->getAttribute($attribute, $default);
     }
-
     /**
      * @param string $key
      *
@@ -144,7 +127,6 @@ trait HasAttributes
     {
         return Arr::has($this->attributes, $key);
     }
-
     /**
      * @param array $attributes
      *
@@ -153,10 +135,8 @@ trait HasAttributes
     public function merge($attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
-
         return $this;
     }
-
     /**
      * @param array|string $keys
      *
@@ -166,7 +146,6 @@ trait HasAttributes
     {
         return Arr::only($this->attributes, $keys);
     }
-
     /**
      * Return all items.
      *
@@ -175,10 +154,8 @@ trait HasAttributes
     public function all()
     {
         $this->checkRequiredAttributes();
-
         return $this->attributes;
     }
-
     /**
      * Magic call.
      *
@@ -192,10 +169,8 @@ trait HasAttributes
         if (0 === stripos($method, 'with')) {
             return $this->with(substr($method, 4), array_shift($args));
         }
-
         throw new \BadMethodCallException(sprintf('Method "%s" does not exists.', $method));
     }
-
     /**
      * Magic get.
      *
@@ -207,7 +182,6 @@ trait HasAttributes
     {
         return $this->get($property);
     }
-
     /**
      * Magic set.
      *
@@ -220,7 +194,6 @@ trait HasAttributes
     {
         return $this->with($property, $value);
     }
-
     /**
      * Whether or not an data exists by key.
      *
@@ -232,7 +205,6 @@ trait HasAttributes
     {
         return isset($this->attributes[$key]);
     }
-
     /**
      * Check required attributes.
      *

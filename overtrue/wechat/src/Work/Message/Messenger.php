@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Message;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\Exceptions\RuntimeException;
 use EasyWeChat\Kernel\Messages\Message;
 use EasyWeChat\Kernel\Messages\Text;
-
 /**
  * Class MessageBuilder.
  *
@@ -27,27 +25,22 @@ class Messenger
      * @var \EasyWeChat\Kernel\Messages\Message;
      */
     protected $message;
-
     /**
      * @var array
      */
     protected $to = ['touser' => '@all'];
-
     /**
      * @var int
      */
     protected $agentId;
-
     /**
      * @var bool
      */
     protected $secretive = false;
-
     /**
      * @var \EasyWeChat\Work\Message\Client
      */
     protected $client;
-
     /**
      * MessageBuilder constructor.
      *
@@ -57,7 +50,6 @@ class Messenger
     {
         $this->client = $client;
     }
-
     /**
      * Set message to send.
      *
@@ -72,28 +64,22 @@ class Messenger
         if (is_string($message) || is_numeric($message)) {
             $message = new Text($message);
         }
-
-        if (!($message instanceof Message)) {
+        if (!$message instanceof Message) {
             throw new InvalidArgumentException('Invalid message.');
         }
-
         $this->message = $message;
-
         return $this;
     }
-
     /**
      * @param int $agentId
      *
      * @return \EasyWeChat\Work\Message\Messenger
      */
-    public function ofAgent( $agentId)
+    public function ofAgent($agentId)
     {
         $this->agentId = $agentId;
-
         return $this;
     }
-
     /**
      * @param array|string $userIds
      *
@@ -103,7 +89,6 @@ class Messenger
     {
         return $this->setRecipients($userIds, 'touser');
     }
-
     /**
      * @param array|string $partyIds
      *
@@ -113,7 +98,6 @@ class Messenger
     {
         return $this->setRecipients($partyIds, 'toparty');
     }
-
     /**
      * @param array|string $tagIds
      *
@@ -123,7 +107,6 @@ class Messenger
     {
         return $this->setRecipients($tagIds, 'totag');
     }
-
     /**
      * Keep secret.
      *
@@ -132,10 +115,8 @@ class Messenger
     public function secretive()
     {
         $this->secretive = true;
-
         return $this;
     }
-
     /**
      * @param array|string $ids
      * @param string       $key
@@ -147,12 +128,9 @@ class Messenger
         if (is_array($ids)) {
             $ids = implode('|', $ids);
         }
-
         $this->to = [$key => $ids];
-
         return $this;
     }
-
     /**
      * @param \EasyWeChat\Kernel\Messages\Message|string|null $message
      *
@@ -166,25 +144,16 @@ class Messenger
         if ($message) {
             $this->message($message);
         }
-
         if (empty($this->message)) {
             throw new RuntimeException('No message to send.');
         }
-
         if (is_null($this->agentId)) {
             throw new RuntimeException('No agentid specified.');
         }
-
-        $message = $this->message->transformForJsonRequest(array_merge([
-            'agentid' => $this->agentId,
-            'safe' => intval($this->secretive),
-        ], $this->to));
-
+        $message = $this->message->transformForJsonRequest(array_merge(['agentid' => $this->agentId, 'safe' => intval($this->secretive)], $this->to));
         $this->secretive = false;
-
         return $this->client->send($message);
     }
-
     /**
      * Return property.
      *
@@ -197,9 +166,8 @@ class Messenger
     public function __get($property)
     {
         if (property_exists($this, $property)) {
-            return $this->$property;
+            return $this->{$property};
         }
-
         throw new InvalidArgumentException(sprintf('No property named "%s"', $property));
     }
 }

@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram\Express;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,7 +27,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/express/business/delivery/getall');
     }
-
     /**
      * @param array $params
      *
@@ -41,7 +38,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/express/business/order/add', $params);
     }
-
     /**
      * @param array $params
      *
@@ -53,7 +49,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/express/business/order/cancel', $params);
     }
-
     /**
      * @param array $params
      *
@@ -65,7 +60,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/express/business/order/get', $params);
     }
-
     /**
      * @param array $params
      *
@@ -77,7 +71,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/express/business/path/get', $params);
     }
-
     /**
      * @param string $deliveryId
      * @param string $bizId
@@ -88,12 +81,8 @@ class Client extends BaseClient
      */
     public function getBalance($deliveryId, $bizId)
     {
-        return $this->httpPostJson('cgi-bin/express/business/quota/get', [
-            'delivery_id' => $deliveryId,
-            'biz_id' => $bizId,
-        ]);
+        return $this->httpPostJson('cgi-bin/express/business/quota/get', ['delivery_id' => $deliveryId, 'biz_id' => $bizId]);
     }
-
     /**
      * @param string $openid
      *
@@ -103,12 +92,8 @@ class Client extends BaseClient
      */
     public function bindPrinter($openid)
     {
-        return $this->httpPostJson('cgi-bin/express/business/printer/update', [
-            'update_type' => 'bind',
-            'openid' => $openid,
-        ]);
+        return $this->httpPostJson('cgi-bin/express/business/printer/update', ['update_type' => 'bind', 'openid' => $openid]);
     }
-
     /**
      * @param string $openid
      *
@@ -118,9 +103,6 @@ class Client extends BaseClient
      */
     public function unbindPrinter($openid)
     {
-        return $this->httpPostJson('cgi-bin/express/business/printer/update', [
-            'update_type' => 'unbind',
-            'openid' => $openid,
-        ]);
+        return $this->httpPostJson('cgi-bin/express/business/printer/update', ['update_type' => 'unbind', 'openid' => $openid]);
     }
 }

@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MiniProgram\AppCode;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Http\StreamResponse;
-
 /**
  * Class Client.
  *
@@ -31,13 +29,9 @@ class Client extends BaseClient
      */
     public function get($path, $optional = [])
     {
-        $params = array_merge([
-            'path' => $path,
-        ], $optional);
-
+        $params = array_merge(['path' => $path], $optional);
         return $this->getStream('wxa/getwxacode', $params);
     }
-
     /**
      * Get AppCode unlimit.
      *
@@ -48,13 +42,9 @@ class Client extends BaseClient
      */
     public function getUnlimit($scene, $optional = [])
     {
-        $params = array_merge([
-            'scene' => $scene,
-        ], $optional);
-
+        $params = array_merge(['scene' => $scene], $optional);
         return $this->getStream('wxa/getwxacodeunlimit', $params);
     }
-
     /**
      * Create QrCode.
      *
@@ -67,7 +57,6 @@ class Client extends BaseClient
     {
         return $this->getStream('cgi-bin/wxaapp/createwxaqrcode', compact('path', 'width'));
     }
-
     /**
      * Get stream.
      *
@@ -79,11 +68,9 @@ class Client extends BaseClient
     protected function getStream($endpoint, $params)
     {
         $response = $this->requestRaw($endpoint, 'POST', ['json' => $params]);
-
         if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
             return StreamResponse::buildFromPsrResponse($response);
         }
-
         return $this->castResponseToType($response, $this->app['config']->get('response_type'));
     }
 }

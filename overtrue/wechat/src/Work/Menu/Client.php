@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\Menu;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -29,7 +27,6 @@ class Client extends BaseClient
     {
         return $this->httpGet('cgi-bin/menu/get', ['agentid' => $this->app['config']['agent_id']]);
     }
-
     /**
      * Create menu for the given agent.
      *
@@ -41,7 +38,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/menu/create', $data, ['agentid' => $this->app['config']['agent_id']]);
     }
-
     /**
      * Delete menu.
      *

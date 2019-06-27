@@ -8,22 +8,16 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace Overtrue\LaravelWeChat\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Overtrue\Socialite\User;
-
 class WeChatUserAuthorized
 {
     use SerializesModels;
-
     public $user;
-
     public $isNewSession;
-
     public $account;
-
     /**
      * Create a new event instance.
      *
@@ -36,7 +30,6 @@ class WeChatUserAuthorized
         $this->isNewSession = $isNewSession;
         $this->account = $account;
     }
-
     /**
      * Retrieve the authorized user.
      *
@@ -46,7 +39,6 @@ class WeChatUserAuthorized
     {
         return $this->user;
     }
-
     /**
      * The name of official account.
      *
@@ -56,7 +48,6 @@ class WeChatUserAuthorized
     {
         return $this->account;
     }
-
     /**
      * Check the user session is first created.
      *
@@ -66,7 +57,6 @@ class WeChatUserAuthorized
     {
         return $this->isNewSession;
     }
-
     /**
      * Get the channels the event should be broadcast on.
      *

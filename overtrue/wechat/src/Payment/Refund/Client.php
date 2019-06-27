@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Refund;
 
 use EasyWeChat\Payment\Kernel\BaseClient;
-
 class Client extends BaseClient
 {
     /**
@@ -32,7 +30,6 @@ class Client extends BaseClient
     {
         return $this->refund($refundNumber, $totalFee, $refundFee, array_merge($optional, ['out_trade_no' => $number]));
     }
-
     /**
      * Refund by transaction id.
      *
@@ -50,7 +47,6 @@ class Client extends BaseClient
     {
         return $this->refund($refundNumber, $totalFee, $refundFee, array_merge($optional, ['transaction_id' => $transactionId]));
     }
-
     /**
      * Query refund by transaction id.
      *
@@ -64,7 +60,6 @@ class Client extends BaseClient
     {
         return $this->query($transactionId, 'transaction_id');
     }
-
     /**
      * Query refund by out trade number.
      *
@@ -78,7 +73,6 @@ class Client extends BaseClient
     {
         return $this->query($outTradeNumber, 'out_trade_no');
     }
-
     /**
      * Query refund by out refund number.
      *
@@ -92,7 +86,6 @@ class Client extends BaseClient
     {
         return $this->query($outRefundNumber, 'out_refund_no');
     }
-
     /**
      * Query refund by refund id.
      *
@@ -106,7 +99,6 @@ class Client extends BaseClient
     {
         return $this->query($refundId, 'refund_id');
     }
-
     /**
      * Refund.
      *
@@ -121,18 +113,9 @@ class Client extends BaseClient
      */
     protected function refund($refundNumber, $totalFee, $refundFee, $optional = [])
     {
-        $params = array_merge([
-            'out_refund_no' => $refundNumber,
-            'total_fee' => $totalFee,
-            'refund_fee' => $refundFee,
-            'appid' => $this->app['config']->app_id,
-        ], $optional);
-
-        return $this->safeRequest($this->wrap(
-            $this->app->inSandbox() ? 'pay/refund' : 'secapi/pay/refund'
-        ), $params);
+        $params = array_merge(['out_refund_no' => $refundNumber, 'total_fee' => $totalFee, 'refund_fee' => $refundFee, 'appid' => $this->app['config']->app_id], $optional);
+        return $this->safeRequest($this->wrap($this->app->inSandbox() ? 'pay/refund' : 'secapi/pay/refund'), $params);
     }
-
     /**
      * Query refund.
      *
@@ -145,11 +128,7 @@ class Client extends BaseClient
      */
     protected function query($number, $type)
     {
-        $params = [
-            'appid' => $this->app['config']->app_id,
-            $type => $number,
-        ];
-
+        $params = ['appid' => $this->app['config']->app_id, $type => $number];
         return $this->request($this->wrap('pay/refundquery'), $params);
     }
 }

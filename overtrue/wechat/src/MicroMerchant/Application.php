@@ -8,14 +8,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MicroMerchant;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\ServiceContainer;
 use EasyWeChat\Kernel\Support;
 use EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException;
-
 /**
  * Class Application.
  *
@@ -46,33 +44,19 @@ class Application extends ServiceContainer
         Withdraw\ServiceProvider::class,
         Media\ServiceProvider::class,
     ];
-
     /**
      * @var array
      */
-    protected $defaultConfig = [
-        'http' => [
-            'base_uri' => 'https://api.mch.weixin.qq.com/',
+    protected $defaultConfig = ['http' => ['base_uri' => 'https://api.mch.weixin.qq.com/'], 'log' => [
+        'default' => 'dev',
+        // 默认使用的 channel，生产环境可以改为下面的 prod
+        'channels' => [
+            // 测试环境
+            'dev' => ['driver' => 'single', 'path' => '/tmp/easywechat.log', 'level' => 'debug'],
+            // 生产环境
+            'prod' => ['driver' => 'daily', 'path' => '/tmp/easywechat.log', 'level' => 'info'],
         ],
-        'log' => [
-            'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
-            'channels' => [
-                // 测试环境
-                'dev' => [
-                    'driver' => 'single',
-                    'path' => '/tmp/easywechat.log',
-                    'level' => 'debug',
-                ],
-                // 生产环境
-                'prod' => [
-                    'driver' => 'daily',
-                    'path' => '/tmp/easywechat.log',
-                    'level' => 'info',
-                ],
-            ],
-        ],
-    ];
-
+    ]];
     /**
      * @return string
      *
@@ -81,18 +65,14 @@ class Application extends ServiceContainer
     public function getKey()
     {
         $key = $this['config']->key;
-
         if (empty($key)) {
             throw new InvalidArgumentException('config key connot be empty.');
         }
-
         if (32 !== strlen($key)) {
             throw new InvalidArgumentException(sprintf("'%s' should be 32 chars length.", $key));
         }
-
         return $key;
     }
-
     /**
      * set sub-mch-id and appid.
      *
@@ -105,10 +85,8 @@ class Application extends ServiceContainer
     {
         $this['config']->set('sub_mch_id', $subMchId);
         $this['config']->set('appid', $appid);
-
         return $this;
     }
-
     /**
      * setCertificate.
      *
@@ -121,10 +99,8 @@ class Application extends ServiceContainer
     {
         $this['config']->set('certificate', $certificate);
         $this['config']->set('serial_no', $serial_no);
-
         return $this;
     }
-
     /**
      * Returning true indicates that the verification is successful,
      * returning false indicates that the signature field does not exist or is empty,
@@ -142,27 +118,22 @@ class Application extends ServiceContainer
         if (!isset($data['sign']) || empty($data['sign'])) {
             return false;
         }
-
         $sign = $data['sign'];
-        strlen($sign) > 32 && $signType = 'HMAC-SHA256';
+        strlen($sign) > 32 && ($signType = 'HMAC-SHA256');
         unset($data['sign']);
         $secretKey = $this->getKey();
-
         if ('HMAC-SHA256' === ($signType ?: 'MD5')) {
-            $encryptMethod = function ($str) use ($secretKey) {
+            $encryptMethod = function ($str) use($secretKey) {
                 return hash_hmac('sha256', $str, $secretKey);
             };
         } else {
             $encryptMethod = 'md5';
         }
-
         if (Support\generate_sign($data, $secretKey, $encryptMethod) === $sign) {
             return true;
         }
-
         throw new InvalidSignException('return value signature verification error');
     }
-
     /**
      * @param string $name
      * @param array  $arguments

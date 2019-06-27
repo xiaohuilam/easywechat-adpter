@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Auth;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\ServiceContainer;
 use EasyWeChat\OpenPlatform\Application;
-
 /**
  * Class Client.
  *
@@ -26,7 +24,6 @@ class Client extends BaseClient
      * @var \EasyWeChat\OpenPlatform\Application
      */
     protected $component;
-
     /**
      * Client constructor.
      *
@@ -36,10 +33,8 @@ class Client extends BaseClient
     public function __construct(ServiceContainer $app, Application $component)
     {
         parent::__construct($app);
-
         $this->component = $component;
     }
-
     /**
      * Get session info by code.
      *
@@ -51,14 +46,7 @@ class Client extends BaseClient
      */
     public function session($code)
     {
-        $params = [
-            'appid' => $this->app['config']['app_id'],
-            'js_code' => $code,
-            'grant_type' => 'authorization_code',
-            'component_appid' => $this->component['config']['app_id'],
-            'component_access_token' => $this->component['access_token']->getToken()['component_access_token'],
-        ];
-
+        $params = ['appid' => $this->app['config']['app_id'], 'js_code' => $code, 'grant_type' => 'authorization_code', 'component_appid' => $this->component['config']['app_id'], 'component_access_token' => $this->component['access_token']->getToken()['component_access_token']];
         return $this->httpGet('sns/component/jscode2session', $params);
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the EasyWeChatComposer.
  *
@@ -10,11 +8,9 @@ declare(strict_types=1);
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChatComposer\Commands;
 
 use Composer\Plugin\Capability\CommandProvider;
-
 class Provider implements CommandProvider
 {
     /**
@@ -24,8 +20,6 @@ class Provider implements CommandProvider
      */
     public function getCommands()
     {
-        return [
-            new ExtensionsCommand(),
-        ];
+        return [new ExtensionsCommand()];
     }
 }

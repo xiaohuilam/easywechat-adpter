@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\MicroMerchant\MerchantConfig;
 
 use EasyWeChat\MicroMerchant\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -35,22 +33,14 @@ class Client extends BaseClient
      */
     public function setFollowConfig($subAppid, $subscribeAppid, $receiptAppid = '')
     {
-        $params = [
-            'sub_appid' => $subAppid,
-        ];
-
+        $params = ['sub_appid' => $subAppid];
         if (!empty($subscribeAppid)) {
             $params['subscribe_appid'] = $subscribeAppid;
         } else {
             $params['receipt_appid'] = $receiptAppid;
         }
-
-        return $this->safeRequest('secapi/mkt/addrecommendconf', array_merge($params, [
-            'sign_type' => 'HMAC-SHA256',
-            'nonce_str' => uniqid('micro'),
-        ]));
+        return $this->safeRequest('secapi/mkt/addrecommendconf', array_merge($params, ['sign_type' => 'HMAC-SHA256', 'nonce_str' => uniqid('micro')]));
     }
-
     /**
      * Configure the new payment directory.
      *
@@ -65,13 +55,8 @@ class Client extends BaseClient
      */
     public function addPath($jsapiPath, $appid = '', $subMchId = '')
     {
-        return $this->addConfig([
-            'appid' => $appid ?: $this->app['config']->appid,
-            'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id,
-            'jsapi_path' => $jsapiPath,
-        ]);
+        return $this->addConfig(['appid' => $appid ?: $this->app['config']->appid, 'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id, 'jsapi_path' => $jsapiPath]);
     }
-
     /**
      * bind appid.
      *
@@ -86,13 +71,8 @@ class Client extends BaseClient
      */
     public function bindAppId($subAppid, $appid = '', $subMchId = '')
     {
-        return $this->addConfig([
-            'appid' => $appid ?: $this->app['config']->appid,
-            'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id,
-            'sub_appid' => $subAppid,
-        ]);
+        return $this->addConfig(['appid' => $appid ?: $this->app['config']->appid, 'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id, 'sub_appid' => $subAppid]);
     }
-
     /**
      * add sub dev config.
      *
@@ -107,7 +87,6 @@ class Client extends BaseClient
     {
         return $this->safeRequest('secapi/mch/addsubdevconfig', $params);
     }
-
     /**
      * query Sub Dev Config.
      *
@@ -121,9 +100,6 @@ class Client extends BaseClient
      */
     public function getConfig($subMchId = '', $appId = '')
     {
-        return $this->safeRequest('secapi/mch/querysubdevconfig', [
-            'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id,
-            'appid' => $appId ?: $this->app['config']->appid,
-        ]);
+        return $this->safeRequest('secapi/mch/querysubdevconfig', ['sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id, 'appid' => $appId ?: $this->app['config']->appid]);
     }
 }

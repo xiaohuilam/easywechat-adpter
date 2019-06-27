@@ -8,7 +8,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Messages;
 
 /**
@@ -20,14 +19,12 @@ class Raw extends Message
      * @var string
      */
     protected $type = 'raw';
-
     /**
      * Properties.
      *
      * @var array
      */
     protected $properties = ['content'];
-
     /**
      * Constructor.
      *
@@ -37,7 +34,6 @@ class Raw extends Message
     {
         parent::__construct(['content' => strval($content)]);
     }
-
     /**
      * @param array $appends
      * @param bool  $withType
@@ -48,7 +44,6 @@ class Raw extends Message
     {
         return json_decode($this->content, true) ?: [];
     }
-
     public function __toString()
     {
         return $this->get('content') ?: '';

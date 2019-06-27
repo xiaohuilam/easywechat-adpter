@@ -8,12 +8,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\OfficialAccount;
 
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
 use EasyWeChat\OpenPlatform\Authorizer\Aggregate\AggregateServiceProvider;
-
 /**
  * Class Application.
  *
@@ -33,12 +31,7 @@ class Application extends OfficialAccount
     public function __construct($config = [], $prepends = [])
     {
         parent::__construct($config, $prepends);
-
-        $providers = [
-            AggregateServiceProvider::class,
-            MiniProgram\ServiceProvider::class,
-        ];
-
+        $providers = [AggregateServiceProvider::class, MiniProgram\ServiceProvider::class];
         foreach ($providers as $provider) {
             $this->register(new $provider());
         }

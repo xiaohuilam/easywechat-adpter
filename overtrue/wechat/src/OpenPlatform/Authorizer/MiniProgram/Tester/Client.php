@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Tester;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -31,11 +29,8 @@ class Client extends BaseClient
      */
     public function bind($wechatId)
     {
-        return $this->httpPostJson('wxa/bind_tester', [
-            'wechatid' => $wechatId,
-        ]);
+        return $this->httpPostJson('wxa/bind_tester', ['wechatid' => $wechatId]);
     }
-
     /**
      * 解绑小程序体验者.
      *
@@ -47,11 +42,8 @@ class Client extends BaseClient
      */
     public function unbind($wechatId)
     {
-        return $this->httpPostJson('wxa/unbind_tester', [
-            'wechatid' => $wechatId,
-        ]);
+        return $this->httpPostJson('wxa/unbind_tester', ['wechatid' => $wechatId]);
     }
-
     /**
      * 获取体验者列表.
      *
@@ -62,8 +54,6 @@ class Client extends BaseClient
      */
     public function list()
     {
-        return $this->httpPostJson('wxa/memberauth', [
-            'action' => 'get_experiencer',
-        ]);
+        return $this->httpPostJson('wxa/memberauth', ['action' => 'get_experiencer']);
     }
 }

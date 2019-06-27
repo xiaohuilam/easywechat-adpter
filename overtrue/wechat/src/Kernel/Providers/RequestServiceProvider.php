@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Kernel\Providers;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
-
 /**
  * Class RequestServiceProvider.
  *

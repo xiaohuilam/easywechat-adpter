@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Work\MiniProgram\Auth;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  */
@@ -29,11 +27,7 @@ class Client extends BaseClient
      */
     public function session($code)
     {
-        $params = [
-            'js_code' => $code,
-            'grant_type' => 'authorization_code',
-        ];
-
+        $params = ['js_code' => $code, 'grant_type' => 'authorization_code'];
         return $this->httpGet('cgi-bin/miniprogram/jscode2session', $params);
     }
 }

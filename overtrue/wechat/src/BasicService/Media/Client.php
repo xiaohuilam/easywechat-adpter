@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\BasicService\Media;
 
 use EasyWeChat\Kernel\BaseClient;
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
 use EasyWeChat\Kernel\Http\StreamResponse;
-
 /**
  * Class Client.
  *
@@ -26,14 +24,12 @@ class Client extends BaseClient
      * @var string
      */
     protected $baseUri = 'https://api.weixin.qq.com/cgi-bin/';
-
     /**
      * Allow media type.
      *
      * @var array
      */
     protected $allowTypes = ['image', 'voice', 'video', 'thumb'];
-
     /**
      * Upload image.
      *
@@ -47,7 +43,6 @@ class Client extends BaseClient
     {
         return $this->upload('image', $path);
     }
-
     /**
      * Upload video.
      *
@@ -61,7 +56,6 @@ class Client extends BaseClient
     {
         return $this->upload('video', $path);
     }
-
     /**
      * @param string $path
      *
@@ -73,7 +67,6 @@ class Client extends BaseClient
     {
         return $this->upload('voice', $path);
     }
-
     /**
      * @param $path
      *
@@ -85,7 +78,6 @@ class Client extends BaseClient
     {
         return $this->upload('thumb', $path);
     }
-
     /**
      * Upload temporary material.
      *
@@ -102,14 +94,11 @@ class Client extends BaseClient
         if (!file_exists($path) || !is_readable($path)) {
             throw new InvalidArgumentException(sprintf("File does not exist, or the file is unreadable: '%s'", $path));
         }
-
         if (!in_array($type, $this->allowTypes, true)) {
             throw new InvalidArgumentException(sprintf("Unsupported media type: '%s'", $type));
         }
-
         return $this->httpUpload('media/upload', ['media' => $path], ['type' => $type]);
     }
-
     /**
      * @param string $path
      * @param string $title
@@ -124,14 +113,11 @@ class Client extends BaseClient
     {
         $response = $this->uploadVideo($path);
         $arrayResponse = $this->detectAndCastResponseToType($response, 'array');
-
         if (!empty($arrayResponse['media_id'])) {
             return $this->createVideoForBroadcasting($arrayResponse['media_id'], $title, $description);
         }
-
         return $response;
     }
-
     /**
      * @param string $mediaId
      * @param string $title
@@ -143,13 +129,8 @@ class Client extends BaseClient
      */
     public function createVideoForBroadcasting($mediaId, $title, $description)
     {
-        return $this->httpPostJson('media/uploadvideo', [
-            'media_id' => $mediaId,
-            'title' => $title,
-            'description' => $description,
-        ]);
+        return $this->httpPostJson('media/uploadvideo', ['media_id' => $mediaId, 'title' => $title, 'description' => $description]);
     }
-
     /**
      * Fetch item from WeChat server.
      *
@@ -161,19 +142,12 @@ class Client extends BaseClient
      */
     public function get($mediaId)
     {
-        $response = $this->requestRaw('media/get', 'GET', [
-            'query' => [
-                'media_id' => $mediaId,
-            ],
-        ]);
-
+        $response = $this->requestRaw('media/get', 'GET', ['query' => ['media_id' => $mediaId]]);
         if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
             return StreamResponse::buildFromPsrResponse($response);
         }
-
         return $this->castResponseToType($response, $this->app['config']->get('response_type'));
     }
-
     /**
      * @param string $mediaId
      *
@@ -183,16 +157,10 @@ class Client extends BaseClient
      */
     public function getJssdkMedia($mediaId)
     {
-        $response = $this->requestRaw('media/get/jssdk', 'GET', [
-            'query' => [
-                'media_id' => $mediaId,
-            ],
-        ]);
-
+        $response = $this->requestRaw('media/get/jssdk', 'GET', ['query' => ['media_id' => $mediaId]]);
         if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
             return StreamResponse::buildFromPsrResponse($response);
         }
-
         return $this->castResponseToType($response, $this->app['config']->get('response_type'));
     }
 }

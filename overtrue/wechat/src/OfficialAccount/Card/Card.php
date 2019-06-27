@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OfficialAccount\Card;
 
 use EasyWeChat\Kernel\Exceptions\InvalidArgumentException;
-
 /**
  * Class Card.
  *
@@ -42,7 +40,6 @@ class Card extends Client
         if (isset($this->app["card.{$property}"])) {
             return $this->app["card.{$property}"];
         }
-
         throw new InvalidArgumentException(sprintf('No card service named "%s".', $property));
     }
 }

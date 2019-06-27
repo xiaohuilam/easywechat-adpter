@@ -8,11 +8,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\MiniProgram;
 
 use EasyWeChat\Kernel\BaseClient;
-
 /**
  * Class Client.
  *
@@ -31,7 +29,6 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('cgi-bin/wxopen/wxamplinkget');
     }
-
     /**
      * 关联小程序.
      *
@@ -45,15 +42,9 @@ class Client extends BaseClient
      */
     public function link($appId, $notifyUsers = true, $showProfile = false)
     {
-        $params = [
-            'appid' => $appId,
-            'notify_users' => (string) $notifyUsers,
-            'show_profile' => (string) $showProfile,
-        ];
-
+        $params = ['appid' => $appId, 'notify_users' => (string) $notifyUsers, 'show_profile' => (string) $showProfile];
         return $this->httpPostJson('cgi-bin/wxopen/wxamplink', $params);
     }
-
     /**
      * 解除已关联的小程序.
      *
@@ -65,10 +56,7 @@ class Client extends BaseClient
      */
     public function unlink($appId)
     {
-        $params = [
-            'appid' => $appId,
-        ];
-
+        $params = ['appid' => $appId];
         return $this->httpPostJson('cgi-bin/wxopen/wxampunlink', $params);
     }
 }

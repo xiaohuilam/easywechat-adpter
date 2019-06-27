@@ -8,13 +8,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace EasyWeChat\Payment\Sandbox;
 
 use EasyWeChat\Kernel\Traits\InteractsWithCache;
 use EasyWeChat\Payment\Kernel\BaseClient;
 use EasyWeChat\Payment\Kernel\Exceptions\SandboxException;
-
 /**
  * Class Client.
  *
@@ -23,7 +21,6 @@ use EasyWeChat\Payment\Kernel\Exceptions\SandboxException;
 class Client extends BaseClient
 {
     use InteractsWithCache;
-
     /**
      * @return string
      *
@@ -37,23 +34,18 @@ class Client extends BaseClient
         if ($cache = $this->getCache()->get($this->getCacheKey())) {
             return $cache;
         }
-
         $response = $this->request('sandboxnew/pay/getsignkey');
-
         if ('SUCCESS' === $response['return_code']) {
             $this->getCache()->set($this->getCacheKey(), $key = $response['sandbox_signkey'], 24 * 3600);
-
             return $key;
         }
-
         throw new SandboxException($response['retmsg'] ?: $response['return_msg']);
     }
-
     /**
      * @return string
      */
     protected function getCacheKey()
     {
-        return 'easywechat.payment.sandbox.'.md5($this->app['config']->app_id.$this->app['config']['mch_id']);
+        return 'easywechat.payment.sandbox.' . md5($this->app['config']->app_id . $this->app['config']['mch_id']);
     }
 }
