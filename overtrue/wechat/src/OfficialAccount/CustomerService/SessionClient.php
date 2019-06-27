@@ -29,7 +29,7 @@ class SessionClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list(string $account)
+    public function list($account)
     {
         return $this->httpGet('customservice/kfsession/getsessionlist', ['kf_account' => $account]);
     }
@@ -56,7 +56,7 @@ class SessionClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function create(string $account, string $openid)
+    public function create($account, $openid)
     {
         $params = [
             'kf_account' => $account,
@@ -76,7 +76,7 @@ class SessionClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function close(string $account, string $openid)
+    public function close($account, $openid)
     {
         $params = [
             'kf_account' => $account,
@@ -95,7 +95,7 @@ class SessionClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function get(string $openid)
+    public function get($openid)
     {
         return $this->httpGet('customservice/kfsession/getsession', ['openid' => $openid]);
     }

@@ -45,7 +45,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list(string $userId)
+    public function list($userId)
     {
         return $this->httpGet('cgi-bin/externalcontact/list', [
             'userid' => $userId,
@@ -63,7 +63,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function get(string $externalUserId)
+    public function get($externalUserId)
     {
         return $this->httpGet('cgi-bin/externalcontact/get', [
             'external_userid' => $externalUserId,
@@ -82,7 +82,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getUnassigned(int $pageId = 0, int $pageSize = 1000)
+    public function getUnassigned( $pageId = 0, $pageSize = 1000)
     {
         return $this->httpPostJson('cgi-bin/externalcontact/get_unassigned_list', [
             'page_id' => $pageId,
@@ -103,7 +103,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function transfer(string $externalUserId, string $handoverUserId, string $takeoverUserId)
+    public function transfer($externalUserId, $handoverUserId, $takeoverUserId)
     {
         $params = [
             'external_userid' => $externalUserId,

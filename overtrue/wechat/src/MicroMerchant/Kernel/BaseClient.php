@@ -76,7 +76,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    public function httpUpload(string $url, array $files = [], array $form = [], array $query = [], $returnResponse = false)
+    public function httpUpload($url, array $files = [], array $form = [], array $query = [], $returnResponse = false)
     {
         $multipart = [];
 
@@ -139,7 +139,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    protected function request(string $endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
+    protected function request($endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
     {
         $base = [
             'mch_id' => $this->app['config']['mch_id'],
@@ -202,7 +202,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\EncryptException
      */
-    protected function encryptSensitiveInformation(string $string)
+    protected function encryptSensitiveInformation($string)
     {
         $certificates = $this->app['config']->get('certificate');
         if (null === $certificates) {

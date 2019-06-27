@@ -86,7 +86,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getBalance(string $deliveryId, string $bizId)
+    public function getBalance($deliveryId, $bizId)
     {
         return $this->httpPostJson('cgi-bin/express/business/quota/get', [
             'delivery_id' => $deliveryId,
@@ -101,7 +101,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function bindPrinter(string $openid)
+    public function bindPrinter($openid)
     {
         return $this->httpPostJson('cgi-bin/express/business/printer/update', [
             'update_type' => 'bind',
@@ -116,7 +116,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function unbindPrinter(string $openid)
+    public function unbindPrinter($openid)
     {
         return $this->httpPostJson('cgi-bin/express/business/printer/update', [
             'update_type' => 'unbind',

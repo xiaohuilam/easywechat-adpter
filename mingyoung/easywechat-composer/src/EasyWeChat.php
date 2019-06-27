@@ -52,7 +52,7 @@ class EasyWeChat
      *
      * @return static
      */
-    public static function setEncryptionKey(string $key)
+    public static function setEncryptionKey($key)
     {
         static::$encryptionKey = $key;
 

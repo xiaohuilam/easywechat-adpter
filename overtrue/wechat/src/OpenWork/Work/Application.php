@@ -30,7 +30,7 @@ class Application extends Work
      * @param OpenWork $component
      * @param array    $prepends
      */
-    public function __construct(string $authCorpId, string $permanentCode, OpenWork $component, array $prepends = [])
+    public function __construct($authCorpId, $permanentCode, OpenWork $component, array $prepends = [])
     {
         parent::__construct($component->getConfig(), $prepends + [
                 'access_token' => function ($app) use ($authCorpId, $permanentCode, $component) {

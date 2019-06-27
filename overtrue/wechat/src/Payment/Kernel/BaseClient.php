@@ -68,7 +68,7 @@ class BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function request(string $endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
+    protected function request($endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
     {
         $base = [
             'mch_id' => $this->app['config']['mch_id'],
@@ -160,7 +160,7 @@ class BaseClient
      *
      * @return string
      */
-    protected function wrap(string $endpoint)
+    protected function wrap($endpoint)
     {
         return $this->app->inSandbox() ? "sandboxnew/{$endpoint}" : $endpoint;
     }

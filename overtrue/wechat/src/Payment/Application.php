@@ -35,7 +35,7 @@ use EasyWeChat\OfficialAccount;
  * @property \EasyWeChat\OfficialAccount\Auth\AccessToken $access_token
  *
  * @method mixed pay(array $attributes)
- * @method mixed authCodeToOpenid(string $authCode)
+ * @method mixed authCodeToOpenid($authCode)
  */
 class Application extends ServiceContainer
 {
@@ -76,7 +76,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function scheme(string $productId)
+    public function scheme($productId)
     {
         $params = [
             'appid' => $this['config']->app_id,
@@ -96,7 +96,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function codeUrlScheme(string $codeUrl)
+    public function codeUrlScheme($codeUrl)
     {
         return \sprintf('weixin://wxpay/bizpayurl?sr=%s', $codeUrl);
     }
@@ -151,7 +151,7 @@ class Application extends ServiceContainer
      *
      * @return $this
      */
-    public function setSubMerchant(string $mchId, string $appId = null)
+    public function setSubMerchant($mchId, $appId = null)
     {
         $this['config']->set('sub_mch_id', $mchId);
         $this['config']->set('sub_appid', $appId);
@@ -174,7 +174,7 @@ class Application extends ServiceContainer
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    public function getKey(string $endpoint = null)
+    public function getKey($endpoint = null)
     {
         if ('sandboxnew/pay/getsignkey' === $endpoint) {
             return $this['config']->key;

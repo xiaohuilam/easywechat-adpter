@@ -78,7 +78,7 @@ abstract class Handler
     /**
      * @param string $message
      */
-    public function fail(string $message)
+    public function fail($message)
     {
         $this->fail = $message;
     }
@@ -157,7 +157,7 @@ abstract class Handler
      *
      * @throws \EasyWeChat\Kernel\Exceptions\Exception
      */
-    public function decryptMessage(string $key)
+    public function decryptMessage($key)
     {
         $message = $this->getMessage();
         if (empty($message[$key])) {

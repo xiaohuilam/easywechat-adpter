@@ -40,7 +40,7 @@ class Media extends Message implements MediaInterface
      * @param string $type
      * @param array  $attributes
      */
-    public function __construct(string $mediaId, $type = null, array $attributes = [])
+    public function __construct($mediaId, $type = null, array $attributes = [])
     {
         parent::__construct(array_merge(['media_id' => $mediaId], $attributes));
 

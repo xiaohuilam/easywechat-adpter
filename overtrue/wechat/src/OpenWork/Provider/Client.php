@@ -41,7 +41,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    public function getLoginUrl(string $redirectUri = '', string $userType = 'admin', string $state = '')
+    public function getLoginUrl($redirectUri = '', $userType = 'admin', $state = '')
     {
         $redirectUri || $redirectUri = $this->app->config['redirect_uri_single'];
         $state || $state = rand();
@@ -64,7 +64,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getLoginInfo(string $authCode)
+    public function getLoginInfo($authCode)
     {
         $params = [
             'auth_code' => $authCode,
@@ -82,7 +82,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getRegisterUri(string $registerCode = '')
+    public function getRegisterUri($registerCode = '')
     {
         $registerCode || $registerCode = $this->getRegisterCode()['register_code'];
         $params = ['register_code' => $registerCode];
@@ -129,7 +129,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getRegisterInfo(string $registerCode)
+    public function getRegisterInfo($registerCode)
     {
         $params = [
             'register_code' => $registerCode,
@@ -186,7 +186,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function contactSyncSuccess(string $accessToken)
+    public function contactSyncSuccess($accessToken)
     {
         $params = ['access_token' => $accessToken];
 

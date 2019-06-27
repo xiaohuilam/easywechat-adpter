@@ -37,7 +37,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function createFromDraft(int $draftId)
+    public function createFromDraft( $draftId)
     {
         $params = [
             'draft_id' => $draftId,

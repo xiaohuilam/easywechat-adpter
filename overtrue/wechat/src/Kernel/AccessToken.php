@@ -131,7 +131,7 @@ abstract class AccessToken implements AccessTokenInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function setToken(string $token, int $lifetime = 7200)
+    public function setToken($token, $lifetime = 7200)
     {
         $this->getCache()->set($this->getCacheKey(), [
             $this->tokenKey => $token,

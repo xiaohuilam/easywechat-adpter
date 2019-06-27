@@ -28,7 +28,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function get(string $mediaId)
+    public function get($mediaId)
     {
         $response = $this->requestRaw('cgi-bin/media/get', 'GET', [
             'query' => [
@@ -50,7 +50,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function uploadImage(string $path)
+    public function uploadImage($path)
     {
         return $this->upload('image', $path);
     }
@@ -62,7 +62,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function uploadVoice(string $path)
+    public function uploadVoice($path)
     {
         return $this->upload('voice', $path);
     }
@@ -74,7 +74,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function uploadVideo(string $path)
+    public function uploadVideo($path)
     {
         return $this->upload('video', $path);
     }
@@ -86,7 +86,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function uploadFile(string $path)
+    public function uploadFile($path)
     {
         return $this->upload('file', $path);
     }
@@ -99,7 +99,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function upload(string $type, string $path)
+    public function upload($type, $path)
     {
         $files = [
             'media' => $path,

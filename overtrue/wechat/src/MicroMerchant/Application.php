@@ -28,9 +28,9 @@ use EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException;
  * @property \EasyWeChat\MicroMerchant\Media\Client          $media
  *
  * @method mixed submitApplication(array $params)
- * @method mixed getStatus(string $applymentId, string $businessCode = '')
+ * @method mixed getStatus($applymentId, $businessCode = '')
  * @method mixed upgrade(array $params)
- * @method mixed getUpgradeStatus(string $subMchId = '')
+ * @method mixed getUpgradeStatus($subMchId = '')
  */
 class Application extends ServiceContainer
 {
@@ -101,7 +101,7 @@ class Application extends ServiceContainer
      *
      * @return $this
      */
-    public function setSubMchId(string $subMchId, string $appid = '')
+    public function setSubMchId($subMchId, $appid = '')
     {
         $this['config']->set('sub_mch_id', $subMchId);
         $this['config']->set('appid', $appid);
@@ -117,7 +117,7 @@ class Application extends ServiceContainer
      *
      * @return $this
      */
-    public function setCertificate(string $certificate, string $serial_no)
+    public function setCertificate($certificate, $serial_no)
     {
         $this['config']->set('certificate', $certificate);
         $this['config']->set('serial_no', $serial_no);

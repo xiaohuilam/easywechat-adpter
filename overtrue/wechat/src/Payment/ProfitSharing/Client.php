@@ -150,7 +150,7 @@ class Client extends BaseClient
      * @param string $outOrderNo    商户系统内部的分账单号
      */
     public function query(
-        string $transactionId, string $outOrderNo
+        string $transactionId, $outOrderNo
     ) {
         $params = [
             'sub_appid' => null,

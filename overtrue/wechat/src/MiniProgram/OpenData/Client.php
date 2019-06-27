@@ -36,7 +36,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function removeUserStorage(string $openid, string $sessionKey, array $key)
+    public function removeUserStorage($openid, $sessionKey, array $key)
     {
         $data = ['key' => $key];
         $query = [
@@ -59,7 +59,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function setUserStorage(string $openid, string $sessionKey, array $kvList)
+    public function setUserStorage($openid, $sessionKey, array $kvList)
     {
         $kvList = $this->formatKVLists($kvList);
 

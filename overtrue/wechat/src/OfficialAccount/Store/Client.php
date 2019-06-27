@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function searchFromMap(int $districtId, string $keyword)
+    public function searchFromMap( $districtId, $keyword)
     {
         $params = [
             'districtid' => $districtId,
@@ -124,7 +124,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update(int $poiId, array $baseInfo)
+    public function update( $poiId, array $baseInfo)
     {
         $params = array_merge($baseInfo, ['poi_id' => $poiId]);
 
@@ -138,7 +138,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function get(int $poiId)
+    public function get( $poiId)
     {
         return $this->httpPostJson('wxa/get_store_info', ['poi_id' => $poiId]);
     }
@@ -151,7 +151,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list(int $offset = 0, int $limit = 10)
+    public function list( $offset = 0, $limit = 10)
     {
         $params = [
             'offset' => $offset,
@@ -168,7 +168,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete(int $poiId)
+    public function delete( $poiId)
     {
         return $this->httpPostJson('wxa/del_store', ['poi_id' => $poiId]);
     }

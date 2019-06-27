@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    public function getFastRegistrationUrl(string $callbackUrl, bool $copyWxVerify = true)
+    public function getFastRegistrationUrl($callbackUrl, bool $copyWxVerify = true)
     {
         $queries = [
             'copy_wx_verify' => $copyWxVerify,
@@ -69,7 +69,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function register(string $ticket)
+    public function register($ticket)
     {
         $params = [
             'ticket' => $ticket,

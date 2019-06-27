@@ -46,7 +46,7 @@ class Client extends BaseClient
      * @param int $firstId  一级类目ID
      * @param int $secondId 二级类目ID
      */
-    public function deleteCategories(int $firstId, int $secondId)
+    public function deleteCategories( $firstId, $secondId)
     {
         $params = ['first' => $firstId, 'second' => $secondId];
 
@@ -190,7 +190,7 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function getDisplayableOfficialAccounts(int $page, int $num)
+    public function getDisplayableOfficialAccounts( $page, $num)
     {
         return $this->httpGet('wxa/getwxamplinkforshow', [
             'page' => $page,

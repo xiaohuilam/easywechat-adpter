@@ -52,7 +52,7 @@ class Application extends ServiceContainer
      *
      * @return Work
      */
-    public function work(string $authCorpId, string $permanentCode)
+    public function work($authCorpId, $permanentCode)
     {
         return new Work($authCorpId, $permanentCode, $this);
     }

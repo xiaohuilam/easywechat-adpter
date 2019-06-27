@@ -34,7 +34,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function checkText(string $text)
+    public function checkText($text)
     {
         $params = [
             'content' => $text,
@@ -52,7 +52,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function checkImage(string $path)
+    public function checkImage($path)
     {
         return $this->httpUpload('img_sec_check', ['media' => $path]);
     }

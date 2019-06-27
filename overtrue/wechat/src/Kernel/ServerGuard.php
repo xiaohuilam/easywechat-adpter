@@ -219,7 +219,7 @@ class ServerGuard
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    public function buildResponse(string $to, string $from, $message)
+    public function buildResponse($to, $from, $message)
     {
         if (empty($message) || self::SUCCESS_EMPTY_RESPONSE === $message) {
             return self::SUCCESS_EMPTY_RESPONSE;
@@ -277,7 +277,7 @@ class ServerGuard
      *
      * @return string
      */
-    protected function buildReply(string $to, string $from, MessageInterface $message)
+    protected function buildReply($to, $from, MessageInterface $message)
     {
         $prepends = [
             'ToUserName' => $to,

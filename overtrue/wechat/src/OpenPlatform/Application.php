@@ -29,11 +29,11 @@ use EasyWeChat\OpenPlatform\Authorizer\Server\Guard;
  * @property \EasyWeChat\OpenPlatform\CodeTemplate\Client $code_template
  * @property \EasyWeChat\OpenPlatform\Component\Client    $component
  *
- * @method mixed handleAuthorize(string $authCode = null)
- * @method mixed getAuthorizer(string $appId)
- * @method mixed getAuthorizerOption(string $appId, string $name)
- * @method mixed setAuthorizerOption(string $appId, string $name, string $value)
- * @method mixed getAuthorizers(int $offset = 0, int $count = 500)
+ * @method mixed handleAuthorize($authCode = null)
+ * @method mixed getAuthorizer($appId)
+ * @method mixed getAuthorizerOption($appId, $name)
+ * @method mixed setAuthorizerOption($appId, $name, $value)
+ * @method mixed getAuthorizers( $offset = 0, $count = 500)
  * @method mixed createPreAuthorizationCode()
  */
 class Application extends ServiceContainer
@@ -68,7 +68,7 @@ class Application extends ServiceContainer
      *
      * @return \EasyWeChat\OpenPlatform\Authorizer\OfficialAccount\Application
      */
-    public function officialAccount(string $appId, string $refreshToken = null, AccessToken $accessToken = null)
+    public function officialAccount($appId, $refreshToken = null, AccessToken $accessToken = null)
     {
         $application = new OfficialAccount($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
             'encryptor' => $this['encryptor'],
@@ -95,7 +95,7 @@ class Application extends ServiceContainer
      *
      * @return \EasyWeChat\OpenPlatform\Authorizer\MiniProgram\Application
      */
-    public function miniProgram(string $appId, string $refreshToken = null, AccessToken $accessToken = null)
+    public function miniProgram($appId, $refreshToken = null, AccessToken $accessToken = null)
     {
         return new MiniProgram($this->getAuthorizerConfig($appId, $refreshToken), $this->getReplaceServices($accessToken) + [
             'encryptor' => function () {
@@ -116,7 +116,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function getPreAuthorizationUrl(string $callbackUrl, $optional = [])
+    public function getPreAuthorizationUrl($callbackUrl, $optional = [])
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
@@ -143,7 +143,7 @@ class Application extends ServiceContainer
      *
      * @return string
      */
-    public function getMobilePreAuthorizationUrl(string $callbackUrl, $optional = [])
+    public function getMobilePreAuthorizationUrl($callbackUrl, $optional = [])
     {
         // 兼容旧版 API 设计
         if (\is_string($optional)) {
@@ -170,7 +170,7 @@ class Application extends ServiceContainer
      *
      * @return array
      */
-    protected function getAuthorizerConfig(string $appId, string $refreshToken = null)
+    protected function getAuthorizerConfig($appId, $refreshToken = null)
     {
         return $this['config']->merge([
             'component_app_id' => $this['config']['app_id'],

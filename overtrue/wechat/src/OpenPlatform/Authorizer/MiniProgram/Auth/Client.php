@@ -49,7 +49,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function session(string $code)
+    public function session($code)
     {
         $params = [
             'appid' => $this->app['config']['app_id'],

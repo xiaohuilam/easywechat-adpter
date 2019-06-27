@@ -88,7 +88,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function getTicket(bool $refresh = false, string $type = 'jsapi')
+    public function getTicket(bool $refresh = false, $type = 'jsapi')
     {
         $cacheKey = sprintf('easywechat.basic_service.jssdk.ticket.%s.%s', $type, $this->getAppId());
 
@@ -123,7 +123,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    protected function configSignature(string $url = null, string $nonce = null, $timestamp = null)
+    protected function configSignature($url = null, $nonce = null, $timestamp = null)
     {
         $url = $url ?: $this->getUrl();
         $nonce = $nonce ?: Support\Str::quickRandom(10);
@@ -172,7 +172,7 @@ class Client extends BaseClient
      *
      * @return $this
      */
-    public function setUrl(string $url)
+    public function setUrl($url)
     {
         $this->url = $url;
 

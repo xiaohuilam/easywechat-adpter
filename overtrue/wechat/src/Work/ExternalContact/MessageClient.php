@@ -80,7 +80,7 @@ class MessageClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function get(string $msgId)
+    public function get($msgId)
     {
         return $this->httpPostJson('cgi-bin/externalcontact/get_group_msg_result', [
             'msgid' => $msgId,
@@ -100,7 +100,7 @@ class MessageClient extends BaseClient
      * @throws InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function sendWelcome(string $welcomeCode, array $msg)
+    public function sendWelcome($welcomeCode, array $msg)
     {
         $formattedMsg = $this->formatMessage($msg);
 

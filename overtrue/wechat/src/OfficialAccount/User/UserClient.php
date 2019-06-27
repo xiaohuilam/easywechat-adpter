@@ -30,7 +30,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function get(string $openid, string $lang = 'zh_CN')
+    public function get($openid, $lang = 'zh_CN')
     {
         $params = [
             'openid' => $openid,
@@ -50,7 +50,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function select(array $openids, string $lang = 'zh_CN')
+    public function select(array $openids, $lang = 'zh_CN')
     {
         return $this->httpPostJson('cgi-bin/user/info/batchget', [
             'user_list' => array_map(function ($openid) use ($lang) {
@@ -71,7 +71,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list(string $nextOpenId = null)
+    public function list($nextOpenId = null)
     {
         $params = ['next_openid' => $nextOpenId];
 
@@ -88,7 +88,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function remark(string $openid, string $remark)
+    public function remark($openid, $remark)
     {
         $params = [
             'openid' => $openid,
@@ -107,7 +107,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function blacklist(string $beginOpenid = null)
+    public function blacklist($beginOpenid = null)
     {
         $params = ['begin_openid' => $beginOpenid];
 
@@ -154,7 +154,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function changeOpenid(string $oldAppId, array $openidList)
+    public function changeOpenid($oldAppId, array $openidList)
     {
         $params = [
             'from_appid' => $oldAppId,

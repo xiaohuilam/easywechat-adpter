@@ -57,7 +57,7 @@ class Client extends BaseClient
      *
      * @param string $signature 功能介绍（简介）
      */
-    public function updateSignature(string $signature)
+    public function updateSignature($signature)
     {
         $params = ['signature' => $signature];
 

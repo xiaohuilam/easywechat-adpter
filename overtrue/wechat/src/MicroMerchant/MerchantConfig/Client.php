@@ -33,7 +33,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function setFollowConfig(string $subAppid, string $subscribeAppid, string $receiptAppid = '')
+    public function setFollowConfig($subAppid, $subscribeAppid, $receiptAppid = '')
     {
         $params = [
             'sub_appid' => $subAppid,
@@ -63,7 +63,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function addPath(string $jsapiPath, string $appid = '', string $subMchId = '')
+    public function addPath($jsapiPath, $appid = '', $subMchId = '')
     {
         return $this->addConfig([
             'appid' => $appid ?: $this->app['config']->appid,
@@ -84,7 +84,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function bindAppId(string $subAppid, string $appid = '', string $subMchId = '')
+    public function bindAppId($subAppid, $appid = '', $subMchId = '')
     {
         return $this->addConfig([
             'appid' => $appid ?: $this->app['config']->appid,
@@ -119,7 +119,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getConfig(string $subMchId = '', string $appId = '')
+    public function getConfig($subMchId = '', $appId = '')
     {
         return $this->safeRequest('secapi/mch/querysubdevconfig', [
             'sub_mch_id' => $subMchId ?: $this->app['config']->sub_mch_id,

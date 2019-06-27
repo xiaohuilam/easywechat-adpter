@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function create(string $account, string $nickname)
+    public function create($account, $nickname)
     {
         $params = [
             'kf_account' => $account,
@@ -66,7 +66,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function update(string $account, string $nickname)
+    public function update($account, $nickname)
     {
         $params = [
             'kf_account' => $account,
@@ -83,7 +83,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function delete(string $account)
+    public function delete($account)
     {
         return $this->httpPostJson('customservice/kfaccount/del', [], ['kf_account' => $account]);
     }
@@ -96,7 +96,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function invite(string $account, string $wechatId)
+    public function invite($account, $wechatId)
     {
         $params = [
             'kf_account' => $account,
@@ -114,7 +114,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function setAvatar(string $account, string $path)
+    public function setAvatar($account, $path)
     {
         return $this->httpUpload('customservice/kfaccount/uploadheadimg', ['media' => $path], [], ['kf_account' => $account]);
     }
@@ -154,7 +154,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function showTypingStatusToUser(string $openid)
+    public function showTypingStatusToUser($openid)
     {
         return $this->httpPostJson('cgi-bin/message/custom/typing', [
             'touser' => $openid,
@@ -169,7 +169,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function hideTypingStatusToUser(string $openid)
+    public function hideTypingStatusToUser($openid)
     {
         return $this->httpPostJson('cgi-bin/message/custom/typing', [
             'touser' => $openid,
@@ -187,7 +187,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function messages($startTime, $endTime, int $msgId = 1, int $number = 10000)
+    public function messages($startTime, $endTime, $msgId = 1, $number = 10000)
     {
         $params = [
             'starttime' => is_numeric($startTime) ? $startTime : strtotime($startTime),

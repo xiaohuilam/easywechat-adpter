@@ -45,7 +45,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function bindTo(string $openAppId)
+    public function bindTo($openAppId)
     {
         $params = [
             'appid' => $this->app['config']['app_id'],
@@ -64,7 +64,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function unbindFrom(string $openAppId)
+    public function unbindFrom($openAppId)
     {
         $params = [
             'appid' => $this->app['config']['app_id'],

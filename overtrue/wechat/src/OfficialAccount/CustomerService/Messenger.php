@@ -86,7 +86,7 @@ class Messenger
      *
      * @return Messenger
      */
-    public function by(string $account)
+    public function by($account)
     {
         $this->account = $account;
 
@@ -98,7 +98,7 @@ class Messenger
      *
      * @return Messenger
      */
-    public function from(string $account)
+    public function from($account)
     {
         return $this->by($account);
     }

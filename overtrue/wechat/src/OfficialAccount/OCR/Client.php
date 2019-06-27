@@ -39,7 +39,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function idCard(string $path, string $type = 'photo')
+    public function idCard($path, $type = 'photo')
     {
         if (!\in_array($type, $this->allowTypes, true)) {
             throw new InvalidArgumentException(sprintf("Unsupported type: '%s'", $type));
@@ -60,7 +60,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function bankCard(string $path)
+    public function bankCard($path)
     {
         return $this->httpGet('cv/ocr/bankcard', [
             'img_url' => $path,
@@ -76,7 +76,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function vehicleLicense(string $path)
+    public function vehicleLicense($path)
     {
         return $this->httpGet('cv/ocr/driving', [
             'img_url' => $path,

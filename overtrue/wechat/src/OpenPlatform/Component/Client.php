@@ -45,7 +45,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getRegistrationStatus(string $companyName, string $legalPersonaWechat, string $legalPersonaName)
+    public function getRegistrationStatus($companyName, $legalPersonaWechat, $legalPersonaName)
     {
         $params = [
             'name' => $companyName,

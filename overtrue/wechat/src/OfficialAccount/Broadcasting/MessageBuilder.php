@@ -69,7 +69,7 @@ class MessageBuilder
      *
      * @return \EasyWeChat\OfficialAccount\Broadcasting\MessageBuilder
      */
-    public function toTag(int $tagId)
+    public function toTag( $tagId)
     {
         $this->to([
             'filter' => [
@@ -155,7 +155,7 @@ class MessageBuilder
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function buildForPreview(string $by, string $user)
+    public function buildForPreview($by, $user)
     {
         return $this->build([$by => $user]);
     }

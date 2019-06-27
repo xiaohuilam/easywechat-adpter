@@ -29,7 +29,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function bind(string $wechatId)
+    public function bind($wechatId)
     {
         return $this->httpPostJson('wxa/bind_tester', [
             'wechatid' => $wechatId,
@@ -45,7 +45,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function unbind(string $wechatId)
+    public function unbind($wechatId)
     {
         return $this->httpPostJson('wxa/unbind_tester', [
             'wechatid' => $wechatId,

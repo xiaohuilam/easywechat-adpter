@@ -55,7 +55,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getStatus(string $applymentId, string $businessCode = '')
+    public function getStatus($applymentId, $businessCode = '')
     {
         if (!empty($applymentId)) {
             $params = [
@@ -110,7 +110,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getUpgradeStatus(string $subMchId = '')
+    public function getUpgradeStatus($subMchId = '')
     {
         return $this->safeRequest('applyment/micro/getupgradestate', [
             'version' => '1.0',

@@ -44,7 +44,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update(int $id, array $data)
+    public function update( $id, array $data)
     {
         return $this->httpPostJson('cgi-bin/department/update', array_merge(compact('id'), $data));
     }

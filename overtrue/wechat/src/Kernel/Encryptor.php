@@ -70,7 +70,7 @@ class Encryptor
      * @param string|null $token
      * @param string|null $aesKey
      */
-    public function __construct(string $appId, string $token = null, string $aesKey = null)
+    public function __construct($appId, $token = null, $aesKey = null)
     {
         $this->appId = $appId;
         $this->token = $token;
@@ -191,7 +191,7 @@ class Encryptor
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function pkcs7Pad(string $text, int $blockSize)
+    public function pkcs7Pad($text, $blockSize)
     {
         if ($blockSize > 256) {
             throw new RuntimeException('$blockSize may not be more than 256');
@@ -209,7 +209,7 @@ class Encryptor
      *
      * @return string
      */
-    public function pkcs7Unpad(string $text)
+    public function pkcs7Unpad($text)
     {
         $pad = ord(substr($text, -1));
         if ($pad < 1 || $pad > $this->blockSize) {

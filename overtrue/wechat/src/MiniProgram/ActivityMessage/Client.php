@@ -33,7 +33,7 @@ class Client extends BaseClient
      *
      * @throws InvalidArgumentException
      */
-    public function updateMessage(string $activityId, int $state = 0, array $params = [])
+    public function updateMessage($activityId, $state = 0, array $params = [])
     {
         if (!in_array($state, [0, 1], true)) {
             throw new InvalidArgumentException('"state" should be "0" or "1".');

@@ -65,7 +65,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function httpGet(string $url, array $query = [])
+    public function httpGet($url, array $query = [])
     {
         return $this->request($url, 'GET', ['query' => $query]);
     }
@@ -80,7 +80,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function httpPost(string $url, array $data = [])
+    public function httpPost($url, array $data = [])
     {
         return $this->request($url, 'POST', ['form_params' => $data]);
     }
@@ -96,7 +96,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function httpPostJson(string $url, array $data = [], array $query = [])
+    public function httpPostJson($url, array $data = [], array $query = [])
     {
         return $this->request($url, 'POST', ['query' => $query, 'json' => $data]);
     }
@@ -113,7 +113,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function httpUpload(string $url, array $files = [], array $form = [], array $query = [])
+    public function httpUpload($url, array $files = [], array $form = [], array $query = [])
     {
         $multipart = [];
 
@@ -161,7 +161,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function request(string $url, string $method = 'GET', array $options = [], $returnRaw = false)
+    public function request($url, $method = 'GET', array $options = [], $returnRaw = false)
     {
         if (empty($this->middlewares)) {
             $this->registerHttpMiddlewares();
@@ -181,7 +181,7 @@ class BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function requestRaw(string $url, string $method = 'GET', array $options = [])
+    public function requestRaw($url, $method = 'GET', array $options = [])
     {
         return Response::buildFromPsrResponse($this->request($url, $method, $options, true));
     }

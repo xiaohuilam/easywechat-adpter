@@ -31,7 +31,7 @@ class Encryptor extends BaseEncryptor
      *
      * @return array
      */
-    public function decryptData(string $sessionKey, string $iv, string $encrypted)
+    public function decryptData($sessionKey, $iv, $encrypted)
     {
         $decrypted = AES::decrypt(
             base64_decode($encrypted, false), base64_decode($sessionKey, false), base64_decode($iv, false)

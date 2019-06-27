@@ -37,7 +37,7 @@ class ManifestManager
      * @param string      $vendorPath
      * @param string|null $manifestPath
      */
-    public function __construct(string $vendorPath, string $manifestPath = null)
+    public function __construct($vendorPath, $manifestPath = null)
     {
         $this->vendorPath = $vendorPath;
         $this->manifestPath = $manifestPath ?: $vendorPath.'/easywechat-composer/easywechat-composer/extensions.php';
