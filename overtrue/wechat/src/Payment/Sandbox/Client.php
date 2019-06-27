@@ -36,7 +36,7 @@ class Client extends BaseClient
         }
         $response = $this->request('sandboxnew/pay/getsignkey');
         if ('SUCCESS' === $response['return_code']) {
-            $this->getCache()->set($this->getCacheKey(), $key = $response['sandbox_signkey'], 24 * 3600);
+            $this->getCache()->put($this->getCacheKey(), $key = $response['sandbox_signkey'], 24 * 3600 / 60);
             return $key;
         }
         throw new SandboxException($response['retmsg'] ?: $response['return_msg']);

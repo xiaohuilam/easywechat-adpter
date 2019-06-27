@@ -31,7 +31,7 @@ trait InteractsWithCache
     /**
      * Get cache instance.
      *
-     * @return \Psr\SimpleCache\CacheInterface
+     * @return \Illuminate\Cache\FileStore
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */

@@ -115,7 +115,7 @@ abstract class AccessToken implements AccessTokenInterface
      */
     public function setToken($token, $lifetime = 7200)
     {
-        $this->getCache()->set($this->getCacheKey(), [$this->tokenKey => $token, 'expires_in' => $lifetime], $lifetime - $this->safeSeconds);
+        $this->getCache()->put($this->getCacheKey(), [$this->tokenKey => $token, 'expires_in' => $lifetime], intval($lifetime - $this->safeSeconds) / 60);
         if (!$this->getCache()->has($this->getCacheKey())) {
             throw new RuntimeException('Failed to cache access token.');
         }

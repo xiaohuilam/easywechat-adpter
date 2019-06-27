@@ -87,7 +87,7 @@ class Client extends BaseClient
             return $this->getCache()->get($cacheKey);
         }
         $result = $this->castResponseToType($this->requestRaw($this->ticketEndpoint, 'GET', ['query' => ['type' => $type]]), 'array');
-        $this->getCache()->set($cacheKey, $result, $result['expires_in'] - 500);
+        $this->getCache()->put($cacheKey, $result, intval($result['expires_in'] - 500) / 60);
         if (!$this->getCache()->has($cacheKey)) {
             throw new RuntimeException('Failed to cache jssdk ticket.');
         }
