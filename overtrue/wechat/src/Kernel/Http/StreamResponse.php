@@ -32,7 +32,7 @@ class StreamResponse extends Response
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function save($directory, $filename = '', bool $appendSuffix = true)
+    public function save($directory, $filename = '', $appendSuffix = true)
     {
         $this->getBody()->rewind();
 
@@ -79,7 +79,7 @@ class StreamResponse extends Response
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function saveAs($directory, $filename, bool $appendSuffix = true)
+    public function saveAs($directory, $filename, $appendSuffix = true)
     {
         return $this->save($directory, $filename, $appendSuffix);
     }

@@ -137,7 +137,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    public function sendSubscription(array $data = [])
+    public function sendSubscription($data = [])
     {
         $params = $this->formatMessage($data);
 
@@ -153,7 +153,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function formatMessage(array $data = [])
+    protected function formatMessage($data = [])
     {
         $params = array_merge($this->message, $data);
 
@@ -175,7 +175,7 @@ class Client extends BaseClient
      *
      * @return array
      */
-    protected function formatData(array $data)
+    protected function formatData($data)
     {
         $formatted = [];
 

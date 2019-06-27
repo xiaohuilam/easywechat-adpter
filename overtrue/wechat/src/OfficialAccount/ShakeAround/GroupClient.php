@@ -116,7 +116,7 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function addDevices( $groupId, array $deviceIdentifiers)
+    public function addDevices( $groupId, $deviceIdentifiers)
     {
         $params = [
             'group_id' => $groupId,
@@ -134,7 +134,7 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function removeDevices( $groupId, array $deviceIdentifiers)
+    public function removeDevices( $groupId, $deviceIdentifiers)
     {
         $params = [
             'group_id' => $groupId,

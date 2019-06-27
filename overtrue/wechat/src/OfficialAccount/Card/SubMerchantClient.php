@@ -28,7 +28,7 @@ class SubMerchantClient extends BaseClient
      *
      * @return mixed
      */
-    public function create(array $info = [])
+    public function create($info = [])
     {
         $params = [
             'info' => Arr::only($info, [
@@ -55,7 +55,7 @@ class SubMerchantClient extends BaseClient
      *
      * @return mixed
      */
-    public function update( $merchantId, array $info = [])
+    public function update( $merchantId, $info = [])
     {
         $params = [
             'info' => array_merge(['merchant_id' => $merchantId],

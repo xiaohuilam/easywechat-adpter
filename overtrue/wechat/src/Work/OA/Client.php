@@ -30,7 +30,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function checkinRecords( $startTime, $endTime, array $userList, $type = 3)
+    public function checkinRecords( $startTime, $endTime, $userList, $type = 3)
     {
         $params = [
             'opencheckindatatype' => $type,

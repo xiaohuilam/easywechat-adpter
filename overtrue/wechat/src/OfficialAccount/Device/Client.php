@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function qrCode(array $deviceIds)
+    public function qrCode($deviceIds)
     {
         $params = [
             'device_num' => count($deviceIds),
@@ -65,7 +65,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function authorize(array $devices, $productId, $opType = 0)
+    public function authorize($devices, $productId, $opType = 0)
     {
         $params = [
             'device_num' => count($devices),

@@ -39,7 +39,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function create(array $data)
+    public function create($data)
     {
         return $this->httpPostJson('cgi-bin/appchat/create', $data);
     }
@@ -52,7 +52,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update($chatId, array $data)
+    public function update($chatId, $data)
     {
         return $this->httpPostJson('cgi-bin/appchat/update', array_merge(['chatid' => $chatId], $data));
     }
@@ -64,7 +64,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function send(array $message)
+    public function send($message)
     {
         return $this->httpPostJson('cgi-bin/appchat/send', $message);
     }

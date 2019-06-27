@@ -57,7 +57,7 @@ class MessageBuilder
      *
      * @return $this
      */
-    public function to(array $to)
+    public function to($to)
     {
         $this->to = $to;
 
@@ -86,7 +86,7 @@ class MessageBuilder
      *
      * @return \EasyWeChat\OfficialAccount\Broadcasting\MessageBuilder
      */
-    public function toUsers(array $openids)
+    public function toUsers($openids)
     {
         $this->to([
             'touser' => $openids,
@@ -112,7 +112,7 @@ class MessageBuilder
      *
      * @return \EasyWeChat\OfficialAccount\Broadcasting\MessageBuilder
      */
-    public function with(array $attributes)
+    public function with($attributes)
     {
         $this->attributes = $attributes;
 
@@ -128,7 +128,7 @@ class MessageBuilder
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function build(array $prepends = [])
+    public function build($prepends = [])
     {
         if (empty($this->message)) {
             throw new RuntimeException('No message content to send.');

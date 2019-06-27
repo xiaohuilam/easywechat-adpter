@@ -35,7 +35,7 @@ class News extends Message
      *
      * @param array $items
      */
-    public function __construct(array $items = [])
+    public function __construct($items = [])
     {
         parent::__construct(compact('items'));
     }
@@ -46,7 +46,7 @@ class News extends Message
      *
      * @return array
      */
-    public function propertiesToArray(array $data, array $aliases = [])
+    public function propertiesToArray($data, $aliases = [])
     {
         return ['articles' => array_map(function ($item) {
             if ($item instanceof NewsItem) {

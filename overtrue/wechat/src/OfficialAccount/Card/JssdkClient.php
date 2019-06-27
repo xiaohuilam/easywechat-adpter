@@ -32,7 +32,7 @@ class JssdkClient extends Jssdk
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function getTicket(bool $refresh = false, $type = 'wx_card')
+    public function getTicket($refresh = false, $type = 'wx_card')
     {
         return parent::getTicket($refresh, $type);
     }
@@ -44,7 +44,7 @@ class JssdkClient extends Jssdk
      *
      * @return string
      */
-    public function assign(array $cards)
+    public function assign($cards)
     {
         return json_encode(array_map(function ($card) {
             return $this->attachExtension($card['card_id'], $card);
@@ -62,7 +62,7 @@ class JssdkClient extends Jssdk
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function attachExtension($cardId, array $extension = [])
+    public function attachExtension($cardId, $extension = [])
     {
         $timestamp = time();
         $nonce = str_random(6);

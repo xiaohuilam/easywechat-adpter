@@ -67,7 +67,7 @@ class Client extends BaseClient
      *
      * @throws InvalidArgumentException
      */
-    protected function formatMessage(array $data = [])
+    protected function formatMessage($data = [])
     {
         $params = array_merge($this->message, $data);
 
@@ -91,7 +91,7 @@ class Client extends BaseClient
      *
      * @return array
      */
-    protected function formatWeappMessage(array $data = [])
+    protected function formatWeappMessage($data = [])
     {
         $params = $this->baseFormat($data, $this->weappMessage);
 
@@ -105,7 +105,7 @@ class Client extends BaseClient
      *
      * @return array
      */
-    protected function formatMpMessage(array $data = [])
+    protected function formatMpMessage($data = [])
     {
         $params = $this->baseFormat($data, $this->mpMessage);
 

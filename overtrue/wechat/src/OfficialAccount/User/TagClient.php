@@ -136,7 +136,7 @@ class TagClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function tagUsers(array $openids, $tagId)
+    public function tagUsers($openids, $tagId)
     {
         $params = [
             'openid_list' => $openids,
@@ -156,7 +156,7 @@ class TagClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function untagUsers(array $openids, $tagId)
+    public function untagUsers($openids, $tagId)
     {
         $params = [
             'openid_list' => $openids,

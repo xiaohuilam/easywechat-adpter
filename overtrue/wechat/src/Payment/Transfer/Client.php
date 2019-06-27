@@ -52,7 +52,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function toBalance(array $params)
+    public function toBalance($params)
     {
         $base = [
             'mch_id' => null,
@@ -96,7 +96,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function toBankCard(array $params)
+    public function toBankCard($params)
     {
         foreach (['bank_code', 'partner_trade_no', 'enc_bank_no', 'enc_true_name', 'amount'] as $key) {
             if (empty($params[$key])) {

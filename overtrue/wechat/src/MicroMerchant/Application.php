@@ -27,9 +27,9 @@ use EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException;
  * @property \EasyWeChat\MicroMerchant\Withdraw\Client       $withdraw
  * @property \EasyWeChat\MicroMerchant\Media\Client          $media
  *
- * @method mixed submitApplication(array $params)
+ * @method mixed submitApplication($params)
  * @method mixed getStatus($applymentId, $businessCode = '')
- * @method mixed upgrade(array $params)
+ * @method mixed upgrade($params)
  * @method mixed getUpgradeStatus($subMchId = '')
  */
 class Application extends ServiceContainer
@@ -137,7 +137,7 @@ class Application extends ServiceContainer
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    public function verifySignature(array $data)
+    public function verifySignature($data)
     {
         if (!isset($data['sign']) || empty($data['sign'])) {
             return false;

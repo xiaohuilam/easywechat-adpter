@@ -82,7 +82,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function setSession($preAuthCode, array $sessionInfo)
+    public function setSession($preAuthCode, $sessionInfo)
     {
         $params = [
             'pre_auth_code' => $preAuthCode,

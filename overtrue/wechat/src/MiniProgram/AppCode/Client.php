@@ -29,7 +29,7 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function get($path, array $optional = [])
+    public function get($path, $optional = [])
     {
         $params = array_merge([
             'path' => $path,
@@ -46,7 +46,7 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function getUnlimit($scene, array $optional = [])
+    public function getUnlimit($scene, $optional = [])
     {
         $params = array_merge([
             'scene' => $scene,
@@ -76,7 +76,7 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    protected function getStream($endpoint, array $params)
+    protected function getStream($endpoint, $params)
     {
         $response = $this->requestRaw($endpoint, 'POST', ['json' => $params]);
 

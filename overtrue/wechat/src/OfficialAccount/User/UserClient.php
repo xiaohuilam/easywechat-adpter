@@ -50,7 +50,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function select(array $openids, $lang = 'zh_CN')
+    public function select($openids, $lang = 'zh_CN')
     {
         return $this->httpPostJson('cgi-bin/user/info/batchget', [
             'user_list' => array_map(function ($openid) use ($lang) {
@@ -154,7 +154,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function changeOpenid($oldAppId, array $openidList)
+    public function changeOpenid($oldAppId, $openidList)
     {
         $params = [
             'from_appid' => $oldAppId,

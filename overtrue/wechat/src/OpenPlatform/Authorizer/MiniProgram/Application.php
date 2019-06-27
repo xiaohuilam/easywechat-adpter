@@ -33,7 +33,7 @@ class Application extends MiniProgram
      * @param array $config
      * @param array $prepends
      */
-    public function __construct(array $config = [], array $prepends = [])
+    public function __construct($config = [], $prepends = [])
     {
         parent::__construct($config, $prepends);
 

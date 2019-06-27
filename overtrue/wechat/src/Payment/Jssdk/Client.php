@@ -37,7 +37,7 @@ class Client extends JssdkClient
      *
      * @return string|array
      */
-    public function bridgeConfig($prepayId, bool $json = true)
+    public function bridgeConfig($prepayId, $json = true)
     {
         $params = [
             'appId' => $this->app['config']->sub_appid ?: $this->app['config']->app_id,
@@ -104,7 +104,7 @@ class Client extends JssdkClient
      *
      * @return string|array
      */
-    public function shareAddressConfig($accessToken, bool $json = true)
+    public function shareAddressConfig($accessToken, $json = true)
     {
         if ($accessToken instanceof AccessTokenInterface) {
             $accessToken = $accessToken->getToken();

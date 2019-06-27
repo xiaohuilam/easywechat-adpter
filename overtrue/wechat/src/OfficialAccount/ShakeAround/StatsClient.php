@@ -29,7 +29,7 @@ class StatsClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function deviceSummary(array $deviceIdentifier, $beginTime, $endTime)
+    public function deviceSummary($deviceIdentifier, $beginTime, $endTime)
     {
         $params = [
             'device_identifier' => $deviceIdentifier,

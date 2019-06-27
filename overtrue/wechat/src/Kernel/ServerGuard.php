@@ -301,7 +301,7 @@ class ServerGuard
      *
      * @return string
      */
-    protected function signature(array $params)
+    protected function signature($params)
     {
         sort($params, SORT_STRING);
 
@@ -359,7 +359,7 @@ class ServerGuard
      *
      * @return mixed
      */
-    protected function decryptMessage(array $message)
+    protected function decryptMessage($message)
     {
         return $message = $this->app['encryptor']->decrypt(
             $message['Encrypt'],

@@ -38,7 +38,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function send(array $message)
+    public function send($message)
     {
         return $this->httpPostJson('cgi-bin/message/send', $message);
     }

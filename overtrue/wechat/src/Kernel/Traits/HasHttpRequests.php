@@ -194,7 +194,7 @@ trait HasHttpRequests
      *
      * @return array
      */
-    protected function fixJsonIssue(array $options)
+    protected function fixJsonIssue($options)
     {
         if (isset($options['json']) && is_array($options['json'])) {
             $options['headers'] = array_merge(isset($options['headers']) && $options['headers'] ?: [], ['Content-Type' => 'application/json']);

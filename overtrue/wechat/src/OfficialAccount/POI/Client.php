@@ -67,7 +67,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function create(array $baseInfo)
+    public function create($baseInfo)
     {
         $params = [
             'business' => [
@@ -83,7 +83,7 @@ class Client extends BaseClient
      *
      * @return int
      */
-    public function createAndGetId(array $databaseInfo)
+    public function createAndGetId($databaseInfo)
     {
         return $this->create($databaseInfo)['poi_id'];
     }
@@ -96,7 +96,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update( $poiId, array $baseInfo)
+    public function update( $poiId, $baseInfo)
     {
         $params = [
             'business' => [

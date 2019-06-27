@@ -37,7 +37,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function createWaybill(array $params = [])
+    public function createWaybill($params = [])
     {
         return $this->httpPostJson('cgi-bin/express/business/order/add', $params);
     }
@@ -49,7 +49,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function deleteWaybill(array $params = [])
+    public function deleteWaybill($params = [])
     {
         return $this->httpPostJson('cgi-bin/express/business/order/cancel', $params);
     }
@@ -61,7 +61,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getWaybill(array $params = [])
+    public function getWaybill($params = [])
     {
         return $this->httpPostJson('cgi-bin/express/business/order/get', $params);
     }
@@ -73,7 +73,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getWaybillTrack(array $params = [])
+    public function getWaybillTrack($params = [])
     {
         return $this->httpPostJson('cgi-bin/express/business/path/get', $params);
     }

@@ -35,7 +35,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidExtensionException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    public function get(bool $returnRaw = false)
+    public function get($returnRaw = false)
     {
         $params = [
             'sign_type' => 'HMAC-SHA256',
@@ -84,7 +84,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidExtensionException
      */
-    public function decrypt(array $encryptCertificate)
+    public function decrypt($encryptCertificate)
     {
         if (false === extension_loaded('sodium')) {
             throw new InvalidExtensionException('sodium extension is not installed，Reference link https://php.net/manual/zh/book.sodium.php');

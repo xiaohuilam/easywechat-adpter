@@ -325,7 +325,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    protected function query($api, $from, $to, array $ext = [])
+    protected function query($api, $from, $to, $ext = [])
     {
         $params = array_merge([
             'begin_date' => $from,

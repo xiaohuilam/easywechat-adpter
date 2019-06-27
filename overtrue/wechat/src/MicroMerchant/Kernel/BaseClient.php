@@ -76,7 +76,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    public function httpUpload($url, array $files = [], array $form = [], array $query = [], $returnResponse = false)
+    public function httpUpload($url, $files = [], $form = [], $query = [], $returnResponse = false)
     {
         $multipart = [];
 
@@ -139,7 +139,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\InvalidSignException
      */
-    protected function request($endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
+    protected function request($endpoint, $params = [], $method = 'post', $options = [], $returnResponse = false)
     {
         $base = [
             'mch_id' => $this->app['config']['mch_id'],
@@ -174,7 +174,7 @@ class BaseClient extends PaymentBaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\EncryptException
      */
-    protected function processParams(array $params)
+    protected function processParams($params)
     {
         $serial_no = $this->app['config']->get('serial_no');
         if (null === $serial_no) {

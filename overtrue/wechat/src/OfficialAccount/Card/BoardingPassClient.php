@@ -23,7 +23,7 @@ class BoardingPassClient extends Client
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function checkin(array $params)
+    public function checkin($params)
     {
         return $this->httpPostJson('card/boardingpass/checkin', $params);
     }

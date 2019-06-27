@@ -45,7 +45,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function select(array $invoices)
+    public function select($invoices)
     {
         $params = [
             'item_list' => $invoices,
@@ -83,7 +83,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function batchUpdate(array $invoices, $openid, $status)
+    public function batchUpdate($invoices, $openid, $status)
     {
         $params = [
             'openid' => $openid,

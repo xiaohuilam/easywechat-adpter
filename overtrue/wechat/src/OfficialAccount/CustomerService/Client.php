@@ -142,7 +142,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function send(array $message)
+    public function send($message)
     {
         return $this->httpPostJson('cgi-bin/message/custom/send', $message);
     }

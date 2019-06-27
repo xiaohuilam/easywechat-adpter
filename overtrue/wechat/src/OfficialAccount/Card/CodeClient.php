@@ -28,7 +28,7 @@ class CodeClient extends BaseClient
      *
      * @return mixed
      */
-    public function deposit($cardId, array $codes)
+    public function deposit($cardId, $codes)
     {
         $params = [
             'card_id' => $cardId,
@@ -62,7 +62,7 @@ class CodeClient extends BaseClient
      *
      * @return mixed
      */
-    public function check($cardId, array $codes)
+    public function check($cardId, $codes)
     {
         $params = [
             'card_id' => $cardId,
@@ -81,7 +81,7 @@ class CodeClient extends BaseClient
      *
      * @return mixed
      */
-    public function get($code, $cardId = '', bool $checkConsume = true)
+    public function get($code, $cardId = '', $checkConsume = true)
     {
         $params = [
             'code' => $code,

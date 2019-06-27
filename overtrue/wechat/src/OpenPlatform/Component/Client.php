@@ -29,7 +29,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function registerMiniProgram(array $params)
+    public function registerMiniProgram($params)
     {
         return $this->httpPostJson('cgi-bin/component/fastregisterweapp', $params, ['action' => 'create']);
     }

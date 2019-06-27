@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    public function getFastRegistrationUrl($callbackUrl, bool $copyWxVerify = true)
+    public function getFastRegistrationUrl($callbackUrl, $copyWxVerify = true)
     {
         $queries = [
             'copy_wx_verify' => $copyWxVerify,

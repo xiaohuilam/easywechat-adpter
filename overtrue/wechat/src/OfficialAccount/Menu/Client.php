@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function create(array $buttons, array $matchRule = [])
+    public function create($buttons, $matchRule = [])
     {
         if (!empty($matchRule)) {
             return $this->httpPostJson('cgi-bin/menu/addconditional', [

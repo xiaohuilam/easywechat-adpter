@@ -44,7 +44,7 @@ class Raw extends Message
      *
      * @return array
      */
-    public function transformForJsonRequest(array $appends = [], $withType = true)
+    public function transformForJsonRequest($appends = [], $withType = true)
     {
         return json_decode($this->content, true) ?: [];
     }

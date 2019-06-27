@@ -27,7 +27,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function create(array $data)
+    public function create($data)
     {
         return $this->httpPostJson('cgi-bin/user/create', $data);
     }
@@ -40,7 +40,7 @@ class Client extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function update($id, array $data)
+    public function update($id, $data)
     {
         return $this->httpPostJson('cgi-bin/user/update', array_merge(['userid' => $id], $data));
     }
@@ -68,7 +68,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function batchDelete(array $userIds)
+    public function batchDelete($userIds)
     {
         return $this->httpPostJson('cgi-bin/user/batchdelete', ['useridlist' => $userIds]);
     }
@@ -93,7 +93,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function getDepartmentUsers( $departmentId, bool $fetchChild = false)
+    public function getDepartmentUsers( $departmentId, $fetchChild = false)
     {
         $params = [
             'department_id' => $departmentId,
@@ -111,7 +111,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function getDetailedDepartmentUsers( $departmentId, bool $fetchChild = false)
+    public function getDetailedDepartmentUsers( $departmentId, $fetchChild = false)
     {
         $params = [
             'department_id' => $departmentId,

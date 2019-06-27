@@ -106,7 +106,7 @@ abstract class AccessToken implements AccessTokenInterface
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function getToken(bool $refresh = false)
+    public function getToken($refresh = false)
     {
         $cacheKey = $this->getCacheKey();
         $cache = $this->getCache();
@@ -171,7 +171,7 @@ abstract class AccessToken implements AccessTokenInterface
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    public function requestToken(array $credentials, $toArray = false)
+    public function requestToken($credentials, $toArray = false)
     {
         $response = $this->sendRequest($credentials);
         $result = json_decode($response->getBody()->getContents(), true);
@@ -196,7 +196,7 @@ abstract class AccessToken implements AccessTokenInterface
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function applyToRequest(RequestInterface $request, array $requestOptions = [])
+    public function applyToRequest(RequestInterface $request, $requestOptions = [])
     {
         parse_str($request->getUri()->getQuery(), $query);
 
@@ -214,7 +214,7 @@ abstract class AccessToken implements AccessTokenInterface
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function sendRequest(array $credentials)
+    protected function sendRequest($credentials)
     {
         $options = [
             ('GET' === $this->requestMethod) ? 'query' : 'json' => $credentials,

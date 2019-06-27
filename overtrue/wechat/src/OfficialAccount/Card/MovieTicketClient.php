@@ -23,7 +23,7 @@ class MovieTicketClient extends Client
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function updateUser(array $params)
+    public function updateUser($params)
     {
         return $this->httpPostJson('card/movieticket/updateuser', $params);
     }

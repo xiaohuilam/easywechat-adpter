@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function user($ticket, bool $needPoi = false)
+    public function user($ticket, $needPoi = false)
     {
         $params = [
             'ticket' => $ticket,

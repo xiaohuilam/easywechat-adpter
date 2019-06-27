@@ -26,7 +26,7 @@ class DeviceClient extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function apply(array $data)
+    public function apply($data)
     {
         return $this->httpPostJson('shakearound/device/applyid', $data);
     }
@@ -55,7 +55,7 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update(array $deviceIdentifier, $comment)
+    public function update($deviceIdentifier, $comment)
     {
         $params = [
             'device_identifier' => $deviceIdentifier,
@@ -75,7 +75,7 @@ class DeviceClient extends BaseClient
      *
      * @throws InvalidArgumentException
      */
-    public function bindPoi(array $deviceIdentifier, $poiId)
+    public function bindPoi($deviceIdentifier, $poiId)
     {
         $params = [
             'device_identifier' => $deviceIdentifier,
@@ -92,7 +92,7 @@ class DeviceClient extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function bindThirdPoi(array $deviceIdentifier, $poiId, $appId)
+    public function bindThirdPoi($deviceIdentifier, $poiId, $appId)
     {
         $params = [
             'device_identifier' => $deviceIdentifier,
@@ -111,7 +111,7 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function listByIds(array $deviceIdentifiers)
+    public function listByIds($deviceIdentifiers)
     {
         $params = [
             'type' => 1,
@@ -168,7 +168,7 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function search(array $params)
+    public function search($params)
     {
         return $this->httpPostJson('shakearound/device/search', $params);
     }

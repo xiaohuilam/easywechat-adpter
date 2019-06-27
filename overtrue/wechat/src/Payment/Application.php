@@ -34,7 +34,7 @@ use EasyWeChat\OfficialAccount;
  * @property \EasyWeChat\Payment\ProfitSharing\Client     $profit_sharing
  * @property \EasyWeChat\OfficialAccount\Auth\AccessToken $access_token
  *
- * @method mixed pay(array $attributes)
+ * @method mixed pay($attributes)
  * @method mixed authCodeToOpenid($authCode)
  */
 class Application extends ServiceContainer

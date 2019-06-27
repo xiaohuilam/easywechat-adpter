@@ -31,7 +31,7 @@ class ContactWayClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function create( $type, $scene, array $config = [])
+    public function create( $type, $scene, $config = [])
     {
         $params = array_merge([
             'type' => $type,
@@ -67,7 +67,7 @@ class ContactWayClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function update($configId, array $config = [])
+    public function update($configId, $config = [])
     {
         $params = array_merge([
             'config_id' => $configId,

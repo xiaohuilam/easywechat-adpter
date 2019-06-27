@@ -257,7 +257,7 @@ class Client extends BaseClient
      * @throws InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function upload($type, $path, array $form = [])
+    public function upload($type, $path, $form = [])
     {
         if (!file_exists($path) || !is_readable($path)) {
             throw new InvalidArgumentException(sprintf('File does not exist, or the file is unreadable: "%s"', $path));

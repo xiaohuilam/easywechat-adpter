@@ -26,7 +26,7 @@ class Hydrate
     /**
      * @param array $attributes
      */
-    public function __construct(array $attributes)
+    public function __construct($attributes)
     {
         $this->attributes = $attributes;
     }
@@ -74,7 +74,7 @@ class Hydrate
         return EasyWeChat\Factory::openPlatform($this->buildConfig($config))->$type($authorizerAppId, $config['refresh_token']);
     }
 
-    protected function buildConfig(array $config)
+    protected function buildConfig($config)
     {
         $config['response_type'] = DelegationResponse::class;
 

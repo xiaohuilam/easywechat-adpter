@@ -24,7 +24,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function pay(array $params)
+    public function pay($params)
     {
         $params['appid'] = $this->app['config']->app_id;
 

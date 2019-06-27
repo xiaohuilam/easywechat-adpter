@@ -75,7 +75,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function createMerchant(array $baseInfo)
+    public function createMerchant($baseInfo)
     {
         return $this->httpPostJson('wxa/apply_merchant', $baseInfo);
     }
@@ -87,7 +87,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function updateMerchant(array $params)
+    public function updateMerchant($params)
     {
         return $this->httpPostJson('wxa/modify_merchant', $params);
     }
@@ -99,7 +99,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function createFromMap(array $baseInfo)
+    public function createFromMap($baseInfo)
     {
         return $this->httpPostJson('wxa/create_map_poi', $baseInfo);
     }
@@ -111,7 +111,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function create(array $baseInfo)
+    public function create($baseInfo)
     {
         return $this->httpPostJson('wxa/add_store', $baseInfo);
     }
@@ -124,7 +124,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function update( $poiId, array $baseInfo)
+    public function update( $poiId, $baseInfo)
     {
         $params = array_merge($baseInfo, ['poi_id' => $poiId]);
 

@@ -37,7 +37,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function create(array $data)
+    public function create($data)
     {
         return $this->httpPostJson('cgi-bin/menu/create', $data, ['agentid' => $this->app['config']['agent_id']]);
     }

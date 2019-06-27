@@ -32,7 +32,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\EncryptException
      */
-    public function submitApplication(array $params)
+    public function submitApplication($params)
     {
         $params = $this->processParams(array_merge($params, [
             'version' => '3.0',
@@ -87,7 +87,7 @@ class Client extends BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\MicroMerchant\Kernel\Exceptions\EncryptException
      */
-    public function upgrade(array $params)
+    public function upgrade($params)
     {
         $params['sub_mch_id'] = $params['sub_mch_id'] ?: $this->app['config']->sub_mch_id;
         $params = $this->processParams(array_merge($params, [

@@ -54,7 +54,7 @@ class Guard extends ServerGuard
      *
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    protected function decryptMessage(array $message)
+    protected function decryptMessage($message)
     {
         $encryptor = new Encryptor($message['ToUserName'], $this->app['config']->get('token'), $this->app['config']->get('aes_key'));
 

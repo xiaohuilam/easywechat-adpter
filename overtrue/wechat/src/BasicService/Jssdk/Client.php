@@ -51,7 +51,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function buildConfig(array $jsApiList, bool $debug = false, bool $beta = false, bool $json = true)
+    public function buildConfig($jsApiList, $debug = false, $beta = false, $json = true)
     {
         $config = array_merge(compact('debug', 'beta', 'jsApiList'), $this->configSignature());
 
@@ -71,7 +71,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function getConfigArray(array $apis, bool $debug = false, bool $beta = false)
+    public function getConfigArray($apis, $debug = false, $beta = false)
     {
         return $this->buildConfig($apis, $debug, $beta, false);
     }
@@ -88,7 +88,7 @@ class Client extends BaseClient
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
-    public function getTicket(bool $refresh = false, $type = 'jsapi')
+    public function getTicket($refresh = false, $type = 'jsapi')
     {
         $cacheKey = sprintf('easywechat.basic_service.jssdk.ticket.%s.%s', $type, $this->getAppId());
 

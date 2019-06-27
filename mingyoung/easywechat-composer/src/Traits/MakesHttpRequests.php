@@ -46,7 +46,7 @@ trait MakesHttpRequests
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function request($endpoint, array $payload)
+    protected function request($endpoint, $payload)
     {
         $response = $this->getHttpClient()->request('POST', $endpoint, [
             'form_params' => $this->buildFormParams($payload),

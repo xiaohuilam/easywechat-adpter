@@ -62,7 +62,7 @@ class MessageClient extends BaseClient
      * @throws InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function submit(array $msg)
+    public function submit($msg)
     {
         $params = $this->formatMessage($msg);
 
@@ -100,7 +100,7 @@ class MessageClient extends BaseClient
      * @throws InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function sendWelcome($welcomeCode, array $msg)
+    public function sendWelcome($welcomeCode, $msg)
     {
         $formattedMsg = $this->formatMessage($msg);
 
@@ -118,7 +118,7 @@ class MessageClient extends BaseClient
      *
      * @throws InvalidArgumentException
      */
-    protected function formatMessage(array $data = [])
+    protected function formatMessage($data = [])
     {
         $params = $data;
 
@@ -149,7 +149,7 @@ class MessageClient extends BaseClient
      *
      * @throws InvalidArgumentException
      */
-    protected function formatFields(array $data = [], array $default = [])
+    protected function formatFields($data = [], $default = [])
     {
         $params = array_merge($default, $data);
         foreach ($params as $key => $value) {

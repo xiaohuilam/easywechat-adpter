@@ -29,7 +29,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function addSubMerchant(array $params)
+    public function addSubMerchant($params)
     {
         return $this->manage($params, ['action' => 'add']);
     }
@@ -78,7 +78,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    protected function manage(array $params, array $query)
+    protected function manage($params, $query)
     {
         $params = array_merge($params, [
             'appid' => $this->app['config']->app_id,

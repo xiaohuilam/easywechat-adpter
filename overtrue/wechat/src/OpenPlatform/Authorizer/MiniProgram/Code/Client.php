@@ -81,7 +81,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function submitAudit(array $itemList)
+    public function submitAudit($itemList)
     {
         return $this->httpPostJson('wxa/submit_audit', [
             'item_list' => $itemList,

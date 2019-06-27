@@ -32,7 +32,7 @@ class EasyWeChat
     /**
      * @param array $config
      */
-    public static function mergeConfig(array $config)
+    public static function mergeConfig($config)
     {
         static::$config = array_merge(static::$config, $config);
     }

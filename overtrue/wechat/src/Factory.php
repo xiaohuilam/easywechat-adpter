@@ -14,14 +14,14 @@ namespace EasyWeChat;
 /**
  * Class Factory.
  *
- * @method static \EasyWeChat\Payment\Application            payment(array $config)
- * @method static \EasyWeChat\MiniProgram\Application        miniProgram(array $config)
- * @method static \EasyWeChat\OpenPlatform\Application       openPlatform(array $config)
- * @method static \EasyWeChat\OfficialAccount\Application    officialAccount(array $config)
- * @method static \EasyWeChat\BasicService\Application       basicService(array $config)
- * @method static \EasyWeChat\Work\Application               work(array $config)
- * @method static \EasyWeChat\OpenWork\Application           openWork(array $config)
- * @method static \EasyWeChat\MicroMerchant\Application      microMerchant(array $config)
+ * @method static \EasyWeChat\Payment\Application            payment($config)
+ * @method static \EasyWeChat\MiniProgram\Application        miniProgram($config)
+ * @method static \EasyWeChat\OpenPlatform\Application       openPlatform($config)
+ * @method static \EasyWeChat\OfficialAccount\Application    officialAccount($config)
+ * @method static \EasyWeChat\BasicService\Application       basicService($config)
+ * @method static \EasyWeChat\Work\Application               work($config)
+ * @method static \EasyWeChat\OpenWork\Application           openWork($config)
+ * @method static \EasyWeChat\MicroMerchant\Application      microMerchant($config)
  */
 class Factory
 {
@@ -31,7 +31,7 @@ class Factory
      *
      * @return \EasyWeChat\Kernel\ServiceContainer
      */
-    public static function make($name, array $config)
+    public static function make($name, $config)
     {
         $namespace = Kernel\Support\Str::studly($name);
         $application = "\\EasyWeChat\\{$namespace}\\Application";

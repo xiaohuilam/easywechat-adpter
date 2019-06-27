@@ -48,7 +48,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function set( $agentId, array $attributes)
+    public function set( $agentId, $attributes)
     {
         return $this->httpPostJson('cgi-bin/agent/set', array_merge(['agentid' => $agentId], $attributes));
     }

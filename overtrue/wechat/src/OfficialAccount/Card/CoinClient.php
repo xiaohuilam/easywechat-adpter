@@ -77,7 +77,7 @@ class CoinClient extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
-    public function orders(array $filters)
+    public function orders($filters)
     {
         return $this->httpPostJson('card/pay/getorderlist', $filters);
     }

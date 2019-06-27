@@ -25,7 +25,7 @@ class MemberCardClient extends Client
      *
      * @return mixed
      */
-    public function activate(array $info = [])
+    public function activate($info = [])
     {
         return $this->httpPostJson('card/membercard/activate', $info);
     }
@@ -38,7 +38,7 @@ class MemberCardClient extends Client
      *
      * @return mixed
      */
-    public function setActivationForm($cardId, array $settings)
+    public function setActivationForm($cardId, $settings)
     {
         $params = array_merge(['card_id' => $cardId], $settings);
 
@@ -70,7 +70,7 @@ class MemberCardClient extends Client
      *
      * @return mixed
      */
-    public function updateUser(array $params = [])
+    public function updateUser($params = [])
     {
         return $this->httpPostJson('card/membercard/updateuser', $params);
     }
@@ -100,7 +100,7 @@ class MemberCardClient extends Client
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function getActivateUrl(array $params = [])
+    public function getActivateUrl($params = [])
     {
         return $this->httpPostJson('card/membercard/activate/geturl', $params);
     }

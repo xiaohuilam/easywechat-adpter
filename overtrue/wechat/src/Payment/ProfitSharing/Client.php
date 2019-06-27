@@ -37,7 +37,7 @@ class Client extends BaseClient
      *
      * @param array $receiver 分账接收方对象，json格式
      */
-    public function addReceiver(array $receiver)
+    public function addReceiver($receiver)
     {
         $params = [
             'appid' => $this->app['config']->app_id,
@@ -58,7 +58,7 @@ class Client extends BaseClient
      *
      * @param array $receiver 分账接收方对象，json格式
      */
-    public function deleteReceiver(array $receiver)
+    public function deleteReceiver($receiver)
     {
         $params = [
             'appid' => $this->app['config']->app_id,
@@ -132,7 +132,7 @@ class Client extends BaseClient
      *
      * @param array $params
      */
-    public function markOrderAsFinished(array $params)
+    public function markOrderAsFinished($params)
     {
         $params['appid'] = $this->app['config']->app_id;
         $params['sub_appid'] = null;

@@ -68,7 +68,7 @@ class BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function request($endpoint, array $params = [], $method = 'post', array $options = [], $returnResponse = false)
+    protected function request($endpoint, $params = [], $method = 'post', $options = [], $returnResponse = false)
     {
         $base = [
             'mch_id' => $this->app['config']['mch_id'],
@@ -125,7 +125,7 @@ class BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function requestRaw($endpoint, array $params = [], $method = 'post', array $options = [])
+    protected function requestRaw($endpoint, $params = [], $method = 'post', $options = [])
     {
         return $this->request($endpoint, $params, $method, $options, true);
     }
@@ -143,7 +143,7 @@ class BaseClient
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function safeRequest($endpoint, array $params, $method = 'post', array $options = [])
+    protected function safeRequest($endpoint, $params, $method = 'post', $options = [])
     {
         $options = array_merge([
             'cert' => $this->app['config']->get('cert_path'),

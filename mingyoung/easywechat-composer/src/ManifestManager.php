@@ -76,7 +76,7 @@ class ManifestManager
      *
      * @return array
      */
-    protected function map(array $packages)
+    protected function map($packages)
     {
         $manifest = [];
 
@@ -96,7 +96,7 @@ class ManifestManager
      *
      * @param array $manifest
      */
-    protected function write(array $manifest)
+    protected function write($manifest)
     {
         file_put_contents(
             $this->manifestPath,

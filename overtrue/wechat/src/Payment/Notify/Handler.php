@@ -89,7 +89,7 @@ abstract class Handler
      *
      * @return $this
      */
-    public function respondWith(array $attributes, bool $sign = false)
+    public function respondWith($attributes, $sign = false)
     {
         $this->attributes = $attributes;
         $this->sign = $sign;
@@ -177,7 +177,7 @@ abstract class Handler
      * @throws \EasyWeChat\Payment\Kernel\Exceptions\InvalidSignException
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      */
-    protected function validate(array $message)
+    protected function validate($message)
     {
         $sign = $message['sign'];
         unset($message['sign']);

@@ -43,7 +43,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function link($appId, bool $notifyUsers = true, bool $showProfile = false)
+    public function link($appId, $notifyUsers = true, $showProfile = false)
     {
         $params = [
             'appid' => $appId,

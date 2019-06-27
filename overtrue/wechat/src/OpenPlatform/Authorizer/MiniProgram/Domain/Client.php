@@ -27,7 +27,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function modify(array $params)
+    public function modify($params)
     {
         return $this->httpPostJson('wxa/modify_domain', $params);
     }
@@ -42,7 +42,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function setWebviewDomain(array $domains, $action = 'add')
+    public function setWebviewDomain($domains, $action = 'add')
     {
         return $this->httpPostJson('wxa/setwebviewdomain', [
             'action' => $action,

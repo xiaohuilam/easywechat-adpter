@@ -33,7 +33,7 @@ class StatisticsClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function userBehavior(array $userIds, $from, $to)
+    public function userBehavior($userIds, $from, $to)
     {
         $params = [
             'userid' => $userIds,

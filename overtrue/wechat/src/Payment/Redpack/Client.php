@@ -50,7 +50,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function sendNormal(array $params)
+    public function sendNormal($params)
     {
         $base = [
             'total_num' => 1,
@@ -70,7 +70,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function sendGroup(array $params)
+    public function sendGroup($params)
     {
         $base = [
             'amt_type' => 'ALL_RAND',

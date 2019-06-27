@@ -29,7 +29,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function send(array $params)
+    public function send($params)
     {
         $params['appid'] = $this->app['config']->app_id;
         $params['openid_count'] = 1;
@@ -46,7 +46,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function stock(array $params)
+    public function stock($params)
     {
         $params['appid'] = $this->app['config']->app_id;
 
@@ -62,7 +62,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function info(array $params)
+    public function info($params)
     {
         $params['appid'] = $this->app['config']->app_id;
 

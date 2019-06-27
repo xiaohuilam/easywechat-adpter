@@ -70,7 +70,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function create($cardType = 'member_card', array $attributes)
+    public function create($cardType = 'member_card', $attributes)
     {
         $params = [
             'card' => [
@@ -127,7 +127,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function update($cardId, $type, array $attributes = [])
+    public function update($cardId, $type, $attributes = [])
     {
         $card = [];
         $card['card_id'] = $cardId;
@@ -159,7 +159,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function createQrCode(array $cards)
+    public function createQrCode($cards)
     {
         return $this->httpPostJson('card/qrcode/create', $cards);
     }
@@ -265,7 +265,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function setTestWhitelistByName(array $usernames)
+    public function setTestWhitelistByName($usernames)
     {
         $params = [
             'username' => $usernames,

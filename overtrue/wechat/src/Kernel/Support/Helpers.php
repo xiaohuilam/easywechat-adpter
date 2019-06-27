@@ -26,7 +26,7 @@ namespace EasyWeChat\Kernel\Support;
  *
  * @return string
  */
-function generate_sign(array $attributes, $key, $encryptMethod = 'md5')
+function generate_sign($attributes, $key, $encryptMethod = 'md5')
 {
     ksort($attributes);
 

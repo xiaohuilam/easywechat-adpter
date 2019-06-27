@@ -25,7 +25,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function unify(array $params)
+    public function unify($params)
     {
         if (empty($params['spbill_create_ip'])) {
             $params['spbill_create_ip'] = ('NATIVE' === $params['trade_type']) ? Support\get_server_ip() : Support\get_client_ip();
@@ -76,7 +76,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    protected function query(array $params)
+    protected function query($params)
     {
         $params['appid'] = $this->app['config']->app_id;
 

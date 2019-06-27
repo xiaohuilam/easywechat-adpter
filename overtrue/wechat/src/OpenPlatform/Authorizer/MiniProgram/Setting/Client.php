@@ -33,7 +33,7 @@ class Client extends BaseClient
      *
      * @param array $categories 类目数组
      */
-    public function addCategories(array $categories)
+    public function addCategories($categories)
     {
         $params = ['categories' => $categories];
 
@@ -66,7 +66,7 @@ class Client extends BaseClient
      *
      * @param array $category 单个类目
      */
-    public function updateCategory(array $category)
+    public function updateCategory($category)
     {
         return $this->httpPostJson('cgi-bin/wxopen/modifycategory', $category);
     }

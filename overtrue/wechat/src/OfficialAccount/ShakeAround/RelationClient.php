@@ -28,7 +28,7 @@ class RelationClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function bindPages(array $deviceIdentifier, array $pageIds)
+    public function bindPages($deviceIdentifier, $pageIds)
     {
         $params = [
             'device_identifier' => $deviceIdentifier,
@@ -45,7 +45,7 @@ class RelationClient extends BaseClient
      *
      * @return array|\EasyWeChat\Kernel\Support\Collection
      */
-    public function listByDeviceId(array $deviceIdentifier)
+    public function listByDeviceId($deviceIdentifier)
     {
         $params = [
             'type' => 1,
