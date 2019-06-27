@@ -63,7 +63,7 @@ class GroupClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($begin, $count)
+    public function all($begin, $count)
     {
         $params = ['begin' => $begin, 'count' => $count];
         return $this->httpPostJson('shakearound/device/group/getlist', $params);

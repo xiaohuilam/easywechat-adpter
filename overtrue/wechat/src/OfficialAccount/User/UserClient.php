@@ -58,7 +58,7 @@ class UserClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list($nextOpenId = null)
+    public function all($nextOpenId = null)
     {
         $params = ['next_openid' => $nextOpenId];
         return $this->httpGet('cgi-bin/user/get', $params);

@@ -55,7 +55,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($msgId, $index, $begin, $count, $type = 0)
+    public function all($msgId, $index, $begin, $count, $type = 0)
     {
         $params = ['msg_data_id' => $msgId, 'index' => $index, 'begin' => $begin, 'count' => $count, 'type' => $type];
         return $this->httpPostJson('cgi-bin/comment/list', $params);

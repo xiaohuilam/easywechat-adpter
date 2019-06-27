@@ -27,7 +27,7 @@ class SessionClient extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list($account)
+    public function all($account)
     {
         return $this->httpGet('customservice/kfsession/getsessionlist', ['kf_account' => $account]);
     }

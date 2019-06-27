@@ -192,7 +192,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list($type, $offset = 0, $count = 20)
+    public function all($type, $offset = 0, $count = 20)
     {
         $params = ['type' => $type, 'offset' => $offset, 'count' => $count];
         return $this->httpPostJson('cgi-bin/material/batchget_material', $params);

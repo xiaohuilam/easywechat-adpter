@@ -88,7 +88,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function list($offset = 0, $count = 10, $statusList = 'CARD_STATUS_VERIFY_OK')
+    public function all($offset = 0, $count = 10, $statusList = 'CARD_STATUS_VERIFY_OK')
     {
         $params = ['offset' => $offset, 'count' => $count, 'status_list' => $statusList];
         return $this->httpPostJson('card/batchget', $params);

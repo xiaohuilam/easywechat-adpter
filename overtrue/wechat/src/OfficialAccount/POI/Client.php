@@ -46,7 +46,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($offset = 0, $limit = 10)
+    public function all($offset = 0, $limit = 10)
     {
         $params = ['begin' => $offset, 'limit' => $limit];
         return $this->httpPostJson('cgi-bin/poi/getpoilist', $params);

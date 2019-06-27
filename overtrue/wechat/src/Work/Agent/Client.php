@@ -53,7 +53,7 @@ class Client extends BaseClient
      *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
      */
-    public function list()
+    public function all()
     {
         return $this->httpGet('cgi-bin/agent/list');
     }

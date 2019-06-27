@@ -23,7 +23,7 @@ class Client extends BaseClient
      *
      * @return mixed
      */
-    public function list()
+    public function all()
     {
         return $this->httpGet('cgi-bin/customservice/getkflist');
     }

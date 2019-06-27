@@ -33,7 +33,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($offset, $count)
+    public function all($offset, $count)
     {
         return $this->httpPostJson('cgi-bin/wxopen/template/library/list', compact('offset', 'count'));
     }

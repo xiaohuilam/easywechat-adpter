@@ -64,7 +64,7 @@ class SubMerchantClient extends BaseClient
      *
      * @return mixed
      */
-    public function list($beginId = 0, $limit = 50, $status = 'CHECKING')
+    public function all($beginId = 0, $limit = 50, $status = 'CHECKING')
     {
         $params = ['begin_id' => $beginId, 'limit' => $limit, 'status' => $status];
         return $this->httpPostJson('card/submerchant/batchget', $params);

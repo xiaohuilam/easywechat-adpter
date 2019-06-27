@@ -100,7 +100,7 @@ class DeviceClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($lastId, $count)
+    public function all($lastId, $count)
     {
         $params = ['type' => 2, 'last_seen' => $lastId, 'count' => $count];
         return $this->search($params);

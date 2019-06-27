@@ -52,7 +52,7 @@ class Client extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($page, $pageRows)
+    public function all($page, $pageRows)
     {
         return $this->httpGet('wxa/getnearbypoilist', ['page' => $page, 'page_rows' => $pageRows]);
     }

@@ -57,7 +57,7 @@ class PageClient extends BaseClient
      *
      * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
      */
-    public function list($begin, $count)
+    public function all($begin, $count)
     {
         $params = ['type' => 2, 'begin' => $begin, 'count' => $count];
         return $this->httpPostJson('shakearound/page/search', $params);
