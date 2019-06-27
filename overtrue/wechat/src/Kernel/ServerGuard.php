@@ -75,9 +75,9 @@ class ServerGuard
      */
     public function serve()
     {
-        $this->app['logger']->debug('Request received:', ['method' => $this->app['request']->getMethod(), 'uri' => $this->app['request']->getUri(), 'content-type' => $this->app['request']->getContentType(), 'content' => $this->app['request']->getContent()]);
+        //$this->app['logger']->debug('Request received:', ['method' => $this->app['request']->getMethod(), 'uri' => $this->app['request']->getUri(), 'content-type' => $this->app['request']->getContentType(), 'content' => $this->app['request']->getContent()]);
         $response = $this->validate()->resolve();
-        $this->app['logger']->debug('Server response created:', ['content' => $response->getContent()]);
+        //$this->app['logger']->debug('Server response created:', ['content' => $response->getContent()]);
         return $response;
     }
     /**
@@ -213,7 +213,7 @@ class ServerGuard
         $prepends = ['ToUserName' => $to, 'FromUserName' => $from, 'CreateTime' => time(), 'MsgType' => $message->getType()];
         $response = $message->transformToXml($prepends);
         if ($this->isSafeMode()) {
-            $this->app['logger']->debug('Messages safe mode is enabled.');
+            //$this->app['logger']->debug('Messages safe mode is enabled.');
             $response = $this->app['encryptor']->encrypt($response);
         }
         return $response;

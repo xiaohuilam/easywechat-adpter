@@ -162,7 +162,7 @@ trait Observable
             return $handler($payload);
         } catch (\Exception $e) {
             if (property_exists($this, 'app') && $this->app instanceof ServiceContainer) {
-                $this->app['logger']->error($e->getCode() . ': ' . $e->getMessage(), ['code' => $e->getCode(), 'message' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()]);
+                //$this->app['logger']->error($e->getCode() . ': ' . $e->getMessage(), ['code' => $e->getCode(), 'message' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()]);
             }
         }
     }
