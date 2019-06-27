@@ -326,7 +326,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function emergency($message, $context = [])
+    public function emergency($message, array $context = array())
     {
         return $this->driver()->emergency($message, $context);
     }
@@ -341,7 +341,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function alert($message, $context = [])
+    public function alert($message, array $context = array())
     {
         return $this->driver()->alert($message, $context);
     }
@@ -355,7 +355,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function critical($message, $context = [])
+    public function critical($message, array $context = array())
     {
         return $this->driver()->critical($message, $context);
     }
@@ -368,7 +368,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function error($message, $context = [])
+    public function error($message, array $context = array())
     {
         return $this->driver()->error($message, $context);
     }
@@ -383,7 +383,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function warning($message, $context = [])
+    public function warning($message, array $context = array())
     {
         return $this->driver()->warning($message, $context);
     }
@@ -395,7 +395,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function notice($message, $context = [])
+    public function notice($message, array $context = array())
     {
         return $this->driver()->notice($message, $context);
     }
@@ -409,7 +409,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function info($message, $context = [])
+    public function info($message, array $context = array())
     {
         return $this->driver()->info($message, $context);
     }
@@ -421,7 +421,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function debug($message, $context = [])
+    public function debug($message, array $context = array())
     {
         return $this->driver()->debug($message, $context);
     }
@@ -434,7 +434,7 @@ class LogManager implements LoggerInterface
      *
      * @return mixed
      */
-    public function log($level, $message, $context = [])
+    public function log($level, $message, array $context = array())
     {
         return $this->driver()->log($level, $message, $context);
     }
